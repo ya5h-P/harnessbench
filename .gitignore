@@ -1,7 +1,8 @@
-# benchmark outputs (yours to keep, not to commit)
-out/
-runs/
-.preflight/
+# benchmark outputs (yours to keep, not to commit) — anchored to repo root:
+# task fixtures/refs may legitimately contain dirs named "out"
+/out/
+/runs/
+/.preflight/
 
 # python
 __pycache__/
