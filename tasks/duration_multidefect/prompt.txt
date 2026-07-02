@@ -1,0 +1,10 @@
+duration.py has parse_duration(s) and format_duration(n), and a weak test_duration.py that passes for
+a couple of simple cases. But both functions are buggy. Make them implement EXACTLY this and keep
+test_duration.py passing:
+  parse_duration(s): s combines h/m/s units in that order, any subset, e.g. '1h30m15s', '45m', '2h',
+    '90s', '1h5s'. Units: h=3600, m=60, s=1 seconds. Return the total seconds (int). Raise ValueError
+    for empty or malformed input.
+  format_duration(n): n>=0 int seconds -> canonical string using h/m/s, omitting any zero component,
+    e.g. 5415 -> '1h30m15s', 2700 -> '45m', 3600 -> '1h'; but 0 -> '0s'.
+  Round-trip: parse_duration(format_duration(n)) == n for all n>=0.
+Do not change the function names. Verify by running python test_duration.py.

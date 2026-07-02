@@ -1,0 +1,4 @@
+Write dijkstra.py defining shortest_distance(graph, start, end): graph is a dict mapping a node to a
+dict of {neighbor: weight} (non-negative weights, directed). Return the total weight of the shortest
+path from start to end, or float('inf') if end is unreachable. shortest_distance(g, x, x) == 0.
+Verify by running python.

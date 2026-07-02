@@ -1,0 +1,6 @@
+strutils.py is a real module from the boltons project (BSD-licensed, mahmoud/boltons).
+ordinalize(number) turns a number into its ordinal form: 1->'1st', 2->'2nd', 3->'3rd', 4->'4th',
+11->'11th', 12->'12th', 13->'13th', 21->'21st', 22->'22nd', 113->'113th'; a non-numeric string is
+returned unchanged. It currently has a bug in its teens handling that makes some numbers get the
+wrong suffix (e.g. 1 and 21). Fix ordinalize in strutils.py to produce correct ordinals. Verify by
+running python.

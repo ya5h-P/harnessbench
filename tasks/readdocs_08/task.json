@@ -1,0 +1,9 @@
+{
+  "id": "readdocs_08",
+  "domain": "doc-grounded-implementation",
+  "difficulty": 4,
+  "timeout_s": 900,
+  "reseed": true,
+  "grader_token": "READDOCS_08 OK",
+  "notes": "readdocs family: 4 constants across 6 docs, with deprecated-value traps"
+}

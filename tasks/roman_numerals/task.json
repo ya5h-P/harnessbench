@@ -1,0 +1,9 @@
+{
+  "id": "roman_numerals",
+  "domain": "spec-to-library",
+  "difficulty": 3,
+  "timeout_s": 420,
+  "reseed": false,
+  "grader_token": "ROMAN OK",
+  "notes": "to_roman/from_roman with strict validation and round-trips."
+}

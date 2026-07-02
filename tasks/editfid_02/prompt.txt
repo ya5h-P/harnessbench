@@ -1,0 +1,1 @@
+settings.ini uses Windows (CRLF) line endings, and the deployment tool requires that. Change retries from 3 to 5. Keep every line ending CRLF and change nothing else.

@@ -1,0 +1,5 @@
+littleutils.py is a real MIT library (littleutils). group_by_key(iterable, key) groups an iterable of
+dicts into a dict mapping each distinct value of dicts[key] to the list of dicts having that value.
+e.g. group_by_key([{'t':'a'},{'t':'b'},{'t':'a'}], 't') == {'a':[{'t':'a'},{'t':'a'}], 'b':[{'t':'b'}]}.
+It currently groups everything under one key instead of grouping by the value at that key. Fix
+group_by_key in littleutils.py to match the documented behavior. Verify by running python.

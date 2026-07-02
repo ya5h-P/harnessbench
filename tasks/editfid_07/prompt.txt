@@ -1,0 +1,1 @@
+deploy.json is one long minified line describing 30 services. Find the service named "search-api" and change its "replicas" to 6. All 29 other services (and every other field) must remain exactly as they are; the file must stay valid JSON.

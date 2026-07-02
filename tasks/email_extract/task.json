@@ -1,0 +1,1 @@
+{"id":"email_extract","domain":"regex-parsing","difficulty":2,"timeout_s":360,"reseed":true,"grader_token":"EMAIL OK","notes":"Extract unique valid emails from messy text; reseeded each run."}

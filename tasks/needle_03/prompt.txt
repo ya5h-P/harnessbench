@@ -1,0 +1,3 @@
+This project has 20 source file(s) under app/. One buggy function is buried somewhere in it:
+- `dedupe_796(xs)` should follow its docstring: Remove duplicates, preserving first-seen order. E.g. dedupe_796([3,1,3,2]) == [3, 1, 2].  (right now dedupe_796([3, 1, 3, 2]) != [3, 1, 2])
+Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

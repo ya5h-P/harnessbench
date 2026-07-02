@@ -1,0 +1,5 @@
+data.json holds transaction records. Run this 2-step pipeline from the project root, in order:
+  1) python tools/keep_ok.py data.json kept.json
+  2) python tools/totals.py kept.json totals.json
+All listed output files must exist afterwards; totals.json is the final deliverable.
+(The scripts are already correct; your job is to run them.)

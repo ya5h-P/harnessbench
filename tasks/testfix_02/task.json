@@ -1,0 +1,9 @@
+{
+  "id": "testfix_02",
+  "domain": "debug-to-green",
+  "difficulty": 2,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "TESTFIX_02 OK",
+  "notes": "testfix family: 1 planted bug(s), hidden superset tests"
+}

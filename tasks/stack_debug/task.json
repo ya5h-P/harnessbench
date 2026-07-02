@@ -1,0 +1,9 @@
+{
+  "id": "stack_debug",
+  "domain": "debug-to-green",
+  "difficulty": 2,
+  "timeout_s": 360,
+  "reseed": false,
+  "grader_token": "STACK OK",
+  "notes": "LIFO bug in pop(); graded against a hidden superset beyond the shown test."
+}

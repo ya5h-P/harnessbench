@@ -1,0 +1,1 @@
+Rename the function `fit_range` (defined in shared.py) to `keep_within` across the whole project: the definition and every import/call site in all 12 caller modules. Behavior must be unchanged, and NO occurrence of the old name `fit_range` may remain anywhere (no alias, no comment mentions).

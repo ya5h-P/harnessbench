@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create summary.txt in the project root containing exactly two lines: count=<how many numbers>, sum=<their integer sum>. No extra lines, no labels beyond the format given.

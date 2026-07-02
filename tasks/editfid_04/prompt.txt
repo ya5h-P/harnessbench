@@ -1,0 +1,1 @@
+thresholds.py holds a single very long line defining THRESHOLDS (55 entries). Set THRESHOLDS['cache_ttl'] to 4242. All 54 other entries must keep their exact current values.

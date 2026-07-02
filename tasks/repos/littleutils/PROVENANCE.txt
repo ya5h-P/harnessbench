@@ -1,0 +1,6 @@
+source: https://github.com/alexmojaki/littleutils
+commit: 62d94010f24242be24deb75d8c64aa2ca5608d22
+license: MIT
+vendored: 2026-07-01
+tasks derived: littleutils_only (d3), littleutils_strip (d3), littleutils_groupby (d4)
+note: each task ships the real single-file module with ONE function mutated; ref/ is the pristine upstream file.

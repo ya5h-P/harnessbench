@@ -1,0 +1,4 @@
+Write a Python file greet.py meeting ALL of these constraints: (1) it defines a function greet(name)
+that returns exactly the string 'Hello, ' + name + '!'; (2) when run as a script it prints greet(arg)
+for each command-line argument, each on its own line, and prints NOTHING else; (3) it has NO shebang
+line; (4) the whole file is at most 12 lines. Then run 'python greet.py Alice Bob' to show the output.

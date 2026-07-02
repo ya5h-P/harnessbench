@@ -1,0 +1,4 @@
+Write jsonpath.py defining get_path(obj, path, default=None): path is a dotted string like
+'a.b.0.c'. Traverse obj: each segment is a dict key, or (if the current value is a list and the
+segment is an integer) a list index. Return the value found, or default if any segment is missing/
+out of range/mismatched. Verify by running python.

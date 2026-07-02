@@ -1,0 +1,2 @@
+core.py in this project is large (1200 functions). The function `safe_get_5441(d, key, default)` should: d[key] if present else default; a stored falsy value is returned as-is. E.g. safe_get_5441({'a': 0}, 'a', 9) == 0.
+Right now safe_get_5441({'a': 0}, 'a', 9) returns the wrong value (expected 0). Fix `safe_get_5441` only — every other function in core.py must remain exactly as it is.

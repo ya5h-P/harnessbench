@@ -1,0 +1,1 @@
+{"id":"interval_merge","domain":"algorithm","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"INTERVAL OK","notes":"Merge overlapping intervals; sorted, touching intervals merge."}

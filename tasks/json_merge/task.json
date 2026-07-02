@@ -1,0 +1,1 @@
+{"id":"json_merge","domain":"error-handling-edge","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"MERGE OK","notes":"Deep merge: dict-recurse / list-concat / override; no input mutation."}

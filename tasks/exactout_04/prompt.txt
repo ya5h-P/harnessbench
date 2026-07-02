@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create stats.txt in the project root containing exactly three lines: min=<int>, max=<int>, mean=<mean to exactly 2 decimals>. No extra lines, no labels beyond the format given.

@@ -1,0 +1,5 @@
+littleutils.py is a real utility library (MIT 'littleutils'). helpful_error_list_get(lst, index)
+should return lst[index], but when the index is out of range it must raise an IndexError (with a
+helpful message) instead of failing silently. It currently returns None for an out-of-range index.
+Fix helpful_error_list_get in littleutils.py so out-of-range access raises IndexError while valid
+indices (including negative ones) still return the element. Verify by running python.

@@ -1,0 +1,2 @@
+Somewhere under the directory 'src files/' (the project layout is messy — spaces, dots and parentheses in names, several similarly named files) exactly one file defines the function `c2f_318(c)`. It should: Celsius to Fahrenheit. E.g. c2f_318(0) == 32.0; c2f_318(100) == 212.0.
+Right now c2f_318(0) returns the wrong value (expected 32.0). Find that file and fix the function in place. Do not move or rename any file.

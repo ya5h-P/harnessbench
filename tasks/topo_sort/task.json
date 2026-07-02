@@ -1,0 +1,1 @@
+{"id":"topo_sort","domain":"algorithm","difficulty":4,"timeout_s":480,"reseed":false,"grader_token":"TOPO OK","notes":"Topological sort with cycle detection."}

@@ -1,0 +1,5 @@
+source: https://github.com/mahmoud/boltons
+commit: 979fa9b613fa8c0a455ae16ea6f2ec91c11ecafe
+license: BSD-3-Clause
+vendored: 2026-07-01
+tasks derived: boltons_ordinalize (d3)

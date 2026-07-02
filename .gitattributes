@@ -1,0 +1,5 @@
+# Task fixtures must survive cloning byte-for-byte: several tasks deliberately test
+# CRLF preservation, tab indentation, and exact file content. Disable ALL newline
+# normalization, then force LF only where execution requires it (bash scripts).
+* -text
+*.sh text eol=lf

@@ -1,0 +1,5 @@
+Write merge.py defining deep_merge(a, b): return a NEW dict that deep-merges b into a. Rules: for a
+key present in both, if BOTH values are dicts, merge them recursively; if BOTH values are lists, the
+result is a concatenation (a's list then b's list); otherwise b's value overrides a's. Keys only in
+a or only in b are carried through. deep_merge must NOT mutate a or b (including nested structures).
+Verify by running python.

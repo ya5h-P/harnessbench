@@ -1,0 +1,1 @@
+{"old": "limit_num", "new": "cap_between", "libmod": "common", "mods": [{"mod": "uses_cache", "cases": [[-2, 1], [3, 3], [29, 20]]}, {"mod": "uses_session", "cases": [[6, 9], [11, 11], [25, 16]]}, {"mod": "uses_profiles", "cases": [[-1, 2], [4, 4], [37, 28]]}, {"mod": "uses_broker", "cases": [[12, 15], [17, 17], [34, 25]]}]}

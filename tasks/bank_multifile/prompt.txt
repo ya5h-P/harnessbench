@@ -1,0 +1,5 @@
+The 'bank' package has a test script test_bank.py that fails when you run `python test_bank.py`.
+Diagnose and fix the bug(s) in the bank/ package so the tests pass (it should print ALL TESTS
+PASSED). withdraw must refuse to overdraw an account (raise ValueError, leaving the balance
+unchanged), and a transfer that cannot be covered must not change either balance. Do NOT modify
+test_bank.py.

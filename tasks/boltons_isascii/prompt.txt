@@ -1,0 +1,5 @@
+strutils.py is a real module from boltons (BSD). is_ascii(text) returns True if text (str or bytes)
+is entirely ASCII, False otherwise, and raises ValueError if given a non-text argument. e.g.
+is_ascii('Beyonce')==True, is_ascii('Beyonce\u0301'... i.e. accented)==False. It currently has a bug
+that returns True for non-ASCII strings. Fix is_ascii in strutils.py to match the documented behavior.
+Verify by running python.

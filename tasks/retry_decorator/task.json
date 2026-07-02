@@ -1,0 +1,1 @@
+{"id":"retry_decorator","domain":"error-handling-edge","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"RETRY OK","notes":"retry(times) decorator: up to N attempts, return on success, re-raise last error."}

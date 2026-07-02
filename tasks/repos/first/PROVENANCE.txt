@@ -1,0 +1,5 @@
+source: https://github.com/hynek/first
+commit: d18599541b15b0fa351b66e20b04b1edd735df4b
+license: MIT
+vendored: 2026-07-01
+tasks derived: first_truthy (d3)

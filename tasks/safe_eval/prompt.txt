@@ -1,0 +1,6 @@
+Write calc.py defining safe_eval(expr): evaluate a STRING arithmetic expression and return the
+numeric result. Support + - * / // % ** , parentheses, unary minus/plus, and integer/float
+literals. It must be SAFE: do NOT use Python's eval/exec. Any expression containing names,
+attribute access, function calls, or anything that is not pure arithmetic must raise ValueError
+(not execute). For example safe_eval('2 + 3 * 4') == 14, and safe_eval("__import__('os')") must
+raise ValueError. Verify by running python.

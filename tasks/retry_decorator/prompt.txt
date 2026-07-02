@@ -1,0 +1,3 @@
+Write retry.py defining retry(times): a decorator factory. The decorated function is attempted up
+to `times` times; it returns the first successful result. If every attempt raises, the LAST exception
+is re-raised. times>=1. Verify by running python.

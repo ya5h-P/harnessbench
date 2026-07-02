@@ -1,0 +1,1 @@
+In build.mk, change VERSION from 1.4.2 to 2.0.0. Change nothing else — recipe lines in make files MUST stay tab-indented (a tab-to-spaces conversion breaks the build).

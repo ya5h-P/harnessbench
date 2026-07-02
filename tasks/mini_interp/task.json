@@ -1,0 +1,1 @@
+{"id":"mini_interp","domain":"spec-to-library","difficulty":5,"timeout_s":600,"reseed":false,"grader_token":"INTERP OK","notes":"Tiny interpreter: assignments + print, arithmetic with + - * and parentheses over ints and vars."}

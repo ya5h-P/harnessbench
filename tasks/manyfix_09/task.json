@@ -1,0 +1,9 @@
+{
+  "id": "manyfix_09",
+  "domain": "bulk-fix-coverage",
+  "difficulty": 5,
+  "timeout_s": 1500,
+  "reseed": false,
+  "grader_token": "MANYFIX_09 OK",
+  "notes": "manyfix family: 26 independent trivial fixes, all required"
+}

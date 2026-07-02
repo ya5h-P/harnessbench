@@ -1,0 +1,9 @@
+Write csvtool.py with two functions for a small CSV-like format (single line per row, no newlines
+inside fields):
+- parse(text): given one row of text, return a list of field strings.
+- dump(fields): given a list of field strings, return one row of text.
+Rules: fields are separated by commas. A field must be quoted with double quotes if (and only if,
+for dump) it contains a comma or a double quote. Inside a quoted field, a literal double quote is
+written as two double quotes (""). parse must correctly handle quoted fields containing commas and
+escaped quotes. parse(dump(fields)) must equal fields for any list of strings. Verify by running
+python.

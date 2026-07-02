@@ -1,0 +1,5 @@
+strutils.py is a real module from boltons (BSD). slugify(text, delim='_', lower=True, ascii=False)
+turns text into a safe slug, lowercased by default and separated by delim, e.g. slugify('First post!
+Hi!!!!~1    ') == 'first_post_hi_1'. It currently fails to lowercase the result. Fix slugify in
+strutils.py so it lowercases when lower is true (and leaves case alone when lower is false). Verify by
+running python.

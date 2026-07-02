@@ -1,0 +1,5 @@
+strutils.py is a real module from the boltons project (BSD, mahmoud/boltons). camel2under(s)
+converts a CamelCase string to lower_underscore form, e.g. camel2under('BasicParseTest') ==
+'basic_parse_test' and camel2under('HTMLParser') == 'html_parser'. It currently has a bug: it does
+not lowercase the result. Fix camel2under in strutils.py to match the documented behavior. Verify by
+running python.

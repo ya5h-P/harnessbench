@@ -1,0 +1,9 @@
+{
+  "id": "path_security",
+  "domain": "security-defensive",
+  "difficulty": 4,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "SECURITY OK",
+  "notes": "read_doc() is vulnerable to ../ path traversal. Grader feeds malicious paths (must be blocked) AND legit paths (must still work)."
+}

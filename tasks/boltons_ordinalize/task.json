@@ -1,0 +1,1 @@
+{"id":"boltons_ordinalize","domain":"real-repo-debug","difficulty":3,"timeout_s":540,"reseed":false,"grader_token":"ORDINAL OK","notes":"Real repo; one function mutated, fix to match documented behavior."}

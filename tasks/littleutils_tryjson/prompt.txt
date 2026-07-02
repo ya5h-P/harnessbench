@@ -1,0 +1,4 @@
+littleutils.py is a real MIT library (littleutils). try_parse_json(s) parses a JSON string and
+returns the resulting object; if s is not valid JSON it must raise ValueError (it must NOT silently
+return None). It currently swallows parse errors. Fix try_parse_json in littleutils.py so invalid
+JSON raises ValueError while valid JSON is parsed and returned. Verify by running python.

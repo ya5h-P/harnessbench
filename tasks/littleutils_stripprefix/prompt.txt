@@ -1,0 +1,4 @@
+littleutils.py is a real MIT library (littleutils). strip_required_prefix(string, prefix) returns the
+string with the prefix removed, e.g. strip_required_prefix('abcdef','abc')=='def', and raises
+AssertionError if the string doesn't start with prefix. It has an off-by-one bug in how much it
+strips. Fix strip_required_prefix in littleutils.py to match its documented behavior. Verify by running python.

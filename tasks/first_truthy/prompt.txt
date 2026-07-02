@@ -1,0 +1,5 @@
+first.py is a real MIT-licensed library (hynek/first). first(iterable, default=None, key=None)
+should return the first element that evaluates TRUE (not merely the first non-None element); if
+none do, it returns default. With a key function it returns the first element for which key(el) is
+true. It currently has a bug: without a key it returns the first non-None element instead of the
+first truthy one. Fix first() in first.py to match its documented behavior. Verify by running python.

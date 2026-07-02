@@ -1,0 +1,7 @@
+This is papergen.py, a real Python test-paper generator. Its README notes a bug: the same questions
+keep repeating throughout the generated paper. Fix papergen.py so that every question slot in the
+output gets FRESHLY generated random numbers (right now it pre-computes just three fixed question
+strings and reuses them). Also make sure genpap() works without depending on a global variable that
+is only defined under the __main__ block. Keep writing the LaTeX to test_paper.tex and keep the same
+overall paper structure (sections and questions). Then run 'python papergen.py' to confirm it works
+and the questions now vary.

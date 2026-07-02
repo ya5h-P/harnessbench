@@ -1,0 +1,4 @@
+Create meta.json in the project root: a JSON object with exactly these keys/values:
+  "name": "hb"  (string)
+  "version": 2  (number)
+  "channels": ["stable", "beta"]  (array of strings, in this order)

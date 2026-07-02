@@ -1,0 +1,4 @@
+wordfreq.py has top_words(words, k): returns the k most frequent words as a list of (word, count)
+sorted by count descending then word ascending. It is correct but far too slow on large inputs
+(it recounts with words.count for every unique word -> O(n*unique)). Optimize it to roughly linear
+time WITHOUT changing behavior (same signature, same ordering/tie-breaking). Verify by running python.

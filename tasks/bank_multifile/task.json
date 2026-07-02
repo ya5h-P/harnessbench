@@ -1,0 +1,9 @@
+{
+  "id": "bank_multifile",
+  "domain": "multi-file-debugging",
+  "difficulty": 3,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "BANK OK",
+  "notes": "Overdraft + atomic transfer across bank/ package; hidden superset beyond shown test."
+}

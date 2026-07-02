@@ -1,0 +1,9 @@
+{
+  "id": "stats_cli",
+  "domain": "spec-to-cli",
+  "difficulty": 2,
+  "timeout_s": 360,
+  "reseed": true,
+  "grader_token": "STATS OK",
+  "notes": "argparse CLI; grader generates random integers each run and checks exact format + flag order."
+}

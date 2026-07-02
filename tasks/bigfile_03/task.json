@@ -1,0 +1,9 @@
+{
+  "id": "bigfile_03",
+  "domain": "large-file-edit",
+  "difficulty": 3,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "BIGFILE_03 OK",
+  "notes": "bigfile family: precise edit in a 180-function file"
+}

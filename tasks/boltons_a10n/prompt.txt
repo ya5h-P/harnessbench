@@ -1,0 +1,5 @@
+strutils.py is a real module from the boltons project (BSD, mahmoud/boltons). a10n(s) makes a
+numeronym: the first letter, then the count of the letters BETWEEN the first and last, then the last
+letter. e.g. a10n('abbreviation') == 'a10n', a10n('internationalization') == 'i18n'; strings shorter
+than 3 chars are returned unchanged. It currently uses the wrong count. Fix a10n in strutils.py to
+match the documented behavior. Verify by running python.

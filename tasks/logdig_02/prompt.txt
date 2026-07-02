@@ -1,0 +1,3 @@
+logs/app.log has ~4000 lines in the format:
+  <timestamp> <LEVEL> code=<code> id=<id> path=<path> <message>
+(plus '=== RESTART ===' marker lines). It is far too large to read directly — compute the answer with a script or shell tools. Write answer.txt in the project root containing exactly one line: "count=<number of WARN-level lines whose code field is W7>".

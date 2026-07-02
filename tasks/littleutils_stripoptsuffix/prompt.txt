@@ -1,0 +1,5 @@
+littleutils.py is a real MIT library (littleutils). strip_optional_suffix(string, suffix) removes the
+suffix IF present, otherwise returns the string unchanged, e.g. strip_optional_suffix('abcdef','def')
+=='abc' but strip_optional_suffix('abcdef','123')=='abcdef'. It currently strips unconditionally even
+when the suffix is absent. Fix strip_optional_suffix in littleutils.py to only strip when the suffix
+is actually present. Verify by running python.

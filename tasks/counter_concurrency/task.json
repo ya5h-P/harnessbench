@@ -1,0 +1,9 @@
+{
+  "id": "counter_concurrency",
+  "domain": "concurrency-atomicity",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "CONCURRENCY OK",
+  "notes": "Thread-safe counter; grader hammers it with many threads across trials and asserts no lost updates."
+}

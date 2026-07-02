@@ -1,0 +1,1 @@
+{"id":"multi_defect","domain":"multi-defect-debug","difficulty":5,"timeout_s":600,"reseed":false,"grader_token":"SHIP OK","notes":"shipping.quote has several interacting bugs; a weak shown test passes but a hidden superset checks all rules."}

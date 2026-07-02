@@ -1,0 +1,1 @@
+messages.py contains unicode-heavy strings (emoji, CJK, accents). Change MESSAGES["greeting_de"] to exactly "Servus Welt 🥨". Every other entry must remain byte-identical.

@@ -1,0 +1,11 @@
+shipping.py has a function quote(weight_kg, distance_km, express=False) that computes a shipping
+price, and a test_shipping.py that currently passes for a couple of simple cases. But quote is
+buggy and does not implement the full pricing policy correctly. Make quote implement EXACTLY this
+policy and keep test_shipping.py passing:
+  base fee = 5.00
+  cost = base + 0.50 * weight_kg + 0.10 * distance_km
+  if weight_kg > 30: add a 20.00 heavy surcharge
+  if express: multiply the whole cost by 1.5 (applied AFTER the surcharge)
+  apply a minimum charge of 10.00 (the final cost is never below 10.00)
+  round the result to 2 decimals
+Do not change the function name/signature. Verify by running python test_shipping.py.

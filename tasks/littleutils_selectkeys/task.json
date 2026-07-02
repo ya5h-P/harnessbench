@@ -1,0 +1,1 @@
+{"id":"littleutils_selectkeys","domain":"real-repo-debug","difficulty":4,"timeout_s":540,"reseed":false,"grader_token":"SELECTKEYS OK","notes":"Real MIT repo littleutils@62d9401; one function mutated, fix to match documented behavior."}

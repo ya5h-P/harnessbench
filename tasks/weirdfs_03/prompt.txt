@@ -1,0 +1,2 @@
+Somewhere under the directory 'src files/' (the project layout is messy — spaces, dots and parentheses in names, several similarly named files) exactly one file defines the function `word_count_933(s)`. It should: Number of whitespace-separated words. E.g. word_count_933('a  b') == 2.
+Right now word_count_933('a  b') returns the wrong value (expected 2). Find that file and fix the function in place. Do not move or rename any file.

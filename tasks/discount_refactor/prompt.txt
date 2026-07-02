@@ -1,0 +1,5 @@
+Refactor discount.py for readability and fix/extend its logic to these EXACT rules. final_price(items)
+takes a list of (unit_price, qty) pairs and returns a float rounded to 2 decimals. Rules: (1) line
+total = unit_price*qty; (2) if a line's qty >= 10, apply a 5% discount to THAT line; (3) after
+summing the lines, if the subtotal is >= 500, apply a further 8% discount to the whole order; (4) an
+empty list returns 0.0. Keep the function name and signature. Verify by running python.

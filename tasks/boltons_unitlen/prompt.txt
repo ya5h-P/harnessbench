@@ -1,0 +1,5 @@
+strutils.py is a real module from boltons (BSD). unit_len(sized_iterable, unit_noun='item') returns a
+plain-English count, e.g. unit_len(range(10),'number')=='10 numbers', unit_len('aeiou','vowel')==
+'5 vowels', and unit_len([],'worry')=='No worries' (empty -> 'No <plural>'). It currently has the
+empty-vs-nonempty condition inverted. Fix unit_len in strutils.py to match the documented behavior.
+Verify by running python.

@@ -1,0 +1,9 @@
+{
+  "id": "test_authoring",
+  "domain": "test-authoring",
+  "difficulty": 4,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "TESTAUTH OK",
+  "notes": "Agent writes a test suite; grader checks it PASSES a hidden correct impl and FAILS a hidden buggy impl (mutation testing)."
+}

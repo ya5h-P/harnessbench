@@ -1,0 +1,6 @@
+source: https://github.com/ya5h-P/papergen
+commit: 4a06659ffd4ed1ffcb6762b187df7992f67a5ad3
+license: MIT (see LICENSE)
+vendored: 2026-06-30
+tasks derived: papergen_repeat (d3, question-repeat bug)
+note: snapshot pinned for reproducibility; do not update in place (would change task semantics).

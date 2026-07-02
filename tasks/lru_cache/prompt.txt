@@ -1,0 +1,5 @@
+Write lru.py defining a class LRU(capacity) implementing a Least-Recently-Used cache:
+- get(key): return the value, or None if absent. A successful get marks the key as most recently used.
+- put(key, value): insert/update. If inserting a new key exceeds capacity, evict the least recently
+  used key first. Updating an existing key also marks it most recently used.
+capacity is a positive int. Verify by running python.

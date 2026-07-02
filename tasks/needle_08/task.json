@@ -1,0 +1,9 @@
+{
+  "id": "needle_08",
+  "domain": "code-search-fix",
+  "difficulty": 4,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "NEEDLE_08 OK",
+  "notes": "needle family: locate a described function among 120 files"
+}

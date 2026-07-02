@@ -1,0 +1,1 @@
+Rename the function `apply_bounds` (defined in baselib.py) to `bound_to` across the whole project: the definition and every import/call site in all 3 caller modules. Behavior must be unchanged, and NO occurrence of the old name `apply_bounds` may remain anywhere (no alias, no comment mentions).

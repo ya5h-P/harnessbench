@@ -1,0 +1,9 @@
+{
+  "id": "exactout_01",
+  "domain": "instruction-format-adherence",
+  "difficulty": 1,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "EXACTOUT_01 OK",
+  "notes": "generated family task (see tasks/_authoring)"
+}

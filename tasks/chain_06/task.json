@@ -1,0 +1,9 @@
+{
+  "id": "chain_06",
+  "domain": "tool-pipeline",
+  "difficulty": 4,
+  "timeout_s": 900,
+  "reseed": true,
+  "grader_token": "CHAIN_06 OK",
+  "notes": "chain family: 3-step executed pipeline, one buggy step"
+}

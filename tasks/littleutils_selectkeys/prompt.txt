@@ -1,0 +1,6 @@
+littleutils.py is a real utility library (MIT 'littleutils'). select_keys(d, keys) should return a
+NEW dict containing only the requested keys, e.g. select_keys({'a':1,'b':2,'c':3}, 'a c') ==
+{'a':1,'c':3}; and if a requested key is missing it must raise KeyError. It currently has a bug
+that returns ALL of d's keys instead of just the requested ones (and so never reports missing
+keys). Fix select_keys in littleutils.py to select exactly the requested keys and raise KeyError
+for a missing key. keys may be a space-separated string or a list. Verify by running python.

@@ -1,0 +1,4 @@
+strutils.py is a real module from boltons (BSD). split_punct_ws(text) splits on runs of punctuation
+and whitespace, returning the non-empty tokens, e.g. split_punct_ws('First post! Hi!!!!~1    ') ==
+['First','post','Hi','1']. It currently has a bug that leaves empty strings in the result. Fix
+split_punct_ws in strutils.py to return only the non-empty tokens. Verify by running python.

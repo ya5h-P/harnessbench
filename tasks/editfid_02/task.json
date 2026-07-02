@@ -1,0 +1,9 @@
+{
+  "id": "editfid_02",
+  "domain": "edit-fidelity",
+  "difficulty": 2,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "EDITFID_02 OK",
+  "notes": "generated family task (see tasks/_authoring)"
+}

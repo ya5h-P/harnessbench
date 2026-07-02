@@ -1,0 +1,7 @@
+Write a Python command-line tool stats.py using argparse. It takes one positional argument: the
+path to a text file with one integer per line (there may be blank lines, which must be ignored). It
+supports four optional flags: --count --min --max --mean. For each flag that is PRESENT on the
+command line, print exactly one line 'name=value', and print them in this FIXED order regardless of
+the flag order given: count, then min, then max, then mean. count/min/max are integers; mean must be
+rounded to exactly 4 decimal places (e.g. mean=5.0000). Print nothing else. Test it yourself by
+running it on a small file.

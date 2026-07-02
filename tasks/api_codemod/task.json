@@ -1,0 +1,9 @@
+{
+  "id": "api_codemod",
+  "domain": "codemod-migration",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "CODEMOD OK",
+  "notes": "Migrate every notify() call site to send() and delete the deprecated shim; graded on completeness AND preserved behavior."
+}

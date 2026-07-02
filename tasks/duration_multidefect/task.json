@@ -1,0 +1,1 @@
+{"id":"duration_multidefect","domain":"multi-defect-debug","difficulty":5,"timeout_s":600,"reseed":false,"grader_token":"DURATION OK","notes":"parse/format duration with several bugs; hidden superset + round-trip."}

@@ -1,0 +1,5 @@
+Write sqlsafe.py defining build_where(filters): filters is a dict {column: value}. Return a tuple
+(sql, params). sql must be the WHERE body using ? placeholders, with columns in SORTED order joined
+by ' AND ', e.g. "age = ? AND name = ?"; params is the list of values in that same order. Values
+must NEVER be inlined into sql (this is what makes it injection-safe) - they only go in params. If
+filters is empty, return ("", []). Verify by running python.

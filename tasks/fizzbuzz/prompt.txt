@@ -1,0 +1,4 @@
+Write fizzbuzz.py defining fizzbuzz(n) that returns a LIST of length n. For i from 1..n the element
+is: "FizzBuzz" if i divisible by 15, else "Fizz" if divisible by 3, else "Buzz" if divisible by 5,
+else the number i as an int (not a string). Example: fizzbuzz(5) == [1, 2, "Fizz", 4, "Buzz"].
+Verify by running python.

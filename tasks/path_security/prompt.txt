@@ -1,0 +1,6 @@
+fileserver.py exposes read_doc(name), which is meant to serve documents only from its docs/ folder.
+It currently has a path-traversal vulnerability: a name like "../secret.txt" (or an absolute path)
+escapes the docs/ folder and reads arbitrary files. Fix read_doc so it ONLY ever reads files inside
+the docs/ directory: any name that resolves outside docs/ must raise an exception (do not read it),
+while legitimate names inside docs/ must still be read and returned normally. Keep the function name
+and signature. Verify by running python.

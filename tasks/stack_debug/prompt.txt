@@ -1,0 +1,3 @@
+stack.py implements a Stack class, but the test script test_stack.py fails. Run it with
+`python test_stack.py`, find the bug in stack.py, and fix stack.py so the tests pass (it should
+print ALL TESTS PASSED). Do not modify test_stack.py.

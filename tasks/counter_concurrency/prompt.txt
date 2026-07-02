@@ -1,0 +1,6 @@
+counter.py defines a Counter class with increment() and a value property. It is meant to be safe to
+use from many threads at once, but it currently loses updates under concurrency (the read-modify-write
+in increment() is not atomic, and it sleeps briefly to widen the race). Fix counter.py so that when
+many threads call increment() concurrently, the final value equals the exact number of increments —
+no lost updates — while keeping the increment()/value interface. Do not delete the small delay; make
+the update correct despite it. Verify by running python.

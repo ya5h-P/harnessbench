@@ -1,0 +1,3 @@
+Write intervals.py defining merge(intervals): given a list of [start,end] pairs (ints, start<=end),
+return a new list of merged, non-overlapping intervals sorted by start. Intervals that only touch
+(e.g. [1,2] and [2,3]) merge into one. Do not mutate the input. Verify by running python.

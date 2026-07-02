@@ -1,0 +1,5 @@
+The file messy.txt contains free-form text with email addresses scattered in it (plus decoy strings
+that look almost like emails but are not). Extract every VALID email address (a local part, then '@',
+then a domain with at least one dot and a 2+ letter TLD; local and domain parts use letters, digits,
+dots, underscores, plus and hyphen). Write the UNIQUE addresses, lowercased, one per line, sorted
+ascending, to emails.txt. You may write and run a script. Then tell me how many you found.

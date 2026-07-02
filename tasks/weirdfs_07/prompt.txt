@@ -1,0 +1,2 @@
+Somewhere under the directory 'src files/' (the project layout is messy — spaces, dots and parentheses in names, several similarly named files) exactly one file defines the function `mean2_113(xs)`. It should: Arithmetic mean rounded to 2 decimals. E.g. mean2_113([2, 4]) == 3.0.
+Right now mean2_113([2, 4]) returns the wrong value (expected 3.0). Find that file and fix the function in place. Do not move or rename any file.

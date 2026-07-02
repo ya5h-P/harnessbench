@@ -1,0 +1,5 @@
+littleutils.py is a real utility library (MIT 'littleutils'). Its function strip_required_suffix(
+string, suffix) should return the string with the suffix removed, e.g. strip_required_suffix(
+'abcdef', 'def') == 'abc', and raise AssertionError if the string does not end with suffix. It has
+an off-by-one bug in how much it strips. Fix strip_required_suffix in littleutils.py to match its
+documented behavior. Don't break other functions. Verify by running python.

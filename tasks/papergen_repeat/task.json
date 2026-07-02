@@ -1,0 +1,9 @@
+{
+  "id": "papergen_repeat",
+  "domain": "real-repo-maintenance",
+  "difficulty": 3,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "RW1 OK",
+  "notes": "Real repo (ya5h-P/papergen @4a06659). Fix the README's known 'questions repeat' bug: every slot must get fresh random numbers, and genpap() must not depend on a __main__-only global."
+}

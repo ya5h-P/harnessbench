@@ -1,0 +1,5 @@
+dedupe.py contains a function dedupe(items) that returns the items with duplicates removed while
+preserving the order of first appearance. It is correct but far too slow on large inputs (it is
+O(n^2)). Optimize dedupe so it runs in roughly linear time on large inputs, WITHOUT changing its
+behavior: same function name and signature, same order-preserving de-duplication, and it must still
+work for any hashable items. Verify by running python.

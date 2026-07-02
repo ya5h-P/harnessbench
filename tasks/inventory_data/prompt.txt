@@ -1,0 +1,5 @@
+The file inventory.txt has a comment header line, then rows of 'SKU,category,qty,unit_price'.
+Considering ONLY rows whose category is exactly 'widgets', compute (a) the total inventory value —
+the sum of qty*unit_price over all widget rows, rounded to 2 decimals — and (b) the SKU of the
+single widget row with the highest qty*unit_price. Write the answers to result.txt as exactly two
+lines: 'total=<value>' then 'sku=<SKU>'. You may write and run a script. Tell me the two answers.

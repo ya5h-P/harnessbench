@@ -1,0 +1,6 @@
+littleutils.py is a real utility library (the MIT-licensed 'littleutils' project). Its function
+only(it) is meant to return the single element of an iterable, and raise AssertionError if the
+iterable does not contain exactly one element (0 or 2+). It currently has a bug: for a sized
+iterable with more than one element it wrongly returns the first element instead of raising.
+Fix only() in littleutils.py to match its documented behavior. Don't break other functions.
+Verify by running python.

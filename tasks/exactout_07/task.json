@@ -1,0 +1,9 @@
+{
+  "id": "exactout_07",
+  "domain": "instruction-format-adherence",
+  "difficulty": 3,
+  "timeout_s": 600,
+  "reseed": true,
+  "grader_token": "EXACTOUT_07 OK",
+  "notes": "exactout family: exact-format artifact from reseeded data"
+}

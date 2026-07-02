@@ -1,0 +1,9 @@
+{
+  "id": "discount_refactor",
+  "domain": "refactor-under-constraints",
+  "difficulty": 3,
+  "timeout_s": 420,
+  "reseed": true,
+  "grader_token": "DISCOUNT OK",
+  "notes": "Refactor + extend pricing rules; reference-impl case sweep with randomized cases each run."
+}

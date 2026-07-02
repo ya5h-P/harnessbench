@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create report.txt in the project root containing exactly a pipe table: header line "value|squared", then one line per DISTINCT input value in ascending order, formatted <value>|<value*value>. No extra lines, no labels beyond the format given.

@@ -1,0 +1,1 @@
+{"id":"idgen_concurrency","domain":"concurrency-atomicity","difficulty":4,"timeout_s":540,"reseed":false,"grader_token":"IDGEN OK","notes":"next_id() must be unique under concurrency; racy fixture hands out duplicates."}

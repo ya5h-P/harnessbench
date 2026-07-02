@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create range.txt in the project root containing exactly three lines: span=<max-min>, first=<first number in the file>, last=<last number>. No extra lines, no labels beyond the format given.

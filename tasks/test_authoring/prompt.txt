@@ -1,0 +1,6 @@
+mathutils.py defines is_prime(n) (True if n is a prime number, else False). Write a thorough test
+suite in a file named test_mathutils.py that imports is_prime from mathutils and checks its
+correctness using assertions. When run with `python test_mathutils.py`, it must exit with status 0
+if is_prime is correct and a NON-ZERO status (e.g. via an AssertionError) if is_prime is wrong.
+Cover edge cases and composite numbers thoroughly — your suite should be strong enough to catch
+subtle bugs, not just check a few small primes. Do not modify mathutils.py.

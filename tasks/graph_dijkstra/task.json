@@ -1,0 +1,1 @@
+{"id":"graph_dijkstra","domain":"algorithm","difficulty":4,"timeout_s":480,"reseed":false,"grader_token":"DIJKSTRA OK","notes":"Weighted shortest path; unreachable -> inf."}

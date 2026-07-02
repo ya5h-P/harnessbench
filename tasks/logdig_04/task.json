@@ -1,0 +1,9 @@
+{
+  "id": "logdig_04",
+  "domain": "data-extraction-at-scale",
+  "difficulty": 3,
+  "timeout_s": 600,
+  "reseed": true,
+  "grader_token": "LOGDIG_04 OK",
+  "notes": "logdig family: 12000-line log analysis (between)"
+}

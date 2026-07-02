@@ -1,0 +1,9 @@
+{
+  "id": "weirdfs_03",
+  "domain": "filesystem-robustness",
+  "difficulty": 3,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "WEIRDFS_03 OK",
+  "notes": "weirdfs family: hostile paths, 8 decoy files"
+}

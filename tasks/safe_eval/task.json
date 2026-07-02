@@ -1,0 +1,1 @@
+{"id":"safe_eval","domain":"security-defensive","difficulty":4,"timeout_s":480,"reseed":false,"grader_token":"SAFEEVAL OK","notes":"Safe arithmetic evaluator; reject names/calls/attributes (no eval/exec)."}

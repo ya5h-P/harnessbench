@@ -1,0 +1,1 @@
+{"id":"csv_roundtrip","domain":"serialization-roundtrip","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"CSV OK","notes":"Implement parse/dump for a quoted CSV-like format; round-trip + quoting edge cases."}

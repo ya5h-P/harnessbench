@@ -1,0 +1,2 @@
+Write parens.py defining is_balanced(s): return True if the string's brackets (), [], {} are
+correctly matched and nested, else False. Non-bracket characters are ignored. Verify by running python.

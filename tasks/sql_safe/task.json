@@ -1,0 +1,1 @@
+{"id":"sql_safe","domain":"security-defensive","difficulty":4,"timeout_s":480,"reseed":false,"grader_token":"SQLSAFE OK","notes":"Parameterized WHERE builder; values must go to params, never inlined (injection-safe)."}

@@ -1,0 +1,9 @@
+{
+  "id": "multiedit_03",
+  "domain": "cross-file-consistency",
+  "difficulty": 3,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "MULTIEDIT_03 OK",
+  "notes": "multiedit family: rename across 5 call sites"
+}

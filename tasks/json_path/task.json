@@ -1,0 +1,1 @@
+{"id":"json_path","domain":"data-access","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"JSONPATH OK","notes":"get_path(obj, dotted-path, default) over dicts+lists."}

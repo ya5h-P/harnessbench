@@ -1,0 +1,5 @@
+This mini project has a deprecated function notify(to, msg) in lib.py that simply forwards to the
+newer send(to, msg). Migrate the whole codebase off the deprecated API: replace EVERY call to
+notify(...) across all files with the equivalent send(...) call, and DELETE the notify function from
+lib.py. After your change, the identifier "notify" must not appear anywhere in any .py file, and the
+behavior of each app module must be unchanged. Verify by running python.

@@ -1,0 +1,3 @@
+Create a directory out/ containing two files:
+- out/a.txt with exactly the line: alpha
+- out/b.txt with exactly the line: bravo

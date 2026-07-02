@@ -1,0 +1,5 @@
+strutils.py is a real module from the boltons project (BSD, mahmoud/boltons). cardinalize(unit_noun,
+count) returns unit_noun unchanged when count == 1, otherwise its plural (via pluralize), e.g.
+cardinalize('vowel', 5) == 'vowels', cardinalize('box', 1) == 'box', cardinalize('Wish', 3) ==
+'Wishes'. It currently has the count condition inverted. Fix cardinalize in strutils.py to match the
+documented behavior. Verify by running python.

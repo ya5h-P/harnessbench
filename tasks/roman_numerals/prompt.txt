@@ -1,0 +1,5 @@
+Write a Python module roman.py with two functions. to_roman(n): convert an integer to a Roman
+numeral string, valid only for 1..3999; raise ValueError for anything outside that range or for a
+non-integer. from_roman(s): convert a valid canonical Roman numeral string to its integer; raise
+ValueError for invalid input (empty string, lowercase, or non-canonical forms such as 'IIII', 'VV',
+'IC'). Use standard Roman numeral rules. Test it yourself by running python.

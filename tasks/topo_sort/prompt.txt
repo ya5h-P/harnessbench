@@ -1,0 +1,5 @@
+Write topo.py defining topo_sort(graph). graph is a dict mapping each node to a list of its
+prerequisite nodes (nodes that must come BEFORE it). Return a list containing every node exactly
+once such that each node appears AFTER all of its prerequisites. If the graph contains a cycle (no
+valid ordering exists), raise ValueError. All nodes appear as keys in the dict. Verify by running
+python.

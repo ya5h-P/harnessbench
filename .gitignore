@@ -1,0 +1,14 @@
+# benchmark outputs (yours to keep, not to commit)
+out/
+runs/
+.preflight/
+
+# python
+__pycache__/
+*.pyc
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

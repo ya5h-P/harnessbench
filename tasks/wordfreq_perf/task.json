@@ -1,0 +1,1 @@
+{"id":"wordfreq_perf","domain":"performance-optimization","difficulty":4,"timeout_s":540,"reseed":false,"grader_token":"WORDFREQ OK","notes":"top_words correct but O(n*unique); gate on correctness AND machine-normalized speedup."}

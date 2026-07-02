@@ -1,0 +1,1 @@
+{"id":"lru_cache","domain":"stateful-algorithm","difficulty":3,"timeout_s":420,"reseed":false,"grader_token":"LRU OK","notes":"LRU cache with capacity eviction; get/put recency semantics."}

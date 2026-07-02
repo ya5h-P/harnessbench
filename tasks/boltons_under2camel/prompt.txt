@@ -1,0 +1,5 @@
+strutils.py is a real module from the boltons project (BSD, mahmoud/boltons). under2camel(s)
+converts an under_scored string to CamelCase, e.g. under2camel('complex_tokenizer') ==
+'ComplexTokenizer' (each word is capitalized: first letter upper, the rest lower). It currently has
+a bug that uppercases entire words. Fix under2camel in strutils.py to match the documented behavior.
+Verify by running python.

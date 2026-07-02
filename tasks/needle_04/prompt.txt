@@ -1,0 +1,3 @@
+This project has 30 source file(s) under app/. One buggy function is buried somewhere in it:
+- `c2f_391(c)` should follow its docstring: Celsius to Fahrenheit. E.g. c2f_391(0) == 32.0; c2f_391(100) == 212.0.  (right now c2f_391(0) != 32.0)
+Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

@@ -1,0 +1,9 @@
+{
+  "id": "perf_dedup",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF OK",
+  "notes": "dedupe() is correct but O(n^2). Grader gates on correctness AND a machine-normalized speedup vs an embedded naive baseline."
+}

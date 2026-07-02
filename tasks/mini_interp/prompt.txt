@@ -1,0 +1,7 @@
+Write interp.py defining run(program): program is a multi-line string. Each non-empty line is either
+  <name> = <expr>        (assign the expression's value to a variable), or
+  print <expr>           (evaluate and record the value)
+run returns a list of the printed values in order. Expressions support integer literals, variables,
+the binary operators + - * with usual precedence (* before + and -), left-to-right associativity,
+and parentheses. Values are integers. You may assume programs are well-formed except that referring
+to an undefined variable should raise a NameError (or KeyError). Verify by running python.

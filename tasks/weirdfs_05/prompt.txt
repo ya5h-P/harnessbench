@@ -1,0 +1,2 @@
+Somewhere under the directory 'src files/' (the project layout is messy — spaces, dots and parentheses in names, several similarly named files) exactly one file defines the function `is_pal_767(s)`. It should: True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_767('Aba') is True.
+Right now is_pal_767('Aba') returns the wrong value (expected True). Find that file and fix the function in place. Do not move or rename any file.

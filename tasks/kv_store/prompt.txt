@@ -1,0 +1,6 @@
+Write kvstore.py defining a class KV: a tiny JSON-backed key-value store. KV(path) opens (or
+creates) a store persisted to the JSON file at path. Methods: set(key, value) stores and persists;
+get(key, default=None) returns the value or default; delete(key) removes a key and persists;
+keys() returns the current keys. Crucially, changes must be durable: constructing a NEW KV(path) on
+the same file must see all previously stored data. Values may be any JSON-serialisable type. Test
+it yourself by running python.

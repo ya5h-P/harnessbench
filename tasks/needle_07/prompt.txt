@@ -1,0 +1,3 @@
+This project has 90 source file(s) under app/. One buggy function is buried somewhere in it:
+- `word_count_477(s)` should follow its docstring: Number of whitespace-separated words. E.g. word_count_477('a  b') == 2.  (right now word_count_477('a  b') != 2)
+Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

@@ -1,0 +1,5 @@
+idgen.py provides next_id() which should hand out a UNIQUE increasing integer id on each call, and
+reset(). It is used from many threads but currently returns duplicate ids under concurrency (the
+read-modify-write races; a tiny sleep widens the window). Fix idgen.py so that concurrent calls to
+next_id() never return duplicates and the set of ids handed out is exactly 0..N-1 for N calls. Keep
+the next_id()/reset() interface and the small delay. Verify by running python.

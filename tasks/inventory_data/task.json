@@ -1,0 +1,9 @@
+{
+  "id": "inventory_data",
+  "domain": "data-wrangling",
+  "difficulty": 2,
+  "timeout_s": 420,
+  "reseed": true,
+  "grader_token": "INVENTORY OK",
+  "notes": "400-line data file reseeded each run; grader recomputes expected from the actual file (un-hardcodable)."
+}

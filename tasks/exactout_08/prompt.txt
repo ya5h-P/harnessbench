@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create buckets.txt in the project root containing exactly one line per bucket in ascending bucket order, formatted "<bucket>: <count>", where bucket = value // 10 * 10 (integer floor to tens) and count = how many values fall in it. No extra lines, no labels beyond the format given.

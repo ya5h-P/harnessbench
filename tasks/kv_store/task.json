@@ -1,0 +1,9 @@
+{
+  "id": "kv_store",
+  "domain": "stateful-persistence",
+  "difficulty": 3,
+  "timeout_s": 420,
+  "reseed": false,
+  "grader_token": "KV OK",
+  "notes": "JSON-backed KV durable across instances; hidden grader exercises persistence + edge keys."
+}

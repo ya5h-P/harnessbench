@@ -1,0 +1,1 @@
+cfg.json is machine-generated minified JSON (one long line). Change limits.max_upload_mb from 25 to 100. Every other value must remain identical and the file must stay valid JSON.
