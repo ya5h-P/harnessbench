@@ -33,6 +33,10 @@ cp "$taskdir/prompt.txt" "$rundir/prompt.txt"
 # HB_TASKDIR points at grade.py/hidden/ref — only the mock dry-run adapter may see it; never
 # leak it into a real harness's environment.
 if [ "$harness" = "mock" ]; then export HB_TASKDIR="$taskdir"; else unset HB_TASKDIR; fi
+# snapshot llama.cpp /metrics counters so token counts + tok/s come from the harness's actual
+# requests (server must run with --metrics; empty snapshots fall back to the probe below)
+MURL="${HB_METRICS_URL:-http://localhost:8000/metrics}"
+curl -s -m 3 "$MURL" 2>/dev/null | grep '^llamacpp:' > "$rundir/m0.prom" || true
 start=$(date +%s)
 timed_out=0; invoke_rc=0
 if command -v timeout >/dev/null 2>&1; then
@@ -49,6 +53,7 @@ else
   wait "$pid" 2>/dev/null; invoke_rc=$?
 fi
 end=$(date +%s); wall=$((end-start))
+curl -s -m 3 "$MURL" 2>/dev/null | grep '^llamacpp:' > "$rundir/m1.prom" || true
 
 # 3. materialize hidden grade files (deferred from step 1; also defends against agent edits)
 "$PY" "$HB/engine/setup.py" "$taskdir" "$grade.tmp" "$grade" "$seed" "" >/dev/null 2>&1 || true
@@ -90,9 +95,18 @@ if [ -n "$flags" ]; then
   echo "  WARN: possible grader access:$flags (recorded in out/flags.csv)"
 fi
 
-# 7. tok/s probe (server now idle)
-tokps=0
-if [ "$noprobe" != "noprobe" ]; then
+# 7. tok/s + token counts, measured from the run's own requests via /metrics deltas.
+# When the server exposes metrics, out_tokens and tokps are server-side truth (includes every
+# request the harness made, at real context depth); the synthetic probe is only a fallback.
+tokps=0; tok_src=probe
+read -r srv_prompt srv_gen srv_prompt_s srv_gen_s srv_tokps < <("$PY" "$HB/engine/metrics_delta.py" "$rundir/m0.prom" "$rundir/m1.prom" 2>/dev/null)
+: "${srv_prompt:=0}" "${srv_gen:=0}" "${srv_prompt_s:=0}" "${srv_gen_s:=0}" "${srv_tokps:=0}"
+if awk "BEGIN{exit !($srv_tokps > 0)}"; then
+  tokps=$srv_tokps; out_tokens=$srv_gen; tok_src=server
+  USAGE="$HB/out/server_usage.csv"
+  [ -f "$USAGE" ] || echo "harness,task,repeat,prompt_tokens,gen_tokens,prompt_s,gen_s,gen_tokps" > "$USAGE"
+  echo "$harness,$task,$repeat,$srv_prompt,$srv_gen,$srv_prompt_s,$srv_gen_s,$srv_tokps" >> "$USAGE"
+elif [ "$noprobe" != "noprobe" ]; then
   pline=$(bash "$HB/probe_tokps.sh" "${harness}_${task}_r${repeat}" 2>/dev/null | tail -1)
   tokps=$(echo "$pline" | cut -d, -f3); : "${tokps:=0}"
 fi
@@ -102,5 +116,5 @@ RES="$HB/out/results.csv"
 mkdir -p "$HB/out"
 [ -f "$RES" ] || echo "harness,task,domain,difficulty,repeat,seed,status,pass,wall_s,toolcalls,turns,out_tokens,self_verify,tokps" > "$RES"
 echo "$harness,$task,$domain,$difficulty,$repeat,$seed,$status,$passed,$wall,$toolcalls,$turns,$out_tokens,$sv,$tokps" >> "$RES"
-echo "[$harness/$task rep$repeat] $status pass=$passed wall=${wall}s tools=$toolcalls turns=$turns out_tok=$out_tokens sv=$sv tokps=$tokps"
+echo "[$harness/$task rep$repeat] $status pass=$passed wall=${wall}s tools=$toolcalls turns=$turns out_tok=$out_tokens sv=$sv tokps=$tokps (src=$tok_src)"
 echo "  grade: $gout" | head -1

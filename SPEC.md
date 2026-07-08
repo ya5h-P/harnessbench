@@ -31,7 +31,10 @@ Anchors are fixed, so adding a new harness never changes existing harnesses' sco
   instrumentation, the self-verification term is dropped and the remaining weights renormalize
   (so a partially-instrumented harness is not penalized with zeros).
 - **Efficiency** = per-task overhead ratio R = wall_time ÷ (output_tokens ÷ tok/s_baseline), mapped
-  by fixed anchors `R≈1→100, 2→84, 3→68, 5→45, 8→22, 12→8`. If a harness doesn't report output
+  by fixed anchors `R≈1→100, 2→84, 3→68, 5→45, 8→22, 12→8`. When the server exposes llama.cpp
+  `/metrics`, both output_tokens and tok/s_baseline are measured server-side per run (counter
+  deltas around the invoke — the run's actual requests at real context depth); otherwise
+  output_tokens is harness-reported and tok/s comes from the synthetic probe. If neither yields
   tokens, a wall-clock fallback (`wall_s ÷ difficulty` vs fixed anchors) is used instead. R≈1 means
   "all time is generation" (ideal); high R means prompt/per-turn overhead.
 
@@ -50,8 +53,8 @@ timeout (`task.json:timeout_s`).
 - Harness pairs share tasks *and* seeds, so a **paired sign-flip permutation test** on per-cluster
   pass-rate differences is reported alongside the leaderboard (don't trust a ranking whose p is large).
 - One **warmup** run per harness is discarded (cold model/prompt cache).
-- Run order is **shuffled/interleaved** to spread thermal drift; the tok/s probe time-series
-  (`out/tokps.csv`) records drift.
+- Run order is **shuffled/interleaved** to spread thermal drift; the per-run server measurements
+  (`out/server_usage.csv`, or the probe time-series `out/tokps.csv` in fallback mode) record drift.
 
 ## Anti-gaming guarantees
 - **Hidden graders**: the agent never sees `grade.py`. Agent-visible tests are graded against a
@@ -109,11 +112,14 @@ multi-step pipelines).
 - **Repeats measure sampling variance, not robustness, for non-reseeded tasks.** Only reseeded
   tasks change inputs across repeats; elsewhere a harness that ships temperature 0 gets a perfect
   pass^k by determinism. "Harness as shipped" is the design stance — but read pass^k accordingly.
-- **`out_tokens` is self-reported** from each harness's own log format; cross-harness token
-  accounting has not been externally validated. The tok/s baseline probe uses a fixed generation
-  whose speculative-decoding acceptance differs from real task content, so Efficiency carries
-  normalization noise. Wall-clock-fallback Efficiency scores are asterisked in the leaderboard and
-  are not commensurable with overhead-ratio scores.
+- **Token accounting depends on the serving stack.** With llama.cpp `/metrics` enabled,
+  `out_tokens` and tok/s are measured server-side per run and are harness-neutral by construction.
+  Without it, `out_tokens` is self-reported from each harness's log format (not externally
+  validated across harnesses) and the synthetic tok/s probe uses a fixed generation whose
+  speculative-decoding acceptance differs from real task content, so fallback-mode Efficiency
+  carries normalization noise. Don't mix server-measured and probe-measured rows in one
+  leaderboard (`src=` is recorded per run). Wall-clock-fallback Efficiency scores are asterisked
+  in the leaderboard and are not commensurable with overhead-ratio scores.
 - **Difficulty weights are author-assigned** ordinals used as ratio weights; re-run `score.py`
   with different `WEIGHTS`/difficulties to check sensitivity (results ship with the per-task table
   so readers can re-derive).

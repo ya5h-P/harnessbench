@@ -78,7 +78,8 @@ Everything is an environment variable — no config files to edit:
 
 ```bash
 export HB_PYTHON=python3                                        # Linux, if `python` isn't a thing
-export HB_ENDPOINT=http://localhost:8000/v1/chat/completions    # your server (tok/s probe)
+export HB_ENDPOINT=http://localhost:8000/v1/chat/completions    # your server (probe fallback)
+export HB_METRICS_URL=http://localhost:8000/metrics             # llama.cpp /metrics (primary token/tok-s source)
 export HB_MODEL=your-model-name                                 # model id your server expects
 
 # tell the adapters where the harness CLIs live (examples):
@@ -113,8 +114,13 @@ Good to know:
   never parallelizes. Run order is shuffled to spread thermal drift fairly across harnesses.
 - **Resumable.** `out/results.csv` is the checkpoint. Ctrl-C anytime (or crash — we've tested
   that the hard way); re-running skips completed rows and continues.
-- **A tok/s probe** fires between runs into `out/tokps.csv`, so Efficiency scores are normalized
-  by your server's actual speed — a faster GPU doesn't make a harness look smarter.
+- **Token counts and tok/s come from the server, not the harness.** `run_one.sh` snapshots
+  llama.cpp's `/metrics` counters around each invoke; the delta gives output tokens and tok/s from
+  the run's *actual* requests at real context depth (logged per-run to `out/server_usage.csv`,
+  results line shows `src=server`). Launch your server with `--metrics` to enable this. Without it,
+  a synthetic tok/s probe fires between runs into `out/tokps.csv` as a fallback (`src=probe`) —
+  either way Efficiency is normalized by your server's actual speed, so a faster GPU doesn't make
+  a harness look smarter.
 - Flags: `--repeats N`, `--tasks all|id,..`, `--harness a,b`, `--seed-base S`, `--no-warmup`,
   `--no-probe`.
 - If a timed-out harness leaves a zombie process holding your endpoint (mostly a Windows thing),
@@ -184,12 +190,13 @@ tasks/               150 task dirs (task.json, prompt.txt, fixtures/, hidden gra
 tasks/_authoring/    generator for the 98 templated harness-load tasks (11 families)
 tasks/repos/         vendored real-repo snapshots (pinned @SHA) + curation guide
 adapters/            pi.sh, opencode.sh, hermes.sh, mock.sh (+ parsers) — add yours here
-engine/              setup.py (workdir/gradedir builder), preflight.sh (discrimination check)
+engine/              setup.py (workdir/gradedir builder), preflight.sh (discrimination check),
+                     metrics_delta.py (per-run token/tok-s deltas from llama.cpp /metrics)
 run_one.sh           one (harness,task,repeat): setup -> invoke -> grade -> metrics -> csv
 run_matrix.sh        the full matrix (sequential, resumable, shuffled, warmup)
-probe_tokps.sh       server tok/s probe (Efficiency normalization + drift tracking)
+probe_tokps.sh       synthetic tok/s probe (fallback when the server has no /metrics)
 score.py             scoring -> out/scores.json + out/LEADERBOARD.md
-out/                 your results (gitignored): results.csv, tokps.csv, flags.csv, leaderboard
+out/                 your results (gitignored): results.csv, server_usage.csv, tokps.csv, flags.csv
 ```
 
 ## License
