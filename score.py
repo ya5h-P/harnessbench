@@ -11,6 +11,8 @@ permutation test on per-cluster pass rates.
 """
 import sys, os, csv, json, statistics, random
 from collections import Counter
+from itertools import combinations
+from math import sqrt
 
 HB = os.path.dirname(os.path.abspath(__file__))
 WEIGHTS = {"correctness": 0.35, "reliability": 0.25, "efficiency": 0.20, "capability": 0.20}
@@ -101,6 +103,53 @@ def task_aggregate(reps):
         "has_tools": has_tools,
         "med_wall": med_wall, "eff": eff, "eff_mode": eff_mode, "n": len(reps),
     }
+
+def kendall_tau_b(x, y):
+    """Tie-corrected Kendall rank correlation (tau-b). O(n^2), fine for n<=few hundred."""
+    n = len(x); C = D = tx = ty = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            a = x[i] - x[j]; b = y[i] - y[j]
+            if a == 0 and b == 0:
+                continue
+            elif a == 0:
+                tx += 1
+            elif b == 0:
+                ty += 1
+            elif (a > 0) == (b > 0):
+                C += 1
+            else:
+                D += 1
+    den = sqrt((C + D + tx) * (C + D + ty))
+    return (C - D) / den if den else None
+
+def stability_taus(tdict):
+    """Run-to-run stability across repeats, two forms (report-only, not in the composite):
+    - tau_outcome: mean pairwise tau-b between repeats on per-task binary pass vectors.
+      High = the same tasks fail every run (systematic); low = failures wander (stochastic).
+    - tau_effort:  mean pairwise tau-b between repeats on per-task wall-time.
+      Measures whether a task's cost is a stable property of the task.
+    Returns (tau_outcome, tau_effort), either None when < 2 shared repeats or all-tied vectors."""
+    P, W = {}, {}
+    for t, reps in tdict.items():
+        for r in reps:
+            k = int(r["repeat"])
+            P.setdefault(t, {})[k] = 1.0 if r["pass"] >= 1 else 0.0
+            W.setdefault(t, {})[k] = r["wall_s"]
+    rep_ids = sorted({k for d in P.values() for k in d})
+    out_taus, eff_taus = [], []
+    for r1, r2 in combinations(rep_ids, 2):
+        shared = [t for t in P if r1 in P[t] and r2 in P[t]]
+        if len(shared) < 10:
+            continue
+        to = kendall_tau_b([P[t][r1] for t in shared], [P[t][r2] for t in shared])
+        te = kendall_tau_b([W[t][r1] for t in shared], [W[t][r2] for t in shared])
+        if to is not None:
+            out_taus.append(to)
+        if te is not None:
+            eff_taus.append(te)
+    return (statistics.mean(out_taus) if out_taus else None,
+            statistics.mean(eff_taus) if eff_taus else None)
 
 def categories(tasks):
     """tasks: dict task_id -> aggregate. Returns the four category scores 0-100.
@@ -202,10 +251,13 @@ def main():
         lo, hi = bootstrap_ci(tasks, WEIGHTS)
         w = weights_for(list(tasks))
         tw = sum(w.values()) or 1
+        tau_out, tau_eff = stability_taus(tdict)
         out["harnesses"][h] = {
             "categories": {k: round(v, 1) for k, v in cat.items()},
             "composite": round(comp, 1), "ci95": [round(lo, 1), round(hi, 1)],
             "n_tasks": len(tasks),
+            "tau_outcome": round(tau_out, 3) if tau_out is not None else None,
+            "tau_effort": round(tau_eff, 3) if tau_eff is not None else None,
             "pass_at_k": round(100 * sum(w[t] * tasks[t]["pass_any"] for t in tasks) / tw, 1),
             "pass_pow_k": round(100 * sum(w[t] * tasks[t]["pass_all"] for t in tasks) / tw, 1),
             "tasks": {t: {kk: (round(vv, 2) if isinstance(vv, float) else vv)
@@ -233,8 +285,8 @@ def render(out):
     lines.append("Category scores are 0-100 (absolute anchors). OVERALL = "
                  "0.35·Correctness + 0.25·Reliability + 0.20·Efficiency + 0.20·Capability, "
                  "with a 95% bootstrap CI over tasks.\n")
-    lines.append("| # | Harness | Correct | Reliab | Effic | Capab | **OVERALL** | 95% CI | pass@k | pass^k |")
-    lines.append("|---|---------|--------:|-------:|------:|------:|------------:|:------:|------:|------:|")
+    lines.append("| # | Harness | Correct | Reliab | Effic | Capab | **OVERALL** | 95% CI | pass@k | pass^k | τ-out | τ-eff |")
+    lines.append("|---|---------|--------:|-------:|------:|------:|------------:|:------:|------:|------:|------:|------:|")
     any_fallback = False
     for i, h in enumerate(order, 1):
         c = H[h]["categories"]; comp = H[h]["composite"]; ci = H[h]["ci95"]
@@ -242,12 +294,20 @@ def render(out):
         # is not commensurable with the overhead-ratio mode, so the number carries an asterisk
         fb = any(a.get("eff_mode") == "wallclock" for a in H[h]["tasks"].values())
         any_fallback = any_fallback or fb
-        lines.append("| %d | %s | %.0f | %.0f | %.0f%s | %.0f | **%.1f** | %.0f–%.0f | %.0f | %.0f |" % (
+        tau_o = H[h].get("tau_outcome"); tau_e = H[h].get("tau_effort")
+        lines.append("| %d | %s | %.0f | %.0f | %.0f%s | %.0f | **%.1f** | %.0f–%.0f | %.0f | %.0f | %s | %s |" % (
             i, h, c["correctness"], c["reliability"], c["efficiency"], "\\*" if fb else "",
-            c["capability"], comp, ci[0], ci[1], H[h]["pass_at_k"], H[h]["pass_pow_k"]))
+            c["capability"], comp, ci[0], ci[1], H[h]["pass_at_k"], H[h]["pass_pow_k"],
+            "%+.2f" % tau_o if tau_o is not None else "—",
+            "%+.2f" % tau_e if tau_e is not None else "—"))
     if any_fallback:
         lines.append("\n\\* Efficiency used the wall-clock fallback for one or more tasks "
                      "(no token instrumentation) — not directly comparable to overhead-ratio scores.")
+    lines.append("\nτ-out / τ-eff = run-to-run stability (mean pairwise Kendall τ-b between repeats; "
+                 "report-only, not in OVERALL). τ-out compares binary pass vectors: high = the same "
+                 "tasks fail every run (systematic), low = failures wander between runs (sampling "
+                 "noise) — read it together with the pass@k vs pass^k gap. τ-eff compares wall-time "
+                 "rankings: high = task cost is a stable property of the task.")
     if out.get("paired"):
         lines.append("\n## Paired comparisons (per-cluster pass rate, sign-flip permutation test)\n")
         lines.append("| Pair | mean Δpass | p (two-sided) |")

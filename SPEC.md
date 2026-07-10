@@ -50,6 +50,11 @@ timeout (`task.json:timeout_s`).
   are correlated, so a per-task bootstrap would understate the CI).
 - **pass@k** (passed ≥1 of k = capability ceiling) and **pass^k** (passed all k = consistency) are
   both reported; their divergence is a signal.
+- **Run-to-run stability (Kendall τ-b, report-only)**: mean pairwise τ-b between repeats, in two
+  forms. **τ-out** on per-task binary pass vectors — high means the same tasks fail every run
+  (systematic weakness), low means failures wander between runs (sampling noise); it tells you
+  *which kind* of inconsistency the pass@k/pass^k gap is made of. **τ-eff** on per-task wall-time
+  rankings — how stable a task's cost is across runs. Neither enters the composite.
 - Harness pairs share tasks *and* seeds, so a **paired sign-flip permutation test** on per-cluster
   pass-rate differences is reported alongside the leaderboard (don't trust a ranking whose p is large).
 - One **warmup** run per harness is discarded (cold model/prompt cache).
