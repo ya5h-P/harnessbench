@@ -1,11 +1,11 @@
-def util_593(x):
-    return x * 22
-
-def util_858(a, b):
+def util_704(a, b):
     return a if a > b else b
 
-def util_613(s):
-    return s[::-1]
+def util_685(s):
+    return s.strip()
 
-def util_807(s):
-    return s[::-1]
+def util_859(x):
+    return x * 22
+
+def util_484(x):
+    return x + 21

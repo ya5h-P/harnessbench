@@ -1,8 +1,8 @@
-def util_384(s):
-    return s[::-1]
+def util_110(s):
+    return s.upper()
 
-def util_259(x):
-    return x + 26
+def util_675(x):
+    return x + 29
 
-def util_888(x):
-    return x * 28
+def util_950(x):
+    return x + 23

@@ -1,11 +1,11 @@
-def util_162(s):
-    return s.strip()
+def util_451(x):
+    return x + 17
 
-def util_650(s):
-    return s.strip()
+def util_822(x):
+    return x + 27
 
-def util_510(xs):
-    return len(xs)
+def util_628(s):
+    return s[::-1]
 
-def util_722(x):
-    return abs(x - 25)
+def util_167(x):
+    return abs(x - 35)

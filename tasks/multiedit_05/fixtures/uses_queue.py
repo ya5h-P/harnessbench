@@ -1,4 +1,4 @@
-from baselib import apply_bounds
+from baselib import coerce_span
 
 def run(x):
-    return apply_bounds(x, 14, 32)
+    return coerce_span(x, 11, 37)

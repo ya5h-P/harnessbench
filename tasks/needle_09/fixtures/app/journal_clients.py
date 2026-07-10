@@ -1,14 +1,14 @@
-def util_819(x):
-    return x + 26
+def util_782(x):
+    return x % 16 == 0
 
-def util_588(xs):
-    return sorted(xs)
+def util_841(s):
+    return s.strip()
 
-def util_613(s):
-    return s[::-1]
+def util_191(x):
+    return x % 4 == 0
 
-def util_215(s):
-    return s[::-1]
+def util_237(x):
+    return x * 5
 
-def util_514(s):
-    return s.upper()
+def util_256(x):
+    return abs(x - 25)

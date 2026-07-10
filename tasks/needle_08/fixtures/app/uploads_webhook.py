@@ -1,14 +1,8 @@
-def util_493(a, b):
-    return a if a > b else b
-
-def util_166(x):
-    return abs(x - 11)
-
-def util_349(s):
-    return s.strip()
-
-def util_306(s):
+def util_321(s):
     return s[::-1]
 
-def util_360(s):
+def util_171(x):
+    return x + 11
+
+def util_175(s):
     return s[::-1]

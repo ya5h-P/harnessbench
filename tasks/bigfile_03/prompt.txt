@@ -1,2 +1,2 @@
-core.py in this project is large (180 functions). The function `strip_ext_9343(fn)` should: Filename without its LAST extension only. E.g. strip_ext_9343('archive.tar.gz') == 'archive.tar'.
-Right now strip_ext_9343('archive.tar.gz') returns the wrong value (expected 'archive.tar'). Fix `strip_ext_9343` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (320 functions). The function `strip_ext_9821(fn)` should: Filename without its LAST extension only. E.g. strip_ext_9821('archive.tar.gz') == 'archive.tar'.
+Right now strip_ext_9821('archive.tar.gz') returns the wrong value (expected 'archive.tar'). Fix `strip_ext_9821` only — every other function in core.py must remain exactly as it is.

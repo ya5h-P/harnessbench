@@ -1,3 +1,3 @@
-This project has 5 source file(s) under app/. One buggy function is buried somewhere in it:
-- `between_700(x, lo, hi)` should follow its docstring: True iff lo <= x <= hi (inclusive). E.g. between_700(1, 1, 3) is True.  (right now between_700(1, 1, 3) != True)
+This project has 8 source file(s) under app/. One buggy function is buried somewhere in it:
+- `word_count_602(s)` should follow its docstring: Number of whitespace-separated words. E.g. word_count_602('a  b') == 2.  (right now word_count_602('a  b') != 2)
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

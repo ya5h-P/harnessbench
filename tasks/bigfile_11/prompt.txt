@@ -1,0 +1,2 @@
+core.py in this project is large (1800 functions). The function `mean2_1056(xs)` should: Arithmetic mean rounded to 2 decimals. E.g. mean2_1056([2, 4]) == 3.0.
+Right now mean2_1056([2, 4]) returns the wrong value (expected 3.0). Fix `mean2_1056` only — every other function in core.py must remain exactly as it is.

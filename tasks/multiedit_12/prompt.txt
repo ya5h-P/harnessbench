@@ -1,0 +1,1 @@
+Rename the function `pin_value` (defined in baselib.py) to `hold_between` across the whole project: the definition and every import/call site in all 20 caller modules. Behavior must be unchanged, and NO occurrence of the old name `pin_value` may remain anywhere (no alias, no comment mentions).

@@ -1,0 +1,1 @@
+inventory.dat is a fixed-width columnar file read by a legacy parser: columns are ID (width 10, left-aligned), NAME (width 22, left-aligned), QTY (width 5, right-aligned), PRICE (width 8, right-aligned, 2 decimals). Change the QTY of row SKU-1017 to 250. Every byte of padding and every other row must remain exactly as it is.

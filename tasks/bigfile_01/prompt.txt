@@ -1,2 +1,2 @@
-core.py in this project is large (60 functions). The function `is_pal_5314(s)` should: True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_5314('Aba') is True.
-Right now is_pal_5314('Aba') returns the wrong value (expected True). Fix `is_pal_5314` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (90 functions). The function `is_pal_7010(s)` should: True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_7010('Aba') is True.
+Right now is_pal_7010('Aba') returns the wrong value (expected True). Fix `is_pal_7010` only — every other function in core.py must remain exactly as it is.

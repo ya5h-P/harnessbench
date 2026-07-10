@@ -1,8 +1,8 @@
-def util_105(x):
-    return x % 19 == 0
+def util_976(a, b):
+    return a if a > b else b
 
-def util_917(x):
-    return x + 7
+def util_301(x):
+    return abs(x - 16)
 
-def util_270(s):
-    return s.strip()
+def util_815(s):
+    return s[::-1]

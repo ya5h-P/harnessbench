@@ -1,8 +1,14 @@
-def util_972(x):
-    return x % 25 == 0
+def util_995(x):
+    return x % 33 == 0
 
-def util_864(x):
-    return x % 30 == 0
+def util_478(xs):
+    return len(xs)
 
-def util_308(xs):
-    return sorted(xs)
+def util_272(s):
+    return s.upper()
+
+def util_233(s):
+    return s[::-1]
+
+def util_543(s):
+    return s.strip()

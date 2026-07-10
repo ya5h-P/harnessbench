@@ -1,8 +1,11 @@
-def util_125(s):
-    return s.strip()
+def util_623(a, b):
+    return a if a > b else b
 
-def util_301(s):
-    return s.upper()
+def util_896(xs):
+    return sorted(xs)
 
-def util_614(x):
-    return x + 8
+def util_852(x):
+    return x + 28
+
+def util_924(xs):
+    return sorted(xs)

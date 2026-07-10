@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": true,
   "grader_token": "CHAIN_06 OK",
-  "notes": "chain family: 3-step executed pipeline, one buggy step"
+  "capability": "multi-step-execution",
+  "tier": "systematic",
+  "stateful": true,
+  "notes": "chain family: 5-step executed pipeline, 1 buggy step(s)"
 }

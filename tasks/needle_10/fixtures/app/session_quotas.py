@@ -1,8 +1,14 @@
-def util_129(x):
-    return x + 27
+def util_290(s):
+    return s.strip()
 
-def util_568(x):
-    return x + 7
+def util_176(s):
+    return s.strip()
 
-def util_607(a, b):
-    return a if a > b else b
+def util_878(s):
+    return s[::-1]
+
+def util_215(s):
+    return s[::-1]
+
+def util_578(x):
+    return x + 3

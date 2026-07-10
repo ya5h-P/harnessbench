@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create mode.txt in the project root containing exactly two lines: distinct=<number of distinct values>, mode=<the most frequent value; ties broken by the smallest value>. No extra lines, no labels beyond the format given.

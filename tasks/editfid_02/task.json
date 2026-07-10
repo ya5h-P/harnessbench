@@ -1,9 +1,12 @@
 {
   "id": "editfid_02",
   "domain": "edit-fidelity",
-  "difficulty": 2,
-  "timeout_s": 480,
+  "difficulty": 3,
+  "timeout_s": 600,
   "reseed": false,
   "grader_token": "EDITFID_02 OK",
+  "capability": "edit-fidelity",
+  "tier": "variance",
+  "stateful": false,
   "notes": "generated family task (see tasks/_authoring)"
 }

@@ -1,6 +1,8 @@
-data.json holds transaction records. Run this 3-step pipeline from the project root, in order:
-  1) python tools/keep_ok.py data.json kept.json
-  2) python tools/totals.py kept.json totals.json
-  3) python tools/to_csv.py totals.json final.csv
+data.json holds transaction records. Run this 5-step pipeline from the project root, in order:
+  1) python tools/dedupe.py data.json unique.json
+  2) python tools/keep_ok.py unique.json kept.json
+  3) python tools/totals.py kept.json totals.json
+  4) python tools/filter_min.py totals.json filtered.json
+  5) python tools/to_csv.py filtered.json final.csv
 All listed output files must exist afterwards; final.csv is the final deliverable.
 NOTE: one of the step scripts has a trivial bug that makes it crash — diagnose and fix it before/while running the pipeline.

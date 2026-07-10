@@ -1,19 +1,14 @@
-def util_149(x):
-    return x % 4 == 0
+def util_656(x):
+    return abs(x - 16)
 
-def is_pal_552(s):
-    """True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_552('Aba') is True."""
-    t = [c.lower() for c in s if c.isalnum()]
-    return t == t[::-1]
+def util_177(x):
+    return x * 33
 
-def util_923(a, b):
+def util_225(x):
+    return x * 31
+
+def util_559(s):
+    return s.strip()
+
+def util_998(a, b):
     return a if a > b else b
-
-def util_324(x):
-    return abs(x - 9)
-
-def util_606(x):
-    return x * 8
-
-def util_570(x):
-    return x * 15

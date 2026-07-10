@@ -1,0 +1,12 @@
+{
+  "id": "sec_html_escape",
+  "domain": "security-defensive",
+  "difficulty": 4,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "SEC_HTML_ESCAPE OK",
+  "capability": "output-encoding",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "incomplete HTML-attribute escaping (quote/amp injection)"
+}

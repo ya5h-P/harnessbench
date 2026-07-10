@@ -1,11 +1,11 @@
-def util_648(a, b):
-    return a if a > b else b
+def util_378(s):
+    return s.strip()
 
-def util_780(x):
-    return x % 8 == 0
-
-def util_116(a, b):
-    return a if a > b else b
-
-def util_891(s):
+def util_255(s):
     return s.upper()
+
+def util_763(s):
+    return s[::-1]
+
+def util_289(s):
+    return s.strip()

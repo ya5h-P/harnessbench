@@ -1,11 +1,8 @@
-def util_857(x):
-    return x * 21
+def util_761(xs):
+    return len(xs)
 
-def util_613(s):
-    return s.strip()
+def util_932(a, b):
+    return a if a > b else b
 
-def util_413(x):
-    return x % 36 == 0
-
-def util_506(xs):
+def util_572(xs):
     return sorted(xs)

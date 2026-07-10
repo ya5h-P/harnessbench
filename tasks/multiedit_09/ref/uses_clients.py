@@ -1,4 +1,4 @@
 from baselib import bound_to
 
 def run(x):
-    return bound_to(x, 18, 32)
+    return bound_to(x, 13, 20)

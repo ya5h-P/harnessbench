@@ -1,8 +1,11 @@
-def util_768(x):
-    return abs(x - 25)
+def util_883(x):
+    return x + 24
 
-def util_590(x):
-    return x * 15
+def util_736(x):
+    return x * 7
 
-def util_169(x):
-    return x * 38
+def util_306(x):
+    return abs(x - 23)
+
+def util_677(s):
+    return s.upper()

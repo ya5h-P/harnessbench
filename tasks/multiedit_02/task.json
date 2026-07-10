@@ -5,5 +5,8 @@
   "timeout_s": 600,
   "reseed": false,
   "grader_token": "MULTIEDIT_02 OK",
+  "capability": "cross-file-consistency",
+  "tier": "variance",
+  "stateful": false,
   "notes": "multiedit family: rename across 4 call sites"
 }

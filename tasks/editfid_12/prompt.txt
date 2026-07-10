@@ -1,0 +1,5 @@
+settings_all.py holds a single very long line defining SETTINGS (300 entries). Make exactly these three changes:
+  SETTINGS['checkout_min_prod'] = 31337
+  SETTINGS['mailer_max_dev'] = 'migrated'
+  SETTINGS['storage_cap_dev'] = [1, 2, 3]
+All 297 other entries must keep their exact current values.

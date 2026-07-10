@@ -1,14 +1,11 @@
-def util_957(s):
-    return s[::-1]
+def util_970(x):
+    return x % 6 == 0
 
-def util_230(x):
-    return x + 4
+def util_179(x):
+    return x % 2 == 0
 
-def util_319(s):
-    return s.upper()
+def util_291(x):
+    return x % 15 == 0
 
-def util_501(s):
-    return s[::-1]
-
-def util_731(a, b):
-    return a if a > b else b
+def util_516(s):
+    return s.strip()

@@ -1,11 +1,11 @@
-def util_598(s):
-    return s[::-1]
+def util_810(x):
+    return abs(x - 31)
 
-def util_218(x):
-    return abs(x - 36)
+def util_137(s):
+    return s.strip()
 
-def util_355(s):
-    return s[::-1]
+def util_669(xs):
+    return sorted(xs)
 
-def util_480(x):
-    return x * 37
+def util_947(x):
+    return x + 33

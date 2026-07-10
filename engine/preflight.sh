@@ -18,6 +18,14 @@ for taskdir in "$TASKS_DIR"/*/; do
 
   reseed=$("$PY" -c "import json,sys;print(1 if json.load(sys.stdin).get('reseed') else 0)" < "$taskdir/task.json" 2>/dev/null)
 
+  # Rule 1 (v2): a task whose failures implicate no harness capability ("floor") must stay d1-2
+  floorbad=$("$PY" -c "import json,sys;t=json.load(sys.stdin);print(1 if t.get('capability')=='floor' and t.get('difficulty',1)>=3 else 0)" < "$taskdir/task.json" 2>/dev/null)
+  if [ "$floorbad" = "1" ]; then
+    fail=$((fail+1)); failed_ids="$failed_ids $id"
+    printf "  FAIL %-26s -> floor-capability-at-d>=3 (Rule 1: floor tasks are capped at d2)\n" "$id"
+    continue
+  fi
+
   # --- FAIL check (unsolved) ---
   wb="$TMP/$id/buggy/work"; gb="$TMP/$id/buggy/grade"; rm -rf "$TMP/$id"; mkdir -p "$wb" "$gb"
   variant_b=""; [ -d "$taskdir/buggy" ] && variant_b="buggy"

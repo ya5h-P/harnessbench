@@ -23,7 +23,19 @@ tasks/<id>/
   "timeout_s": 480,                 // hard wall-clock cap -> TIMEOUT failure class
   "reseed": false,                  // true => gen.py is invoked with a fresh seed each repeat
   "grader_token": "STACK OK",       // grade.py prints this exact line on success (sanity)
-  "notes": "free text"
+  "notes": "free text",
+
+  // v2 optional fields (all backward-compatible; v1 tasks may omit them)
+  "capability": "cross-file-consistency", // the HARNESS mechanism a failure implicates (Rule 1).
+                                    // "floor" = pure model floor-check; floor tasks must be d1-2
+                                    // (preflight rejects a d>=3 task tagged floor). when absent,
+                                    // consumers derive a default from domain.
+  "tier": "variance",               // "variance" = near the capability frontier (drives pass^k)
+                                    // | "systematic" = designed beyond it (drives pass@k).
+                                    // default "variance". report-only; never enters the composite.
+  "stateful": false                 // true = a later step depends on an artifact/decision produced
+                                    // by an earlier step in the SAME session (tests context
+                                    // retention/compression). default false.
 }
 ```
 

@@ -1,8 +1,8 @@
-def util_804(a, b):
-    return a if a > b else b
+def util_362(x):
+    return abs(x - 38)
 
-def util_968(xs):
-    return sorted(xs)
+def util_417(s):
+    return s.upper()
 
-def util_877(x):
-    return x % 18 == 0
+def util_441(xs):
+    return len(xs)

@@ -1,8 +1,8 @@
-def util_651(x):
-    return abs(x - 27)
-
-def util_683(xs):
+def util_508(xs):
     return len(xs)
 
-def util_865(a, b):
-    return a if a > b else b
+def util_625(x):
+    return abs(x - 34)
+
+def util_890(xs):
+    return sorted(xs)

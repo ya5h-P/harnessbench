@@ -1,14 +1,8 @@
-def util_884(xs):
-    return len(xs)
-
-def util_271(a, b):
+def util_232(a, b):
     return a if a > b else b
 
-def util_470(x):
-    return x * 25
-
-def util_360(a, b):
-    return a if a > b else b
-
-def util_200(s):
+def util_970(s):
     return s.upper()
+
+def util_604(x):
+    return x % 7 == 0

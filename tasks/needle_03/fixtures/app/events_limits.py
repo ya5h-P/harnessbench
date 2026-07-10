@@ -4,9 +4,14 @@ def util_875(xs):
 def util_842(s):
     return s[::-1]
 
-def clamp_575(x, lo, hi):
-    """Clamp x into [lo, hi]. E.g. clamp_575(12, 1, 10) == 10; clamp_575(0, 1, 10) == 1."""
-    return max(lo, min(hi, x))
+def running_sum_575(xs):
+    """Cumulative sums. E.g. running_sum_575([1, 2, 3]) == [1, 3, 6]."""
+    total = 0
+    out = []
+    for x in xs:
+        total += x
+        out.append(total)
+    return out
 
 def util_824(x):
     return x * 36

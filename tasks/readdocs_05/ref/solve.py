@@ -1,6 +1,6 @@
 import ast, os, re, sys
 workdir = sys.argv[1]
-CONSTS = [["BASE_FEE", "base handling fee"], ["RATE_PCT", "percentage service rate"]]
+CONSTS = [["BASE_FEE", "base handling fee"], ["RATE_PCT", "percentage service rate"], ["MAX_ITEMS", "maximum items per order"]]
 MOD = "pricing.py"
 text = ""
 for root, _, files in os.walk(os.path.join(workdir, "docs")):

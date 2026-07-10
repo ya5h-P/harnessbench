@@ -1,8 +1,14 @@
-def util_827(xs):
+def util_828(s):
+    return s.strip()
+
+def util_875(xs):
     return len(xs)
 
-def util_399(s):
-    return s[::-1]
+def util_400(xs):
+    return sorted(xs)
 
-def util_595(x):
-    return x + 22
+def util_984(s):
+    return s.strip()
+
+def util_493(x):
+    return abs(x - 17)

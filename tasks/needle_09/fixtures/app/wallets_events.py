@@ -1,8 +1,11 @@
-def util_585(xs):
+def util_312(x):
+    return x * 7
+
+def util_962(s):
+    return s[::-1]
+
+def util_610(xs):
     return sorted(xs)
 
-def util_880(x):
-    return x * 5
-
-def util_544(x):
-    return x % 11 == 0
+def util_963(a, b):
+    return a if a > b else b

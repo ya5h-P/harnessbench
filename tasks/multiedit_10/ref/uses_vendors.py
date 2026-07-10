@@ -1,4 +1,4 @@
 from shared import cap_between
 
 def run(x):
-    return cap_between(x, 7, 32)
+    return cap_between(x, 3, 32)

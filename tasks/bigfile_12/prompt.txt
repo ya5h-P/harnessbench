@@ -1,0 +1,2 @@
+core.py in this project is large (2000 functions). The function `last_n_8904(xs, n)` should: Last n items of xs (all of xs if n >= len). E.g. last_n_8904([1,2,3,4], 2) == [3, 4].
+Right now last_n_8904([1, 2, 3, 4], 2) returns the wrong value (expected [3, 4]). Fix `last_n_8904` only — every other function in core.py must remain exactly as it is.

@@ -1,5 +1,5 @@
-def util_693(s):
-    return s.strip()
+def util_983(x):
+    return x % 3 == 0
 
 def util_611(xs):
     return sorted(xs)

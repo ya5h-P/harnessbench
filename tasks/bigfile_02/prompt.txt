@@ -1,2 +1,2 @@
-core.py in this project is large (90 functions). The function `pct_4092(part, whole)` should: part as a percentage of whole, rounded to 1 decimal. E.g. pct_4092(1, 8) == 12.5.
-Right now pct_4092(1, 8) returns the wrong value (expected 12.5). Fix `pct_4092` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (240 functions). The function `pct_8593(part, whole)` should: part as a percentage of whole, rounded to 1 decimal. E.g. pct_8593(1, 8) == 12.5.
+Right now pct_8593(1, 8) returns the wrong value (expected 12.5). Fix `pct_8593` only — every other function in core.py must remain exactly as it is.

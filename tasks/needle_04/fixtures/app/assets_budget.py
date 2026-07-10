@@ -1,8 +1,8 @@
-def util_940(x):
-    return x * 6
-
-def util_374(xs):
+def util_805(xs):
     return sorted(xs)
 
-def util_523(xs):
-    return len(xs)
+def util_534(s):
+    return s[::-1]
+
+def util_604(x):
+    return x + 8

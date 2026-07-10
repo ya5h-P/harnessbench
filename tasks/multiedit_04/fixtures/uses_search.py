@@ -1,4 +1,4 @@
 import baselib
 
 def run(x):
-    return baselib.clamp_value(x, 13, 39)
+    return baselib.pin_value(x, 8, 26)

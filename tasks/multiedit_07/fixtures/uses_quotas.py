@@ -1,4 +1,4 @@
 import shared
 
 def run(x):
-    return shared.fit_range(x, 5, 34)
+    return shared.squeeze_val(x, 9, 22)

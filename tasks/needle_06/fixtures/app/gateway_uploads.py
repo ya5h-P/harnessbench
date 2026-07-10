@@ -1,8 +1,8 @@
-def util_232(s):
-    return s.strip()
+def util_188(x):
+    return x * 24
 
-def util_381(s):
-    return s.strip()
+def util_773(s):
+    return s.upper()
 
-def util_814(xs):
-    return len(xs)
+def util_906(a, b):
+    return a if a > b else b

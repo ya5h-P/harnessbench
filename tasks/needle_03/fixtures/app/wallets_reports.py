@@ -9,3 +9,6 @@ def util_866(a, b):
 
 def util_255(x):
     return x + 28
+
+def util_382(xs):
+    return len(xs)

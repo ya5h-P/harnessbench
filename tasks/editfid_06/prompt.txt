@@ -1,1 +1,1 @@
-legacy_ops.py is TAB-indented throughout (house style; do not reindent). The function dedupe_688(xs) should remove duplicates PRESERVING first-seen order, e.g. dedupe_688([3,1,3,2]) == [3, 1, 2] — currently it returns sorted output. Fix it, keeping the whole file tab-indented (a mixed-indentation file will not even import).
+deploy.json is one long minified line describing 30 services. Find the service named "search-api" and change its "replicas" to 6. All 29 other services (and every other field) must remain exactly as they are; the file must stay valid JSON.

@@ -2,8 +2,11 @@
   "id": "bigfile_10",
   "domain": "large-file-edit",
   "difficulty": 5,
-  "timeout_s": 1500,
+  "timeout_s": 900,
   "reseed": false,
   "grader_token": "BIGFILE_10 OK",
-  "notes": "bigfile family: precise edit in a 1200-function file"
+  "capability": "precise-edit-in-large-file",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "bigfile family: precise edit in a 1600-function file"
 }

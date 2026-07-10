@@ -1,11 +1,14 @@
-def util_169(x):
-    return abs(x - 9)
+def util_696(x):
+    return x % 38 == 0
 
-def util_867(x):
-    return abs(x - 6)
+def util_727(a, b):
+    return a if a > b else b
 
-def util_571(x):
-    return abs(x - 21)
+def util_606(s):
+    return s.strip()
 
-def util_537(x):
-    return x * 26
+def util_815(a, b):
+    return a if a > b else b
+
+def util_921(xs):
+    return len(xs)

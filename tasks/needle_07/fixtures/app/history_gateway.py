@@ -1,8 +1,8 @@
-def util_470(x):
-    return x % 9 == 0
+def util_293(s):
+    return s[::-1]
 
-def util_809(a, b):
-    return a if a > b else b
+def util_806(xs):
+    return sorted(xs)
 
-def util_451(s):
+def util_903(s):
     return s.strip()

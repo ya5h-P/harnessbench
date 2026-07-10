@@ -1,4 +1,4 @@
 from common import clamp_value
 
 def run(x):
-    return clamp_value(x, 1, 10)
+    return clamp_value(x, 18, 41)

@@ -1,11 +1,14 @@
-def util_915(x):
-    return abs(x - 20)
-
 def util_249(x):
-    return x + 26
+    return abs(x - 39)
 
-def util_791(x):
-    return x % 29 == 0
-
-def util_916(a, b):
+def util_341(a, b):
     return a if a > b else b
+
+def util_439(x):
+    return abs(x - 7)
+
+def util_694(s):
+    return s[::-1]
+
+def util_160(s):
+    return s[::-1]

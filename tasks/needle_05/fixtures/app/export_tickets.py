@@ -1,8 +1,8 @@
-def util_578(x):
-    return abs(x - 22)
+def util_975(x):
+    return x + 12
 
-def util_506(x):
-    return x % 35 == 0
+def util_696(x):
+    return abs(x - 17)
 
-def util_933(xs):
+def util_772(xs):
     return len(xs)

@@ -1,0 +1,12 @@
+{
+  "id": "perf_subarray_target",
+  "domain": "performance-optimization",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "PERF_SUBARRAY_TARGET OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "subarray-sum count: O(n^2) -> prefix-sum Counter O(n)"
+}

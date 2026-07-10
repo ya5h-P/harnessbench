@@ -1,0 +1,12 @@
+{
+  "id": "multiedit_13",
+  "domain": "cross-file-consistency",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "MULTIEDIT_13 OK",
+  "capability": "cross-file-consistency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "multiedit family: rename across 22 call sites"
+}

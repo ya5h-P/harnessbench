@@ -1,0 +1,12 @@
+{
+  "id": "perf_prefix_range",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_PREFIX_RANGE OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "prefix sums: per-query O(n) slice-sum -> prefix array"
+}

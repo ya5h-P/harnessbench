@@ -1,8 +1,14 @@
-def util_327(xs):
-    return len(xs)
+def util_193(s):
+    return s.upper()
 
-def util_890(x):
-    return x + 14
+def util_487(s):
+    return s.upper()
 
-def util_566(s):
-    return s[::-1]
+def util_438(s):
+    return s.upper()
+
+def util_215(x):
+    return x + 26
+
+def util_448(x):
+    return x % 6 == 0

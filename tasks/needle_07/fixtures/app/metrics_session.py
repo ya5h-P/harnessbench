@@ -1,14 +1,8 @@
-def util_413(a, b):
-    return a if a > b else b
-
-def util_585(xs):
-    return sorted(xs)
-
-def util_593(s):
+def util_338(s):
     return s[::-1]
 
-def util_536(a, b):
-    return a if a > b else b
+def util_871(xs):
+    return len(xs)
 
-def util_542(a, b):
-    return a if a > b else b
+def util_995(x):
+    return x % 18 == 0

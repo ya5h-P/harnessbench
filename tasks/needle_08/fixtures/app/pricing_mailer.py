@@ -1,8 +1,11 @@
-def util_421(s):
-    return s[::-1]
-
-def util_450(x):
-    return abs(x - 33)
-
-def util_176(xs):
+def util_137(xs):
     return len(xs)
+
+def util_896(a, b):
+    return a if a > b else b
+
+def util_267(a, b):
+    return a if a > b else b
+
+def util_124(s):
+    return s.upper()

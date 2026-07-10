@@ -1,12 +1,15 @@
-def initials_148(name):
-    """Uppercase initials of each word. E.g. initials_148('ada lovelace') == 'AL'."""
-    return "".join(w[0].upper() for w in name.split())
+def util_148(a, b):
+    return a if a > b else b
 
-def util_866(x):
-    return x * 17
+def util_992(s):
+    return s.strip()
 
-def util_430(x):
-    return x + 35
+def util_628(xs):
+    return sorted(xs)
 
-def util_979(xs):
-    return len(xs)
+def pct_979(part, whole):
+    """part as a percentage of whole, rounded to 1 decimal. E.g. pct_979(1, 8) == 12.5."""
+    return round(part / whole, 1)
+
+def util_949(x):
+    return x * 31

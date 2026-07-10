@@ -1,14 +1,8 @@
-def util_345(x):
-    return x * 30
+def util_644(s):
+    return s.strip()
 
-def util_953(xs):
-    return len(xs)
+def util_621(a, b):
+    return a if a > b else b
 
-def util_783(x):
-    return x % 36 == 0
-
-def util_934(s):
-    return s[::-1]
-
-def util_507(xs):
-    return len(xs)
+def util_837(x):
+    return x * 6

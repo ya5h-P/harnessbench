@@ -1,11 +1,8 @@
-def util_297(x):
-    return x + 6
+def util_969(s):
+    return s[::-1]
 
-def util_367(x):
-    return x % 19 == 0
+def util_823(xs):
+    return sorted(xs)
 
-def util_430(x):
-    return x + 22
-
-def util_677(x):
-    return abs(x - 11)
+def util_390(a, b):
+    return a if a > b else b

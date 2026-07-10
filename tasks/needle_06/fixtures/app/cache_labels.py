@@ -1,12 +1,14 @@
-def util_416(x):
-    return x * 32
+def util_321(xs):
+    return len(xs)
 
-def util_527(x):
-    return x % 36 == 0
+def util_788(xs):
+    return sorted(xs)
 
-def word_count_666(s):
-    """Number of whitespace-separated words. E.g. word_count_666('a  b') == 2."""
-    return len(s.split(" "))
+def util_433(x):
+    return x + 25
 
-def util_340(x):
-    return abs(x - 14)
+def util_347(x):
+    return abs(x - 21)
+
+def util_209(a, b):
+    return a if a > b else b

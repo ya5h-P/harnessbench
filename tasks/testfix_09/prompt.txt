@@ -1,0 +1,1 @@
+tests_visible.py currently FAILS (run it: python tests_visible.py). Fix textkit_9.py so the visible tests pass. Grading uses a HIDDEN superset of these tests, so fix the functions to match their docstrings — don't just game the visible asserts, and do not edit the test file.

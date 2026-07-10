@@ -1,11 +1,8 @@
-def util_440(s):
+def util_679(s):
     return s[::-1]
 
-def util_225(xs):
+def util_672(xs):
     return len(xs)
 
-def util_984(x):
-    return x + 3
-
-def util_867(x):
-    return x * 17
+def util_608(x):
+    return x % 4 == 0

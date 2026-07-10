@@ -1,11 +1,14 @@
-def util_703(s):
-    return s[::-1]
+def util_964(x):
+    return x % 37 == 0
 
-def util_707(s):
-    return s[::-1]
+def util_672(x):
+    return abs(x - 28)
 
-def util_347(x):
-    return abs(x - 22)
+def util_550(x):
+    return abs(x - 38)
 
-def util_351(s):
-    return s.upper()
+def util_381(x):
+    return x % 8 == 0
+
+def util_796(xs):
+    return sorted(xs)

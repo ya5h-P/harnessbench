@@ -1,0 +1,12 @@
+{
+  "id": "logdig_10",
+  "domain": "data-extraction-at-scale",
+  "difficulty": 5,
+  "timeout_s": 1500,
+  "reseed": true,
+  "grader_token": "LOGDIG_10 OK",
+  "capability": "data-extraction-at-scale",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "logdig family: 100000-line log analysis (multi)"
+}

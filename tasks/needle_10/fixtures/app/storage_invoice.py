@@ -1,15 +1,8 @@
-def util_280(x):
-    return x + 15
-
-def util_867(x):
-    return x + 37
-
-def util_115(a, b):
+def util_745(a, b):
     return a if a > b else b
 
-def word_count_693(s):
-    """Number of whitespace-separated words. E.g. word_count_693('a  b') == 2."""
-    return len(s.split(" "))
+def util_928(a, b):
+    return a if a > b else b
 
-def util_558(xs):
-    return len(xs)
+def util_299(s):
+    return s.strip()

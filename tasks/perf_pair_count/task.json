@@ -1,0 +1,12 @@
+{
+  "id": "perf_pair_count",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_PAIR_COUNT OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "pair-count: O(n^2) -> Counter of complements"
+}

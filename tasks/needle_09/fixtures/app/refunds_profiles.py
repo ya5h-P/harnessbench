@@ -1,14 +1,8 @@
-def util_251(s):
-    return s[::-1]
+def util_721(x):
+    return x + 35
 
-def util_180(s):
-    return s.upper()
+def util_588(a, b):
+    return a if a > b else b
 
-def util_467(x):
-    return x % 18 == 0
-
-def util_657(x):
+def util_495(x):
     return abs(x - 19)
-
-def util_917(s):
-    return s.strip()

@@ -1,0 +1,12 @@
+{
+  "id": "codemod_kwargs",
+  "domain": "refactor-under-constraints",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "CODEMOD_KWARGS OK",
+  "capability": "cross-file-consistency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "signature migration to keyword-only across all callers"
+}

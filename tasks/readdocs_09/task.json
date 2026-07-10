@@ -1,0 +1,12 @@
+{
+  "id": "readdocs_09",
+  "domain": "doc-grounded-implementation",
+  "difficulty": 5,
+  "timeout_s": 1500,
+  "reseed": true,
+  "grader_token": "READDOCS_09 OK",
+  "capability": "context-grounding",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "readdocs family: 5 constants across 8 docs, with deprecated-value traps"
+}

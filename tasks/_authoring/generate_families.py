@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Generate the templated task families (98 tasks, easy -> very hard).
+"""Generate the templated task families (133 tasks, easy -> very hard). v2 plans.
 
 These families stress the HARNESS (search, navigation, edit fidelity, tool execution,
 sustained coverage), keeping per-step model difficulty low. Each family is a statistical
 cluster (see score.py CLUSTER_PREFIXES).
+
+v2 (see V2_PLAN.md): mass shifted into d4/d5, and each hard member carries a tier tag —
+"variance" (near the capability frontier; drives pass^k) or "systematic" (deliberately
+beyond it, e.g. needle at 320 files; drives pass@k). Systematic d5 tasks are capped at
+the d4 timeout (they are expected to fail; a correct solve is fast).
 
 Run once from anywhere:  python tasks/_authoring/generate_families.py
 Then verify:             bash engine/preflight.sh
@@ -129,12 +134,17 @@ def _safe_eq(f, args, exp):
 
 # ---------------------------------------------------------------- emit helpers
 
-def emit(tid, domain, diff, prompt, files, reseed=False, notes=""):
+def emit(tid, domain, diff, prompt, files, reseed=False, notes="",
+         capability=None, tier="variance", stateful=False):
     """files: relpath -> str (utf-8) | bytes | ('crlf', str)."""
     d = os.path.join(TASKS, tid)
     shutil.rmtree(d, ignore_errors=True)
-    meta = {"id": tid, "domain": domain, "difficulty": diff, "timeout_s": TIMEOUT[diff],
+    # systematic d5 = designed to fail most seeds; a correct solve is fast, so don't
+    # spend the d5 marathon timeout waiting for one (V2_PLAN decision 3)
+    timeout = TIMEOUT[4] if (diff == 5 and tier == "systematic") else TIMEOUT[diff]
+    meta = {"id": tid, "domain": domain, "difficulty": diff, "timeout_s": timeout,
             "reseed": reseed, "grader_token": tid.upper() + " OK",
+            "capability": capability or domain, "tier": tier, "stateful": stateful,
             "notes": notes or "generated family task (see tasks/_authoring)"}
     files = dict(files)
     files["task.json"] = json.dumps(meta, indent=2)
@@ -395,9 +405,13 @@ def apply_bug(source, uname, entry):
     return source.replace(good, bad)
 
 def fam_needle():
-    plan = [(2, 5, 1), (2, 8, 1), (3, 20, 1), (3, 30, 1), (3, 40, 1),
-            (4, 70, 1), (4, 90, 1), (4, 120, 1), (5, 160, 2), (5, 200, 2)]
-    for i, (diff, nfiles, nbugs) in enumerate(plan, 1):
+    # (diff, nfiles, nbugs, tier) — v2: d4/d5-heavy; systematic tier beyond the v1 top (200)
+    plan = [(2, 8, 1, "variance"), (3, 25, 1, "variance"), (3, 40, 1, "variance"),
+            (4, 70, 1, "variance"), (4, 90, 1, "variance"), (4, 120, 1, "variance"),
+            (4, 160, 2, "systematic"), (4, 200, 2, "systematic"),
+            (5, 220, 2, "variance"), (5, 260, 3, "systematic"),
+            (5, 290, 3, "systematic"), (5, 320, 3, "systematic")]
+    for i, (diff, nfiles, nbugs, tier) in enumerate(plan, 1):
         tid = "needle_%02d" % i
         rng = rng_for(tid)
         words = rng.sample([a + "_" + b for a in FILEWORDS for b in FILEWORDS if a != b], nfiles)
@@ -445,14 +459,19 @@ def fam_needle():
              dict(fixtures, **ref,
                   **{"grade.py": grader(GRADER_GENERIC, tid.upper() + " OK"),
                      "hidden/expected.json": json.dumps(checks)}),
+             capability="search-navigation", tier=tier,
              notes="needle family: locate a described function among %d files" % nfiles)
 
 # ---------------------------------------------------------------- family: bigfile
 
 def fam_bigfile():
-    plan = [(2, 60), (2, 90), (3, 180), (3, 240), (3, 320),
-            (4, 450), (4, 550), (4, 700), (5, 900), (5, 1200)]
-    for i, (diff, nfuncs) in enumerate(plan, 1):
+    # (diff, nfuncs, tier) — v2: systematic tier beyond the v1 top (1200)
+    plan = [(2, 90, "variance"), (3, 240, "variance"), (3, 320, "variance"),
+            (4, 450, "variance"), (4, 550, "variance"), (4, 700, "variance"),
+            (4, 900, "systematic"), (4, 1100, "systematic"),
+            (5, 1300, "variance"), (5, 1600, "systematic"),
+            (5, 1800, "systematic"), (5, 2000, "systematic")]
+    for i, (diff, nfuncs, tier) in enumerate(plan, 1):
         tid = "bigfile_%02d" % i
         rng = rng_for(tid)
         pool = rng.sample(POOL, 5)
@@ -490,15 +509,24 @@ def fam_bigfile():
              {"fixtures/core.py": src, "ref/core.py": ref_src,
               "grade.py": grader(GRADER_GENERIC, tid.upper() + " OK"),
               "hidden/expected.json": json.dumps(checks)},
+             capability="precise-edit-in-large-file", tier=tier,
              notes="bigfile family: precise edit in a %d-function file" % nfuncs)
 
 # ---------------------------------------------------------------- family: multiedit
 
 def fam_multiedit():
-    plan = [(3, 3), (3, 4), (3, 5), (4, 7), (4, 8), (4, 10), (4, 12), (5, 14), (5, 16), (5, 18)]
+    # (diff, ncallers, tier) — v2: primary multi-site-edit signal; systematic beyond v1 top (18)
+    plan = [(3, 3, "variance"), (3, 4, "variance"), (3, 5, "variance"),
+            (4, 6, "variance"), (4, 7, "variance"), (4, 8, "variance"),
+            (4, 10, "variance"), (4, 12, "variance"), (4, 14, "systematic"),
+            (4, 16, "systematic"), (4, 18, "systematic"),
+            (5, 20, "variance"), (5, 22, "systematic"), (5, 24, "systematic"),
+            (5, 26, "systematic"), (5, 28, "systematic")]
     renames = [("clamp_value", "restrict_range"), ("apply_bounds", "bound_to"),
-               ("limit_num", "cap_between"), ("fit_range", "keep_within")]
-    for i, (diff, ncallers) in enumerate(plan, 1):
+               ("limit_num", "cap_between"), ("fit_range", "keep_within"),
+               ("pin_value", "hold_between"), ("coerce_span", "snap_to_range"),
+               ("bracket_num", "confine_to"), ("squeeze_val", "narrow_into")]
+    for i, (diff, ncallers, tier) in enumerate(plan, 1):
         tid = "multiedit_%02d" % i
         rng = rng_for(tid)
         old, new = renames[i % len(renames)]
@@ -533,13 +561,19 @@ def fam_multiedit():
              dict(files, **ref,
                   **{"grade.py": grader(GRADER_MULTIEDIT, tid.upper() + " OK"),
                      "hidden/expected.json": json.dumps(spec)}),
+             capability="cross-file-consistency", tier=tier,
              notes="multiedit family: rename across %d call sites" % ncallers)
 
 # ---------------------------------------------------------------- family: manyfix
 
 def fam_manyfix():
-    plan = [(3, 6), (3, 8), (3, 10), (4, 12), (4, 14), (4, 17), (4, 20), (5, 23), (5, 26), (5, 28)]
-    for i, (diff, nbugs) in enumerate(plan, 1):
+    # (diff, nbugs, tier) — v2: systematic beyond v1 top (28)
+    plan = [(3, 8, "variance"), (3, 10, "variance"),
+            (4, 12, "variance"), (4, 14, "variance"), (4, 17, "variance"),
+            (4, 20, "variance"), (4, 24, "systematic"), (4, 28, "systematic"),
+            (5, 30, "variance"), (5, 32, "systematic"), (5, 34, "systematic"),
+            (5, 36, "systematic"), (5, 40, "systematic")]
+    for i, (diff, nbugs, tier) in enumerate(plan, 1):
         tid = "manyfix_%02d" % i
         rng = rng_for(tid)
         files, ref, checks = {}, {}, []
@@ -558,6 +592,7 @@ def fam_manyfix():
              dict(files, **ref,
                   **{"grade.py": grader(GRADER_GENERIC, tid.upper() + " OK"),
                      "hidden/expected.json": json.dumps(checks)}),
+             capability="sustained-coverage", tier=tier,
              notes="manyfix family: %d independent trivial fixes, all required" % nbugs)
 
 # ---------------------------------------------------------------- family: weirdfs
@@ -566,9 +601,12 @@ WEIRD_DIRS = ["src files", "pkg (legacy)", "modules v2.1", "uber-tools", "data &
               "alpha-core", "my lib", "sub.dir", "old-stuff", "final (2)", "misc  bits", "cafe"]
 
 def fam_weirdfs():
-    plan = [(2, 2, 3), (2, 2, 4), (3, 4, 8), (3, 4, 10), (3, 5, 12),
-            (4, 6, 16), (4, 7, 20), (4, 7, 24)]
-    for i, (diff, depth, ndecoys) in enumerate(plan, 1):
+    # (diff, depth, ndecoys, tier) — v2: adds a d5 band beyond the v1 top (7, 24)
+    plan = [(2, 2, 4, "variance"), (3, 4, 10, "variance"), (3, 5, 12, "variance"),
+            (4, 6, 16, "variance"), (4, 7, 20, "variance"), (4, 7, 24, "variance"),
+            (4, 8, 28, "systematic"), (4, 8, 32, "systematic"),
+            (5, 9, 40, "variance"), (5, 10, 48, "systematic"), (5, 10, 56, "systematic")]
+    for i, (diff, depth, ndecoys, tier) in enumerate(plan, 1):
         tid = "weirdfs_%02d" % i
         rng = rng_for(tid)
         e = rng.choice(POOL)
@@ -597,6 +635,7 @@ def fam_weirdfs():
              dict(files, **ref,
                   **{"grade.py": grader(GRADER_GENERIC, tid.upper() + " OK"),
                      "hidden/expected.json": json.dumps(checks)}),
+             capability="filesystem-robustness", tier=tier,
              notes="weirdfs family: hostile paths, %d decoy files" % ndecoys)
 
 # ---------------------------------------------------------------- family: exactout
@@ -609,7 +648,7 @@ def fam_exactout():
          'Hello, HarnessBench!',
          {"fixtures/.keep": "", "ref/hello.txt": "Hello, HarnessBench!\n",
           "grade.py": grader(GRADER_TEXTFILE, tok("exactout_01"), target="hello.txt"),
-          "hidden/expected_out.txt": "Hello, HarnessBench!\n"})
+          "hidden/expected_out.txt": "Hello, HarnessBench!\n"}, capability="floor")
     emit("exactout_02", "instruction-format-adherence", 1,
          "Create a directory out/ containing two files:\n"
          "- out/a.txt with exactly the line: alpha\n- out/b.txt with exactly the line: bravo",
@@ -625,7 +664,7 @@ def main():
             print("FAIL: %s wrong content" % rel); sys.exit(1)
     print("EXACTOUT_02 OK")
 main()
-'''})
+'''}, capability="floor")
     meta = {"name": "hb", "version": 2, "channels": ["stable", "beta"]}
     emit("exactout_03", "instruction-format-adherence", 1,
          'Create meta.json in the project root: a JSON object with exactly these keys/values:\n'
@@ -633,7 +672,7 @@ main()
          '  "channels": ["stable", "beta"]  (array of strings, in this order)',
          {"fixtures/.keep": "", "ref/meta.json": json.dumps(meta, indent=1),
           "grade.py": grader(GRADER_JSONFILE, tok("exactout_03"), target="meta.json"),
-          "hidden/expected.json": json.dumps(meta)})
+          "hidden/expected.json": json.dumps(meta)}, capability="floor")
     # d2/d3 reseeded: numbers -> stats file with exact format
     seeded = [("exactout_04", 2, "stats.txt", "min={mn}\nmax={mx}\nmean={mean:.2f}",
                "three lines: min=<int>, max=<int>, mean=<mean to exactly 2 decimals>"),
@@ -646,7 +685,18 @@ main()
                "in ascending order, formatted <value>|<value*value>"),
               ("exactout_08", 3, "buckets.txt", None,
                'one line per bucket in ascending bucket order, formatted "<bucket>: <count>", where '
-               "bucket = value // 10 * 10 (integer floor to tens) and count = how many values fall in it")]
+               "bucket = value // 10 * 10 (integer floor to tens) and count = how many values fall in it"),
+              ("exactout_09", 2, "parity.txt", None,
+               "two lines: evens=<count of even values>, odds=<count of odd values>"),
+              ("exactout_10", 2, "mode.txt", None,
+               "two lines: distinct=<number of distinct values>, mode=<the most frequent value; "
+               "ties broken by the smallest value>"),
+              ("exactout_11", 3, "cdf.txt", None,
+               'four lines, in this order: "le_20=<count of values <= 20>", then likewise le_40, '
+               "le_60, le_80"),
+              ("exactout_12", 3, "quartiles.txt", None,
+               'three lines: p25=<v>, p50=<v>, p75=<v>, where p<q> is the NEAREST-RANK percentile: '
+               "the value at 1-indexed position ceil(q/100 * count) of the ascending sorted list")]
     for tid, diff, target, fmt, desc in seeded:
         gensrc = '''import json, os, random, sys
 workdir, gradedir, seed = sys.argv[1], sys.argv[2], int(sys.argv[3])
@@ -662,10 +712,23 @@ elif TID == "exactout_06":
     out = "span=%d\\nfirst=%d\\nlast=%d" % (max(nums) - min(nums), nums[0], nums[-1])
 elif TID == "exactout_07":
     out = "value|squared\\n" + "\\n".join("%d|%d" % (v, v * v) for v in sorted(set(nums)))
-else:
+elif TID == "exactout_08":
     from collections import Counter
     c = Counter(v // 10 * 10 for v in nums)
     out = "\\n".join("%d: %d" % (b, c[b]) for b in sorted(c))
+elif TID == "exactout_09":
+    ev = sum(1 for v in nums if v % 2 == 0)
+    out = "evens=%d\\nodds=%d" % (ev, len(nums) - ev)
+elif TID == "exactout_10":
+    from collections import Counter
+    c = Counter(nums)
+    m = sorted(c, key=lambda v: (-c[v], v))[0]
+    out = "distinct=%d\\nmode=%d" % (len(c), m)
+elif TID == "exactout_11":
+    out = "\\n".join("le_%d=%d" % (t, sum(1 for v in nums if v <= t)) for t in (20, 40, 60, 80))
+else:
+    s = sorted(nums)
+    out = "\\n".join("p%d=%d" % (q, s[max(0, -(-q * len(s) // 100) - 1)]) for q in (25, 50, 75))
 open(os.path.join(gradedir, "expected_out.txt"), "w").write(out + "\\n")
 '''.replace("@TID@", json.dumps(tid))
         solvesrc = gensrc.replace('workdir, gradedir, seed = sys.argv[1], sys.argv[2], int(sys.argv[3])',
@@ -679,7 +742,7 @@ open(os.path.join(gradedir, "expected_out.txt"), "w").write(out + "\\n")
         emit(tid, "instruction-format-adherence", diff, prompt,
              {"fixtures/.keep": "", "gen.py": gensrc, "ref/solve.py": solvesrc,
               "grade.py": grader(GRADER_TEXTFILE, tok(tid), target=target)},
-             reseed=True, notes="exactout family: exact-format artifact from reseeded data")
+             reseed=True, capability="instruction-adherence", notes="exactout family: exact-format artifact from reseeded data")
 
 # ---------------------------------------------------------------- family: chain
 
@@ -718,8 +781,23 @@ t = json.load(open(src))
 top = sorted(t, key=lambda u: (-t[u], u))[0] if t else "-"
 open(dst, "w").write("users=%d\\ntop=%s\\n" % (len(t), top))
 ''',
+    "filter_min.py": '''import json, sys
+src, dst = sys.argv[1], sys.argv[2]
+t = json.load(open(src))
+json.dump({u: v for u, v in t.items() if v >= 50}, open(dst, "w"), sort_keys=True)
+''',
+    "rank.py": '''import json, sys
+src, dst = sys.argv[1], sys.argv[2]
+t = json.load(open(src))
+order = sorted(t, key=lambda u: (-t[u], u))
+open(dst, "w").write("\\n".join("%d. %s %.2f" % (i + 1, u, t[u]) for i, u in enumerate(order)) + "\\n")
+''',
 }
-CHAIN_BUGGY_TOTALS = CHAIN_TOOLS["totals.py"].replace("import json, sys\n", "import sys\n")
+# planted bugs: dropping the json import makes the tool crash on first use
+CHAIN_BUGGY = {
+    "totals.py": CHAIN_TOOLS["totals.py"].replace("import json, sys\n", "import sys\n"),
+    "filter_min.py": CHAIN_TOOLS["filter_min.py"].replace("import json, sys\n", "import sys\n"),
+}
 
 def chain_expected(records, steps):
     data = list(records)
@@ -736,25 +814,38 @@ def chain_expected(records, steps):
     return t
 
 def fam_chain():
-    # (diff, steps, buggy_step?)
-    plan = [(2, ["keep_ok", "totals"], False), (2, ["keep_ok", "totals"], False),
-            (3, ["keep_ok", "totals", "to_csv"], False), (3, ["keep_ok", "totals", "to_csv"], False),
-            (3, ["keep_ok", "totals", "to_csv"], False),
-            (4, ["keep_ok", "totals", "to_csv"], True), (4, ["dedupe", "keep_ok", "totals", "to_csv"], True),
-            (4, ["dedupe", "keep_ok", "totals", "to_csv"], True),
-            (5, ["dedupe", "keep_ok", "totals", "to_csv", "summary"], True),
-            (5, ["dedupe", "keep_ok", "totals", "to_csv", "summary"], True)]
-    for i, (diff, steps, buggy) in enumerate(plan, 1):
+    # (diff, steps, n_buggy_steps, tier) — v2: 6/7-step pipelines and two-bug systematic members.
+    # d4/d5 members are stateful: every step consumes the artifact the previous step produced.
+    plan = [(3, ["keep_ok", "totals", "to_csv"], 0, "variance"),
+            (3, ["keep_ok", "totals", "to_csv"], 0, "variance"),
+            (4, ["keep_ok", "totals", "to_csv"], 1, "variance"),
+            (4, ["dedupe", "keep_ok", "totals", "to_csv"], 1, "variance"),
+            (4, ["dedupe", "keep_ok", "totals", "to_csv", "summary"], 1, "variance"),
+            (4, ["dedupe", "keep_ok", "totals", "filter_min", "to_csv"], 1, "systematic"),
+            (4, ["dedupe", "keep_ok", "totals", "filter_min", "rank"], 1, "systematic"),
+            (5, ["dedupe", "keep_ok", "totals", "filter_min", "to_csv", "summary"], 1, "variance"),
+            (5, ["dedupe", "keep_ok", "totals", "filter_min", "rank", "summary"], 2, "systematic"),
+            (5, ["dedupe", "keep_ok", "totals", "filter_min", "to_csv", "rank"], 2, "systematic"),
+            (5, ["dedupe", "keep_ok", "totals", "filter_min", "to_csv", "rank", "summary"], 2, "systematic")]
+    for i, (diff, steps, nbuggy, tier) in enumerate(plan, 1):
         tid = "chain_%02d" % i
         artifacts = {"dedupe": "unique.json", "keep_ok": "kept.json", "totals": "totals.json",
-                     "to_csv": "final.csv", "summary": "summary.txt"}
-        inputs = {"dedupe": "data.json", "keep_ok": artifacts["dedupe"] if "dedupe" in steps else "data.json",
-                  "totals": "kept.json", "to_csv": "totals.json", "summary": "totals.json"}
+                     "filter_min": "filtered.json", "to_csv": "final.csv",
+                     "rank": "ranking.txt", "summary": "summary.txt"}
+        # data flow: transform steps consume the latest json artifact and produce the next;
+        # sink steps (to_csv/rank/summary) read the latest json artifact without advancing it
+        inputs, cur = {}, "data.json"
+        for s in steps:
+            inputs[s] = cur
+            if s in ("dedupe", "keep_ok", "totals", "filter_min"):
+                cur = artifacts[s]
         final = artifacts[steps[-1]]
         cmds = ["python tools/%s.py %s %s" % (s, inputs[s], artifacts[s]) for s in steps]
         files = {"fixtures/tools/%s.py" % s: CHAIN_TOOLS[s + ".py"] for s in steps}
-        if buggy:
-            files["fixtures/tools/totals.py"] = CHAIN_BUGGY_TOTALS
+        if nbuggy >= 1:
+            files["fixtures/tools/totals.py"] = CHAIN_BUGGY["totals.py"]
+        if nbuggy >= 2:
+            files["fixtures/tools/filter_min.py"] = CHAIN_BUGGY["filter_min.py"]
         spec = {"required": [artifacts[s] for s in steps], "final": final, "steps": steps}
         gensrc = '''import json, os, random, sys
 workdir, gradedir, seed = sys.argv[1], sys.argv[2], int(sys.argv[3])
@@ -776,16 +867,21 @@ data = [r for r in data if r.get("ok")]
 t = {}
 for r in data:
     t[r["user"]] = round(t.get(r["user"], 0) + r["amount"], 2)
+basis = {u: v for u, v in t.items() if v >= 50} if "filter_min" in STEPS else t
 json.dump(@SPEC@, open(os.path.join(gradedir, "chain_spec.json"), "w"))
 FINAL = @FINAL@
 if FINAL.endswith(".json"):
-    json.dump(t, open(os.path.join(gradedir, "expected_final.json"), "w"), sort_keys=True)
+    json.dump(basis, open(os.path.join(gradedir, "expected_final.json"), "w"), sort_keys=True)
 elif FINAL == "final.csv":
-    lines = ["user,total"] + ["%s,%.2f" % (u, t[u]) for u in sorted(t)]
+    lines = ["user,total"] + ["%s,%.2f" % (u, basis[u]) for u in sorted(basis)]
     open(os.path.join(gradedir, "expected_final.txt"), "w").write("\\n".join(lines) + "\\n")
+elif FINAL == "ranking.txt":
+    order = sorted(basis, key=lambda u: (-basis[u], u))
+    open(os.path.join(gradedir, "expected_final.txt"), "w").write(
+        "\\n".join("%d. %s %.2f" % (i + 1, u, basis[u]) for i, u in enumerate(order)) + "\\n")
 else:
-    top = sorted(t, key=lambda u: (-t[u], u))[0] if t else "-"
-    open(os.path.join(gradedir, "expected_final.txt"), "w").write("users=%d\\ntop=%s\\n" % (len(t), top))
+    top = sorted(basis, key=lambda u: (-basis[u], u))[0] if basis else "-"
+    open(os.path.join(gradedir, "expected_final.txt"), "w").write("users=%d\\ntop=%s\\n" % (len(basis), top))
 '''.replace("@STEPS@", json.dumps(steps)).replace("@SPEC@", json.dumps(spec)) \
    .replace("@FINAL@", json.dumps(final))
         solvesrc = '''import json, os, sys
@@ -808,17 +904,27 @@ t = {}
 for r in data:
     t[r["user"]] = round(t.get(r["user"], 0) + r["amount"], 2)
 json.dump(t, open(os.path.join(workdir, ART["totals"]), "w"), sort_keys=True)
+basis = t
+if "filter_min" in STEPS:
+    basis = {u: v for u, v in t.items() if v >= 50}
+    json.dump(basis, open(os.path.join(workdir, ART["filter_min"]), "w"), sort_keys=True)
 if "to_csv" in STEPS:
-    lines = ["user,total"] + ["%s,%.2f" % (u, t[u]) for u in sorted(t)]
+    lines = ["user,total"] + ["%s,%.2f" % (u, basis[u]) for u in sorted(basis)]
     open(os.path.join(workdir, ART["to_csv"]), "w").write("\\n".join(lines) + "\\n")
+if "rank" in STEPS:
+    order = sorted(basis, key=lambda u: (-basis[u], u))
+    open(os.path.join(workdir, ART["rank"]), "w").write(
+        "\\n".join("%d. %s %.2f" % (i + 1, u, basis[u]) for i, u in enumerate(order)) + "\\n")
 if "summary" in STEPS:
-    top = sorted(t, key=lambda u: (-t[u], u))[0] if t else "-"
-    open(os.path.join(workdir, ART["summary"]), "w").write("users=%d\\ntop=%s\\n" % (len(t), top))
+    top = sorted(basis, key=lambda u: (-basis[u], u))[0] if basis else "-"
+    open(os.path.join(workdir, ART["summary"]), "w").write("users=%d\\ntop=%s\\n" % (len(basis), top))
 '''.replace("@STEPS@", json.dumps(steps)).replace("@ART@", json.dumps(artifacts)) \
    .replace("@IN@", json.dumps(inputs))
-        bugnote = ("\nNOTE: one of the step scripts has a trivial bug that makes it crash — "
-                   "diagnose and fix it before/while running the pipeline." if buggy else
-                   "\n(The scripts are already correct; your job is to run them.)")
+        bugnote = {0: "\n(The scripts are already correct; your job is to run them.)",
+                   1: "\nNOTE: one of the step scripts has a trivial bug that makes it crash — "
+                      "diagnose and fix it before/while running the pipeline.",
+                   2: "\nNOTE: two of the step scripts each have a trivial bug that makes them "
+                      "crash — diagnose and fix them before/while running the pipeline."}[nbuggy]
         prompt = ("data.json holds transaction records. Run this %d-step pipeline from the project "
                   "root, in order:\n%s\nAll listed output files must exist afterwards; %s is the "
                   "final deliverable.%s"
@@ -827,8 +933,9 @@ if "summary" in STEPS:
         emit(tid, "tool-pipeline", diff, prompt,
              dict(files, **{"gen.py": gensrc, "ref/solve.py": solvesrc,
                             "grade.py": grader(GRADER_CHAIN, tid.upper() + " OK")}),
-             reseed=True, notes="chain family: %d-step executed pipeline%s"
-                                % (len(steps), ", one buggy step" if buggy else ""))
+             reseed=True, capability="multi-step-execution", tier=tier, stateful=diff >= 4,
+             notes="chain family: %d-step executed pipeline%s"
+                   % (len(steps), ", %d buggy step(s)" % nbuggy if nbuggy else ""))
 
 # ---------------------------------------------------------------- family: readdocs
 
@@ -836,11 +943,17 @@ def prose_par(rng, n_sent):
     return " ".join(rng.choice(PROSE).strip().capitalize() + "." for _ in range(n_sent))
 
 def fam_readdocs():
-    plan = [(2, 1, 1, False), (2, 1, 1, False), (3, 3, 2, False), (3, 3, 2, False), (3, 4, 2, False),
-            (4, 5, 3, True), (4, 6, 4, True), (4, 6, 4, True)]
+    # (diff, ndocs, nconsts, trap, tier) — v2: up to 10 docs / 6 constants, all hard members trapped
+    plan = [(2, 1, 1, False, "variance"),
+            (3, 3, 2, False, "variance"), (3, 3, 2, False, "variance"), (3, 4, 2, False, "variance"),
+            (4, 5, 3, True, "variance"), (4, 6, 4, True, "variance"), (4, 6, 4, True, "variance"),
+            (4, 7, 4, True, "systematic"),
+            (5, 8, 5, True, "variance"), (5, 9, 6, True, "systematic"), (5, 10, 6, True, "systematic")]
     labels = [("BASE_FEE", "base handling fee"), ("RATE_PCT", "percentage service rate"),
-              ("MAX_ITEMS", "maximum items per order"), ("GRACE_DAYS", "grace period in days")]
-    for i, (diff, ndocs, nconsts, trap) in enumerate(plan, 1):
+              ("MAX_ITEMS", "maximum items per order"), ("GRACE_DAYS", "grace period in days"),
+              ("SURCHARGE_PCT", "peak-hours surcharge percentage"),
+              ("RETENTION_DAYS", "record retention period in days")]
+    for i, (diff, ndocs, nconsts, trap, tier) in enumerate(plan, 1):
         tid = "readdocs_%02d" % i
         rng = rng_for(tid)
         modname = rng.choice(["fees.py", "pricing.py", "charges.py"])
@@ -862,12 +975,13 @@ def par(n):
     return " ".join(rng.choice(PROSE).strip().capitalize() + "." for _ in range(n))
 vals = {}
 for k, lbl in CONSTS:
-    if k in ("MAX_ITEMS", "GRACE_DAYS"):
+    if k in ("MAX_ITEMS", "GRACE_DAYS", "RETENTION_DAYS"):
         vals[k] = rng.randrange(3, 60)
     else:
         vals[k] = round(rng.uniform(0.5, 9.5), 2)
 docnames = ["docs/overview.md", "docs/operations.md", "docs/billing.md", "docs/changelog.md",
-            "docs/faq.md", "docs/appendix.md"][:NDOCS]
+            "docs/faq.md", "docs/appendix.md", "docs/release-notes.md", "docs/integrations.md",
+            "docs/runbook.md", "docs/glossary.md"][:NDOCS]
 paras = {d: [par(rng.randrange(3, 6)) for _ in range(rng.randrange(8, 16))] for d in docnames}
 for idx, (k, lbl) in enumerate(CONSTS):
     d = docnames[idx % len(docnames)]
@@ -916,17 +1030,21 @@ open(os.path.join(workdir, MOD), "w", encoding="utf-8").write(src)
         emit(tid, "doc-grounded-implementation", diff, prompt,
              {"fixtures/" + modname: skel, "gen.py": gensrc, "ref/solve.py": solvesrc,
               "grade.py": grader(GRADER_READDOCS, tid.upper() + " OK")},
-             reseed=True, notes="readdocs family: %d constants across %d docs%s"
+             reseed=True, capability="context-grounding", tier=tier,
+             notes="readdocs family: %d constants across %d docs%s"
                                 % (len(consts), ndocs, ", with deprecated-value traps" if trap else ""))
 
 # ---------------------------------------------------------------- family: logdig
 
 def fam_logdig():
-    # (diff, n_lines, question)
-    plan = [(2, 3000, "errors"), (2, 4000, "code"), (2, 5000, "needle"),
-            (3, 12000, "between"), (3, 15000, "code"), (3, 18000, "between"),
-            (4, 30000, "multi"), (4, 40000, "multi")]
-    for i, (diff, nlines, q) in enumerate(plan, 1):
+    # (diff, n_lines, question, tier) — v2: systematic beyond v1 top (40k lines)
+    plan = [(2, 4000, "code", "variance"), (2, 5000, "needle", "variance"),
+            (3, 12000, "between", "variance"), (3, 15000, "code", "variance"),
+            (3, 18000, "between", "variance"),
+            (4, 30000, "multi", "variance"), (4, 40000, "multi", "variance"),
+            (4, 60000, "multi", "systematic"), (4, 80000, "multi", "systematic"),
+            (5, 100000, "multi", "variance"), (5, 150000, "multi", "systematic")]
+    for i, (diff, nlines, q, tier) in enumerate(plan, 1):
         tid = "logdig_%02d" % i
         gensrc = '''import json, os, random, sys
 from collections import Counter
@@ -1012,13 +1130,18 @@ def parse(ln):''' + solvesrc).replace("@Q@", json.dumps(q)) \
         emit(tid, "data-extraction-at-scale", diff, prompt,
              {"fixtures/.keep": "", "gen.py": gensrc, "ref/solve.py": solvesrc,
               "grade.py": grader(GRADER_TEXTFILE, tid.upper() + " OK", target="answer.txt")},
-             reseed=True, notes="logdig family: %d-line log analysis (%s)" % (nlines, q))
+             reseed=True, capability="data-extraction-at-scale", tier=tier,
+             notes="logdig family: %d-line log analysis (%s)" % (nlines, q))
 
 # ---------------------------------------------------------------- family: testfix
 
 def fam_testfix():
-    plan = [(2, 1), (2, 1), (2, 1), (3, 2), (3, 2), (3, 2), (4, 3), (4, 3)]
-    for i, (diff, nbugs) in enumerate(plan, 1):
+    # (diff, nbugs, tier) — v2: systematic beyond v1 top (3 bugs)
+    plan = [(2, 1, "variance"), (3, 2, "variance"), (3, 2, "variance"), (3, 3, "variance"),
+            (4, 3, "variance"), (4, 4, "variance"), (4, 4, "variance"), (4, 5, "variance"),
+            (4, 6, "systematic"), (4, 7, "systematic"),
+            (5, 8, "systematic"), (5, 10, "systematic")]
+    for i, (diff, nbugs, tier) in enumerate(plan, 1):
         tid = "testfix_%02d" % i
         rng = rng_for(tid)
         modname = "textkit_%d" % i
@@ -1050,11 +1173,16 @@ def fam_testfix():
               "ref/%s.py" % modname: refsrc,
               "hidden/tests_hidden.py": testsrc(9, "hidden").replace(modname, modname),
               "grade.py": grader(GRADER_TESTFIX, tid.upper() + " OK", modfile=modname + ".py")},
+             capability="test-iterate-loop", tier=tier,
              notes="testfix family: %d planted bug(s), hidden superset tests" % nbugs)
 
 # ---------------------------------------------------------------- family: editfid
 
 def fam_editfid():
+    # v2: 12 members — d2x1 (01), d3x4 (02-05), d4x5 (06-10), d5x2 (11-12).
+    # 01-07 are the v1 members renumbered (v1's small minified-JSON d2 dropped — subsumed
+    # by 06/09); 08-12 are new: Latin-1 encoding, 100-service JSON, fixed-width columns,
+    # a CRLF+tabs+unicode+minified combo, and a 300-entry single-line dict with 3 edits.
     tok = lambda t: t.upper() + " OK"
     # 01 (d2) Makefile: tabs must survive
     mk = ("# build config\nVERSION = 1.4.2\nCC = gcc\nCFLAGS = -O2 -Wall\n\n"
@@ -1079,11 +1207,11 @@ def main():
         if t not in txt: print("FAIL: target %s lost" % t); sys.exit(1)
     print("EDITFID_01 OK")
 main()
-'''})
-    # 02 (d2) CRLF ini
+'''}, capability="edit-fidelity")
+    # 02 (d3) CRLF ini
     ini = ("[server]\nhost = 127.0.0.1\nport = 8443\n\n[client]\nretries = 3\n"
            "timeout_s = 30\nverify_tls = true\n")
-    emit("editfid_02", "edit-fidelity", 2,
+    emit("editfid_02", "edit-fidelity", 3,
          "settings.ini uses Windows (CRLF) line endings, and the deployment tool requires that. "
          "Change retries from 3 to 5. Keep every line ending CRLF and change nothing else.",
          {"fixtures/settings.ini": ("crlf", ini), "ref/settings.ini": ("crlf", ini.replace("retries = 3", "retries = 5")),
@@ -1100,28 +1228,16 @@ def main():
         if ("%s = %s" % (k, v)) not in txt: print("FAIL: %s should be %s" % (k, v)); sys.exit(1)
     print("EDITFID_02 OK")
 main()
-'''})
-    # 03 (d2) minified JSON, small
+'''}, capability="edit-fidelity")
+    # 03 (d3) one very long python dict line
     rng = rng_for("editfid_03")
-    cfg = {"app": "hb", "limits": {"max_upload_mb": 25, "max_users": 500, "rate_per_min": 120},
-           "features": {"beta": False, "exports": True}, "regions": ["eu-1", "us-2"]}
-    fixed = json.loads(json.dumps(cfg)); fixed["limits"]["max_upload_mb"] = 100
-    emit("editfid_03", "edit-fidelity", 2,
-         "cfg.json is machine-generated minified JSON (one long line). Change limits.max_upload_mb "
-         "from 25 to 100. Every other value must remain identical and the file must stay valid JSON.",
-         {"fixtures/cfg.json": json.dumps(cfg, separators=(",", ":")),
-          "ref/cfg.json": json.dumps(fixed, separators=(",", ":")),
-          "grade.py": grader(GRADER_JSONFILE, tok("editfid_03"), target="cfg.json"),
-          "hidden/expected.json": json.dumps(fixed)})
-    # 04 (d3) one very long python dict line
-    rng = rng_for("editfid_04")
     keys = ["%s_%s" % (a, b) for a in FILEWORDS[:12] for b in ("limit", "rate", "ttl", "cap", "max")]
     th = {k: rng.randrange(10, 9000) for k in rng.sample(keys, 55)}
     tgt = sorted(th)[27]
     fixed_th = dict(th); fixed_th[tgt] = 4242
     line = "THRESHOLDS = " + repr(th)
     fixed_line = "THRESHOLDS = " + repr(fixed_th)
-    emit("editfid_04", "edit-fidelity", 3,
+    emit("editfid_03", "edit-fidelity", 3,
          "thresholds.py holds a single very long line defining THRESHOLDS (55 entries). Set "
          "THRESHOLDS[%r] to 4242. All 54 other entries must keep their exact current values." % tgt,
          {"fixtures/thresholds.py": line + "\n", "ref/thresholds.py": fixed_line + "\n",
@@ -1137,16 +1253,16 @@ def main():
     exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
     if getattr(mod, "THRESHOLDS", None) != exp:
         print("FAIL: THRESHOLDS does not match expected values"); sys.exit(1)
-    print("EDITFID_04 OK")
+    print("EDITFID_03 OK")
 main()
 ''',
-          "hidden/expected.json": json.dumps(fixed_th)})
-    # 05 (d3) unicode-dense file
+          "hidden/expected.json": json.dumps(fixed_th)}, capability="edit-fidelity")
+    # 04 (d3) unicode-dense file
     msgs = {"greeting_en": "Hello 👋 world", "greeting_de": "Hallo Welt", "greeting_ja": "こんにちは世界",
             "farewell_en": "Bye 🎉", "farewell_ja": "さようなら", "prompt_emoji": "✨🚀✨",
             "cafe": "Ça va très bien — naïve café"}
     fixed_msgs = dict(msgs); fixed_msgs["greeting_de"] = "Servus Welt 🥨"
-    emit("editfid_05", "edit-fidelity", 3,
+    emit("editfid_04", "edit-fidelity", 3,
          'messages.py contains unicode-heavy strings (emoji, CJK, accents). Change MESSAGES'
          '["greeting_de"] to exactly "Servus Welt 🥨". Every other entry must remain byte-identical.',
          {"fixtures/messages.py": "MESSAGES = " + repr(msgs) + "\n",
@@ -1163,12 +1279,12 @@ def main():
     exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
     if getattr(mod, "MESSAGES", None) != exp:
         print("FAIL: MESSAGES does not match expected values"); sys.exit(1)
-    print("EDITFID_05 OK")
+    print("EDITFID_04 OK")
 main()
 ''',
-          "hidden/expected.json": json.dumps(fixed_msgs, ensure_ascii=False)})
-    # 06 (d3) tab-indented python module
-    rng = rng_for("editfid_06")
+          "hidden/expected.json": json.dumps(fixed_msgs, ensure_ascii=False)}, capability="edit-fidelity")
+    # 05 (d3) tab-indented python module
+    rng = rng_for("editfid_05")
     e = POOL[5]  # dedupe
     uname = "dedupe_688"
     others = [fn_src("op_%d" % rng.randrange(100, 999),
@@ -1178,7 +1294,7 @@ main()
     tabbed_ok = fn_src(uname, e, "correct", indent="\t")
     mod = "\n".join(others[:1] + [tabbed_buggy] + others[1:])
     modref = "\n".join(others[:1] + [tabbed_ok] + others[1:])
-    emit("editfid_06", "edit-fidelity", 3,
+    emit("editfid_05", "edit-fidelity", 3,
          "legacy_ops.py is TAB-indented throughout (house style; do not reindent). The function "
          "dedupe_688(xs) should remove duplicates PRESERVING first-seen order, e.g. "
          "dedupe_688([3,1,3,2]) == [3, 1, 2] — currently it returns sorted output. Fix it, keeping "
@@ -1201,12 +1317,12 @@ def main():
     for args, exp in cases:
         got = mod.''' + uname + '''(*args)
         if got != exp: print("FAIL: %r -> %r, expected %r" % (args, got, exp)); sys.exit(1)
-    print("EDITFID_06 OK")
+    print("EDITFID_05 OK")
 main()
 '''),
-          "hidden/expected.json": json.dumps(jcases(e["cases"]))})
-    # 07 (d4) big minified JSON (~4000 chars), nested change
-    rng = rng_for("editfid_07")
+          "hidden/expected.json": json.dumps(jcases(e["cases"]))}, capability="edit-fidelity")
+    # 06 (d4) big minified JSON (~4000 chars), nested change
+    rng = rng_for("editfid_06")
     services = [{"name": "%s-%s" % (w, kind), "replicas": rng.randrange(1, 5),
                  "port": rng.randrange(3000, 9000),
                  "env": {"LOG_LEVEL": rng.choice(["info", "warn"]), "REGION": rng.choice(["eu-1", "us-2"])}}
@@ -1217,15 +1333,15 @@ main()
     for s in fixed_deploy["services"]:
         if s["name"] == "search-api":
             s["replicas"] = 6
-    emit("editfid_07", "edit-fidelity", 4,
+    emit("editfid_06", "edit-fidelity", 4,
          "deploy.json is one long minified line describing 30 services. Find the service named "
          '"search-api" and change its "replicas" to 6. All 29 other services (and every other field) '
          "must remain exactly as they are; the file must stay valid JSON.",
          {"fixtures/deploy.json": json.dumps(deploy, separators=(",", ":")),
           "ref/deploy.json": json.dumps(fixed_deploy, separators=(",", ":")),
-          "grade.py": grader(GRADER_JSONFILE, tok("editfid_07"), target="deploy.json"),
-          "hidden/expected.json": json.dumps(fixed_deploy)})
-    # 08 (d4) regex-pattern dict with escapes
+          "grade.py": grader(GRADER_JSONFILE, tok("editfid_06"), target="deploy.json"),
+          "hidden/expected.json": json.dumps(fixed_deploy)}, capability="edit-fidelity")
+    # 07 (d4) regex-pattern dict with escapes
     pats = {"ipv4": r"^\d{1,2}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",
             "iso_date": r"^\d{4}-\d{2}-\d{2}$",
             "quoted": "\"([^\"\\\\]|\\\\.)*\"",
@@ -1233,7 +1349,7 @@ main()
             "word_b": r"\btoken\b"}
     newpat = r"^(\d{1,3}\.){3}\d{1,3}$"
     fixed_pats = dict(pats); fixed_pats["ipv4"] = newpat
-    emit("editfid_08", "edit-fidelity", 4,
+    emit("editfid_07", "edit-fidelity", 4,
          "patterns.py maps names to regex strings full of backslashes and quotes. Replace the "
          "pattern for \"ipv4\" with exactly this regex (single backslashes, as a Python raw-string "
          "pattern):\n\n    ^(\\d{1,3}\\.){3}\\d{1,3}$\n\nEvery other pattern must remain exactly "
@@ -1252,10 +1368,186 @@ def main():
     exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
     if getattr(mod, "PATTERNS", None) != exp:
         print("FAIL: PATTERNS does not match expected values"); sys.exit(1)
+    print("EDITFID_07 OK")
+main()
+''',
+          "hidden/expected.json": json.dumps(fixed_pats)}, capability="edit-fidelity")
+    # 08 (d4, NEW) Latin-1 encoded config: encoding must survive the edit
+    cfg8 = ("# Konfiguration - Zugriff\n"
+            "owner = José Müller\n"
+            "greeting = Grüße aus Köln\n"
+            "region = São Paulo\n"
+            "retries = 3\n"
+            "timeout_s = 45\n"
+            "motto = «Qualité, sécurité»\n")
+    cfg8_fixed = cfg8.replace("retries = 3", "retries = 7")
+    emit("editfid_08", "edit-fidelity", 4,
+         "access.cfg is Latin-1 (ISO-8859-1) encoded — the legacy deployment tooling requires that "
+         "exact encoding. Change retries from 3 to 7. Keep the file Latin-1 encoded and change "
+         "nothing else (the accented characters must remain single-byte Latin-1, not UTF-8).",
+         {"fixtures/access.cfg": cfg8.encode("latin-1"),
+          "ref/access.cfg": cfg8_fixed.encode("latin-1"),
+          "grade.py": '''import sys, os
+def norm(b): return b.replace(b"\\r\\n", b"\\n").rstrip(b"\\n")
+def main():
+    w, g = sys.argv[1], sys.argv[2]
+    p = os.path.join(w, "access.cfg")
+    if not os.path.exists(p): print("FAIL: access.cfg missing"); sys.exit(1)
+    got = norm(open(p, "rb").read())
+    exp = norm(open(os.path.join(g, "expected.bin"), "rb").read())
+    if got != exp:
+        try:
+            got.decode("utf-8")
+            print("FAIL: access.cfg was re-encoded (decodes as UTF-8); it must stay Latin-1"); sys.exit(1)
+        except UnicodeDecodeError:
+            pass
+        print("FAIL: access.cfg bytes differ from expected (only retries should change)"); sys.exit(1)
     print("EDITFID_08 OK")
 main()
 ''',
-          "hidden/expected.json": json.dumps(fixed_pats)})
+          "hidden/expected.bin": cfg8_fixed.encode("latin-1")}, capability="edit-fidelity")
+    # 09 (d4, NEW, systematic) 100-service minified JSON, nested env change
+    rng = rng_for("editfid_09")
+    combos = rng.sample([a + "-" + b for a in FILEWORDS for b in ("api", "worker", "svc", "cron")], 100)
+    combos = [c for c in combos if c != "audit-worker"]
+    services9 = [{"name": n, "replicas": rng.randrange(1, 6), "port": rng.randrange(3000, 9000),
+                  "env": {"LOG_LEVEL": rng.choice(["info", "warn"]), "REGION": rng.choice(["eu-1", "us-2"]),
+                          "TRACE": rng.choice(["0", "1"])}}
+                 for n in combos[:99]]
+    services9.insert(41, {"name": "audit-worker", "replicas": 2, "port": 7141,
+                          "env": {"LOG_LEVEL": "info", "REGION": "eu-1", "TRACE": "0"}})
+    deploy9 = {"version": 7, "services": services9}
+    fixed9 = json.loads(json.dumps(deploy9))
+    for s in fixed9["services"]:
+        if s["name"] == "audit-worker":
+            s["env"]["LOG_LEVEL"] = "debug"
+    emit("editfid_09", "edit-fidelity", 4,
+         "deploy.json is one long minified line describing 100 services. Find the service named "
+         '"audit-worker" and change its env.LOG_LEVEL to "debug". All 99 other services (and every '
+         "other field of audit-worker) must remain exactly as they are; the file must stay valid JSON.",
+         {"fixtures/deploy.json": json.dumps(deploy9, separators=(",", ":")),
+          "ref/deploy.json": json.dumps(fixed9, separators=(",", ":")),
+          "grade.py": grader(GRADER_JSONFILE, tok("editfid_09"), target="deploy.json"),
+          "hidden/expected.json": json.dumps(fixed9)},
+         capability="edit-fidelity", tier="systematic")
+    # 10 (d4, NEW, systematic) fixed-width columnar data: padding must survive
+    rng = rng_for("editfid_10")
+    rows = []
+    for i10 in range(40):
+        sku = "SKU-%d" % (1000 + i10)
+        name10 = "%s-%s" % (rng.choice(FILEWORDS), rng.choice(["unit", "pack", "case", "kit"]))
+        rows.append((sku, name10, rng.randrange(1, 500), round(rng.uniform(0.5, 99.5), 2)))
+    def render10(rws):
+        return "".join("%-10s%-22s%5d%8.2f\n" % r for r in rws)
+    dat = render10(rows)
+    fixed_rows = [(s, n, 250 if s == "SKU-1017" else q, p) for s, n, q, p in rows]
+    dat_fixed = render10(fixed_rows)
+    emit("editfid_10", "edit-fidelity", 4,
+         "inventory.dat is a fixed-width columnar file read by a legacy parser: columns are ID "
+         "(width 10, left-aligned), NAME (width 22, left-aligned), QTY (width 5, right-aligned), "
+         "PRICE (width 8, right-aligned, 2 decimals). Change the QTY of row SKU-1017 to 250. Every "
+         "byte of padding and every other row must remain exactly as it is.",
+         {"fixtures/inventory.dat": dat, "ref/inventory.dat": dat_fixed,
+          "grade.py": '''import sys, os
+def norm(b): return b.replace(b"\\r\\n", b"\\n").rstrip(b"\\n")
+def main():
+    w, g = sys.argv[1], sys.argv[2]
+    p = os.path.join(w, "inventory.dat")
+    if not os.path.exists(p): print("FAIL: inventory.dat missing"); sys.exit(1)
+    got = norm(open(p, "rb").read())
+    exp = norm(open(os.path.join(g, "expected.bin"), "rb").read())
+    if got != exp:
+        gl, el = got.split(b"\\n"), exp.split(b"\\n")
+        if len(gl) != len(el):
+            print("FAIL: expected %d data rows, found %d" % (len(el), len(gl))); sys.exit(1)
+        for i, (a, b) in enumerate(zip(gl, el)):
+            if a != b:
+                print("FAIL: row %d differs (column alignment/padding must be preserved exactly)" % (i + 1)); sys.exit(1)
+        print("FAIL: content differs"); sys.exit(1)
+    print("EDITFID_10 OK")
+main()
+''',
+          "hidden/expected.bin": dat_fixed.encode("utf-8")},
+         capability="edit-fidelity", tier="systematic")
+    # 11 (d5, NEW) combo fidelity: CRLF + tabs + unicode + one minified JSON line, two edits
+    cfg11 = ("# build configuration — maintained by Zoë Åström\n"
+             "version = 3.1.4\n"
+             "publish = true\n"
+             "\n"
+             "[recipe]\n"
+             "\tprep --clean\n"
+             "\tcompile --opt=2\n"
+             "\tpackage --sign\n"
+             "\n"
+             'pipeline_json = {"max_jobs":8,"queues":["fast","bulk"],"retry":{"limit":3,"backoff_s":1.5}}\n')
+    cfg11_fixed = cfg11.replace("version = 3.1.4", "version = 4.0.0").replace('"max_jobs":8,', '"max_jobs":24,')
+    emit("editfid_11", "edit-fidelity", 5,
+         "build.cfg mixes fragile conventions: CRLF line endings (required by the deploy tool), "
+         "TAB-indented recipe lines (required by the build tool), unicode text, and one minified "
+         "JSON line. Make exactly two changes: (1) version 3.1.4 -> 4.0.0, (2) inside pipeline_json, "
+         '"max_jobs": 8 -> 24. Everything else — every byte, every tab, every CRLF — must survive.',
+         {"fixtures/build.cfg": ("crlf", cfg11), "ref/build.cfg": ("crlf", cfg11_fixed),
+          "grade.py": '''import sys, os
+def main():
+    w, g = sys.argv[1], sys.argv[2]
+    p = os.path.join(w, "build.cfg")
+    if not os.path.exists(p): print("FAIL: build.cfg missing"); sys.exit(1)
+    raw = open(p, "rb").read()
+    if b"\\n" in raw.replace(b"\\r\\n", b""): print("FAIL: bare LF found - CRLF not preserved"); sys.exit(1)
+    tabs = [l for l in raw.split(b"\\r\\n") if l.startswith(b"\\t")]
+    if len(tabs) != 3: print("FAIL: expected 3 tab-indented recipe lines, found %d" % len(tabs)); sys.exit(1)
+    exp = open(os.path.join(g, "expected.bin"), "rb").read()
+    if raw.rstrip(b"\\r\\n") != exp.rstrip(b"\\r\\n"):
+        print("FAIL: build.cfg bytes differ from expected (exactly two values change)"); sys.exit(1)
+    print("EDITFID_11 OK")
+main()
+''',
+          "hidden/expected.bin": cfg11_fixed.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8")},
+         capability="edit-fidelity")
+    # 12 (d5, NEW, systematic) 300-entry single-line dict, three precise edits
+    rng = rng_for("editfid_12")
+    keypool = ["%s_%s_%s" % (a, b, c) for a in FILEWORDS
+               for b in ("lim", "ttl", "cap", "max", "min", "rate") for c in ("prod", "dev")]
+    keys12 = rng.sample(keypool, 300)
+    def val12():
+        r = rng.random()
+        if r < 0.5:
+            return rng.randrange(1, 100000)
+        if r < 0.8:
+            return rng.choice(["on", "off", "auto", "strict", "legacy"])
+        return [rng.randrange(0, 99) for _ in range(rng.randrange(2, 5))]
+    st12 = {k: val12() for k in keys12}
+    t_a, t_b, t_c = sorted(st12)[50], sorted(st12)[150], sorted(st12)[250]
+    fixed12 = dict(st12)
+    fixed12[t_a] = 31337; fixed12[t_b] = "migrated"; fixed12[t_c] = [1, 2, 3]
+    emit("editfid_12", "edit-fidelity", 5,
+         "settings_all.py holds a single very long line defining SETTINGS (300 entries). Make "
+         "exactly these three changes:\n"
+         "  SETTINGS[%r] = 31337\n  SETTINGS[%r] = 'migrated'\n  SETTINGS[%r] = [1, 2, 3]\n"
+         "All 297 other entries must keep their exact current values." % (t_a, t_b, t_c),
+         {"fixtures/settings_all.py": "SETTINGS = " + repr(st12) + "\n",
+          "ref/settings_all.py": "SETTINGS = " + repr(fixed12) + "\n",
+          "grade.py": '''import sys, os, json, importlib.util
+def main():
+    w, g = sys.argv[1], sys.argv[2]
+    p = os.path.join(w, "settings_all.py")
+    if not os.path.exists(p): print("FAIL: settings_all.py missing"); sys.exit(1)
+    spec = importlib.util.spec_from_file_location("sall", p)
+    mod = importlib.util.module_from_spec(spec)
+    try: spec.loader.exec_module(mod)
+    except Exception as e: print("FAIL: import error %r" % e); sys.exit(1)
+    exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
+    got = getattr(mod, "SETTINGS", None)
+    if got != exp:
+        if isinstance(got, dict):
+            bad = [k for k in exp if got.get(k) != exp[k]] + [k for k in got if k not in exp]
+            print("FAIL: %d entries differ from expected (e.g. %s)" % (len(bad), bad[:3])); sys.exit(1)
+        print("FAIL: SETTINGS does not match expected values"); sys.exit(1)
+    print("EDITFID_12 OK")
+main()
+''',
+          "hidden/expected.json": json.dumps(fixed12)},
+         capability="edit-fidelity", tier="systematic")
 
 # ---------------------------------------------------------------- main
 

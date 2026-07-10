@@ -1,19 +1,19 @@
-import sys, os, json, importlib.util
+import sys, os, json
+
 def main():
-    w, g = sys.argv[1], sys.argv[2]
-    p = os.path.join(w, "legacy_ops.py")
-    if not os.path.exists(p): print("FAIL: legacy_ops.py missing"); sys.exit(1)
-    for ln in open(p, encoding="utf-8"):
-        stripped = ln.rstrip("\n")
-        if stripped and (stripped[0] == " "):
-            print("FAIL: space-indented line found - file must stay tab-indented"); sys.exit(1)
-    spec = importlib.util.spec_from_file_location("lops", p)
-    mod = importlib.util.module_from_spec(spec)
-    try: spec.loader.exec_module(mod)
-    except Exception as e: print("FAIL: import error %r" % e); sys.exit(1)
-    cases = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
-    for args, exp in cases:
-        got = mod.dedupe_688(*args)
-        if got != exp: print("FAIL: %r -> %r, expected %r" % (args, got, exp)); sys.exit(1)
+    workdir, gradedir = sys.argv[1], sys.argv[2]
+    target = "deploy.json"
+    p = os.path.join(workdir, *target.split("/"))
+    if not os.path.exists(p):
+        print("FAIL: missing %s" % target); sys.exit(1)
+    try:
+        got = json.load(open(p, encoding="utf-8"))
+    except Exception as e:
+        print("FAIL: %s is not valid JSON: %r" % (target, e)); sys.exit(1)
+    exp = json.load(open(os.path.join(gradedir, "expected.json"), encoding="utf-8"))
+    if got != exp:
+        print("FAIL: %s does not match the expected object" % target); sys.exit(1)
     print("EDITFID_06 OK")
-main()
+
+if __name__ == "__main__":
+    main()

@@ -1,14 +1,8 @@
-def util_632(a, b):
-    return a if a > b else b
+def util_652(x):
+    return x * 32
 
-def util_713(s):
-    return s.strip()
-
-def util_715(s):
+def util_189(s):
     return s[::-1]
 
-def util_810(s):
-    return s.upper()
-
-def util_329(x):
-    return x * 6
+def util_942(x):
+    return x + 24

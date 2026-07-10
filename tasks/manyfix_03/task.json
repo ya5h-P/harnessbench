@@ -1,9 +1,12 @@
 {
   "id": "manyfix_03",
   "domain": "bulk-fix-coverage",
-  "difficulty": 3,
-  "timeout_s": 600,
+  "difficulty": 4,
+  "timeout_s": 900,
   "reseed": false,
   "grader_token": "MANYFIX_03 OK",
-  "notes": "manyfix family: 10 independent trivial fixes, all required"
+  "capability": "sustained-coverage",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "manyfix family: 12 independent trivial fixes, all required"
 }

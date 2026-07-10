@@ -1,4 +1,4 @@
 import shared
 
 def run(x):
-    return shared.limit_num(x, 12, 26)
+    return shared.bracket_num(x, 9, 26)

@@ -1,11 +1,8 @@
-def util_883(x):
-    return x + 24
+def util_770(x):
+    return x + 17
 
-def util_736(x):
-    return x * 7
+def util_648(xs):
+    return sorted(xs)
 
-def util_306(x):
-    return abs(x - 23)
-
-def util_677(s):
-    return s.upper()
+def util_285(s):
+    return s[::-1]

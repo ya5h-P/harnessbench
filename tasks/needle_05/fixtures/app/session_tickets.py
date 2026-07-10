@@ -1,19 +1,15 @@
-def util_304(x):
-    return x * 33
+def util_658(x):
+    return abs(x - 12)
 
-def util_103(xs):
-    return len(xs)
+def strip_ext_411(fn):
+    """Filename without its LAST extension only. E.g. strip_ext_411('archive.tar.gz') == 'archive.tar'."""
+    return fn.rsplit(".", 1)[0] if "." in fn else fn
 
-def util_680(a, b):
-    return a if a > b else b
+def util_473(x):
+    return x + 36
 
-def is_pal_930(s):
-    """True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_930('Aba') is True."""
-    t = [c.lower() for c in s if c.isalnum()]
-    return t == t[::-1]
+def util_117(x):
+    return x + 12
 
-def util_814(x):
-    return abs(x - 35)
-
-def util_532(x):
-    return abs(x - 25)
+def util_939(x):
+    return abs(x - 21)

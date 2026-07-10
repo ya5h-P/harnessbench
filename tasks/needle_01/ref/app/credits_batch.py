@@ -1,15 +1,15 @@
-def between_700(x, lo, hi):
-    """True iff lo <= x <= hi (inclusive). E.g. between_700(1, 1, 3) is True."""
-    return lo <= x <= hi
+def word_count_602(s):
+    """Number of whitespace-separated words. E.g. word_count_602('a  b') == 2."""
+    return len(s.split())
 
-def util_888(x):
-    return abs(x - 18)
-
-def util_270(s):
-    return s[::-1]
+def util_832(s):
+    return s.upper()
 
 def util_822(x):
     return x * 11
 
 def util_826(x):
     return x + 16
+
+def util_801(x):
+    return x * 2

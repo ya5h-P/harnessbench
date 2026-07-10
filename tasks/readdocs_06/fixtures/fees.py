@@ -1,6 +1,7 @@
 BASE_FEE = None  # TODO: documented under docs/
 RATE_PCT = None  # TODO: documented under docs/
 MAX_ITEMS = None  # TODO: documented under docs/
+GRACE_DAYS = None  # TODO: documented under docs/
 
 
 def total_fee(amount):

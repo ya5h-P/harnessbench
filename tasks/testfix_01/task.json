@@ -5,5 +5,8 @@
   "timeout_s": 480,
   "reseed": false,
   "grader_token": "TESTFIX_01 OK",
+  "capability": "test-iterate-loop",
+  "tier": "variance",
+  "stateful": false,
   "notes": "testfix family: 1 planted bug(s), hidden superset tests"
 }

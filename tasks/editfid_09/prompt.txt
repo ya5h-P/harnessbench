@@ -1,0 +1,1 @@
+deploy.json is one long minified line describing 100 services. Find the service named "audit-worker" and change its env.LOG_LEVEL to "debug". All 99 other services (and every other field of audit-worker) must remain exactly as they are; the file must stay valid JSON.

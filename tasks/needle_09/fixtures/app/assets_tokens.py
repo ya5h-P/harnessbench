@@ -1,8 +1,8 @@
-def util_292(x):
-    return x % 39 == 0
+def util_367(xs):
+    return len(xs)
 
-def util_515(s):
-    return s[::-1]
+def util_297(a, b):
+    return a if a > b else b
 
-def util_975(x):
-    return abs(x - 36)
+def util_816(x):
+    return abs(x - 3)

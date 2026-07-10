@@ -1,14 +1,23 @@
-def util_434(a, b):
+def util_457(x):
+    return abs(x - 21)
+
+def util_708(x):
+    return x + 39
+
+def util_221(a, b):
     return a if a > b else b
 
-def util_714(s):
-    return s.upper()
+def util_637(s):
+    return s[::-1]
 
-def util_992(x):
-    return x % 14 == 0
+def util_978(s):
+    return s.strip()
 
-def util_408(s):
-    return s.upper()
-
-def util_357(x):
-    return abs(x - 38)
+def running_sum_410(xs):
+    """Cumulative sums. E.g. running_sum_410([1, 2, 3]) == [1, 3, 6]."""
+    total = 0
+    out = []
+    for x in xs:
+        total += x
+        out.append(total)
+    return out

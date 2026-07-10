@@ -1,4 +1,4 @@
-logs/app.log has ~30000 lines in the format:
+logs/app.log has ~40000 lines in the format:
   <timestamp> <LEVEL> code=<code> id=<id> path=<path> <message>
 (plus '=== RESTART ===' marker lines). It is far too large to read directly — compute the answer with a script or shell tools. Write answer.txt in the project root containing exactly three lines:
   errors=<total ERROR lines>

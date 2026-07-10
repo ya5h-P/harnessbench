@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create parity.txt in the project root containing exactly two lines: evens=<count of even values>, odds=<count of odd values>. No extra lines, no labels beyond the format given.

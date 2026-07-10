@@ -1,0 +1,12 @@
+{
+  "id": "perf_topk_freq",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_TOPK_FREQ OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "top-k: O(n^2) count-by-rescan -> Counter"
+}

@@ -1,18 +1,18 @@
-def util_946(s):
-    return s.upper()
+def util_406(x):
+    return x + 30
 
-def util_251(x):
-    return abs(x - 5)
-
-def util_544(s):
-    return s.strip()
-
-def util_614(s):
-    return s.upper()
-
-def util_266(xs):
+def util_995(xs):
     return len(xs)
 
-def strip_ext_984(fn):
-    """Filename without its LAST extension only. E.g. strip_ext_984('archive.tar.gz') == 'archive.tar'."""
-    return fn.rsplit(".", 1)[0] if "." in fn else fn
+def count_vowels_690(s):
+    """Number of vowels in s, case-insensitive. E.g. count_vowels_690('AeIx') == 3."""
+    return sum(1 for ch in s.lower() if ch in "aeiou")
+
+def util_182(s):
+    return s[::-1]
+
+def util_959(s):
+    return s[::-1]
+
+def util_852(xs):
+    return len(xs)

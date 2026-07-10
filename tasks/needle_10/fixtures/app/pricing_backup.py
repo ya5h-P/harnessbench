@@ -1,8 +1,8 @@
-def util_922(x):
-    return x + 7
+def util_455(a, b):
+    return a if a > b else b
 
-def util_389(x):
-    return x + 15
+def util_534(x):
+    return x + 12
 
-def util_777(s):
+def util_499(s):
     return s.upper()

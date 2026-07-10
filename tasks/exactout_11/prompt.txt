@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create cdf.txt in the project root containing exactly four lines, in this order: "le_20=<count of values <= 20>", then likewise le_40, le_60, le_80. No extra lines, no labels beyond the format given.

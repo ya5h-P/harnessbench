@@ -1,0 +1,12 @@
+{
+  "id": "perf_twosum",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_TWOSUM OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "twosum: O(n^2) pair scan -> hashset"
+}

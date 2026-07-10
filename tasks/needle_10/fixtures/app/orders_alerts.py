@@ -1,8 +1,8 @@
-def util_205(x):
-    return x * 14
+def util_247(x):
+    return x + 30
 
-def util_724(xs):
-    return len(xs)
+def util_203(a, b):
+    return a if a > b else b
 
-def util_564(x):
-    return x % 33 == 0
+def util_517(x):
+    return x + 33

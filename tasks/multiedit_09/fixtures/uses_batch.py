@@ -1,4 +1,4 @@
 import baselib
 
 def run(x):
-    return baselib.apply_bounds(x, 4, 15)
+    return baselib.apply_bounds(x, 18, 33)

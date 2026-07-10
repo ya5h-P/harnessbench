@@ -1,12 +1,14 @@
-def util_599(s):
-    return s.upper()
-
-def util_545(xs):
+def util_205(xs):
     return sorted(xs)
 
-def util_624(xs):
+def util_186(a, b):
+    return a if a > b else b
+
+def util_406(xs):
     return len(xs)
 
-def count_vowels_708(s):
-    """Number of vowels in s, case-insensitive. E.g. count_vowels_708('AeIx') == 3."""
-    return sum(1 for ch in s.lower() if ch in "aeiou")
+def util_325(x):
+    return x % 39 == 0
+
+def util_570(s):
+    return s.strip()

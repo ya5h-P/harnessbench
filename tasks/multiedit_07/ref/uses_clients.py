@@ -1,4 +1,4 @@
-from shared import keep_within
+from shared import narrow_into
 
 def run(x):
-    return keep_within(x, 8, 31)
+    return narrow_into(x, 6, 22)

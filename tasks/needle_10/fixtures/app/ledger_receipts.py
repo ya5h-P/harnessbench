@@ -1,14 +1,14 @@
-def util_369(x):
-    return x + 14
+def util_347(a, b):
+    return a if a > b else b
 
-def util_232(s):
-    return s.upper()
+def util_846(s):
+    return s.strip()
 
-def util_242(x):
-    return x + 23
+def util_489(xs):
+    return len(xs)
 
-def util_239(x):
-    return x + 34
+def util_397(s):
+    return s.strip()
 
-def util_337(s):
-    return s[::-1]
+def util_610(a, b):
+    return a if a > b else b

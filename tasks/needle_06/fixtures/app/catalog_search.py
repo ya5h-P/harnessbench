@@ -1,14 +1,11 @@
-def util_238(x):
-    return x + 38
+def util_145(s):
+    return s.upper()
 
-def util_746(x):
-    return x + 11
+def util_628(x):
+    return x + 12
 
-def util_151(x):
-    return x + 14
+def util_792(s):
+    return s.strip()
 
-def util_210(xs):
-    return len(xs)
-
-def util_885(xs):
-    return sorted(xs)
+def util_767(x):
+    return x + 31

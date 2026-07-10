@@ -1,2 +1,2 @@
-core.py in this project is large (900 functions). The function `last_n_4846(xs, n)` should: Last n items of xs (all of xs if n >= len). E.g. last_n_4846([1,2,3,4], 2) == [3, 4].
-Right now last_n_4846([1, 2, 3, 4], 2) returns the wrong value (expected [3, 4]). Fix `last_n_4846` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (1300 functions). The function `last_n_1556(xs, n)` should: Last n items of xs (all of xs if n >= len). E.g. last_n_1556([1,2,3,4], 2) == [3, 4].
+Right now last_n_1556([1, 2, 3, 4], 2) returns the wrong value (expected [3, 4]). Fix `last_n_1556` only — every other function in core.py must remain exactly as it is.

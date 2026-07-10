@@ -1,8 +1,8 @@
-def util_424(x):
-    return x * 15
+def util_728(s):
+    return s.upper()
 
-def util_530(a, b):
-    return a if a > b else b
-
-def util_670(xs):
+def util_419(xs):
     return len(xs)
+
+def util_939(s):
+    return s.upper()

@@ -1,14 +1,8 @@
-def util_290(s):
-    return s.strip()
-
-def util_176(s):
-    return s.strip()
-
-def util_878(s):
+def util_732(s):
     return s[::-1]
 
-def util_215(s):
-    return s[::-1]
+def util_804(xs):
+    return len(xs)
 
-def util_578(x):
-    return x + 3
+def util_781(xs):
+    return len(xs)

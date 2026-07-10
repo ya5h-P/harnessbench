@@ -1,14 +1,11 @@
-def util_880(x):
-    return x % 30 == 0
+def util_622(s):
+    return s.strip()
 
-def util_697(x):
-    return x + 31
+def util_684(x):
+    return abs(x - 26)
 
-def util_311(xs):
+def util_947(xs):
     return len(xs)
 
-def util_969(x):
-    return x + 26
-
-def util_808(xs):
+def util_134(xs):
     return len(xs)

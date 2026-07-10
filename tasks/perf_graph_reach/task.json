@@ -1,0 +1,12 @@
+{
+  "id": "perf_graph_reach",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_GRAPH_REACH OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "graph reach: O(V*E) fixpoint on a reverse-ordered chain -> BFS"
+}

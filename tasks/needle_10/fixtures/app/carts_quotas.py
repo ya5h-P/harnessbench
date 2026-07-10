@@ -1,8 +1,8 @@
-def util_423(s):
-    return s.strip()
+def util_156(x):
+    return abs(x - 31)
 
-def util_614(x):
-    return x * 32
+def util_170(xs):
+    return sorted(xs)
 
-def util_439(s):
-    return s.strip()
+def util_391(s):
+    return s[::-1]

@@ -9,12 +9,13 @@ def par(n):
     return " ".join(rng.choice(PROSE).strip().capitalize() + "." for _ in range(n))
 vals = {}
 for k, lbl in CONSTS:
-    if k in ("MAX_ITEMS", "GRACE_DAYS"):
+    if k in ("MAX_ITEMS", "GRACE_DAYS", "RETENTION_DAYS"):
         vals[k] = rng.randrange(3, 60)
     else:
         vals[k] = round(rng.uniform(0.5, 9.5), 2)
 docnames = ["docs/overview.md", "docs/operations.md", "docs/billing.md", "docs/changelog.md",
-            "docs/faq.md", "docs/appendix.md"][:NDOCS]
+            "docs/faq.md", "docs/appendix.md", "docs/release-notes.md", "docs/integrations.md",
+            "docs/runbook.md", "docs/glossary.md"][:NDOCS]
 paras = {d: [par(rng.randrange(3, 6)) for _ in range(rng.randrange(8, 16))] for d in docnames}
 for idx, (k, lbl) in enumerate(CONSTS):
     d = docnames[idx % len(docnames)]

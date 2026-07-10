@@ -1,8 +1,8 @@
-def util_448(x):
-    return x * 35
-
-def util_500(s):
+def util_726(s):
     return s.upper()
 
-def util_189(xs):
+def util_360(xs):
     return sorted(xs)
+
+def util_909(xs):
+    return len(xs)

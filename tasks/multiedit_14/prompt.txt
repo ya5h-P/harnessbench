@@ -1,0 +1,1 @@
+Rename the function `bracket_num` (defined in baselib.py) to `confine_to` across the whole project: the definition and every import/call site in all 24 caller modules. Behavior must be unchanged, and NO occurrence of the old name `bracket_num` may remain anywhere (no alias, no comment mentions).

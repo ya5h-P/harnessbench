@@ -5,5 +5,8 @@
   "timeout_s": 600,
   "reseed": true,
   "grader_token": "EXACTOUT_07 OK",
+  "capability": "instruction-adherence",
+  "tier": "variance",
+  "stateful": false,
   "notes": "exactout family: exact-format artifact from reseeded data"
 }

@@ -1,0 +1,1 @@
+numbers.txt contains one integer per line. Create quartiles.txt in the project root containing exactly three lines: p25=<v>, p50=<v>, p75=<v>, where p<q> is the NEAREST-RANK percentile: the value at 1-indexed position ceil(q/100 * count) of the ascending sorted list. No extra lines, no labels beyond the format given.

@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": false,
   "grader_token": "WEIRDFS_07 OK",
-  "notes": "weirdfs family: hostile paths, 20 decoy files"
+  "capability": "filesystem-robustness",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "weirdfs family: hostile paths, 28 decoy files"
 }

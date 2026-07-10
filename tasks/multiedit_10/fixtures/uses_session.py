@@ -1,4 +1,4 @@
 import shared
 
 def run(x):
-    return shared.limit_num(x, 6, 19)
+    return shared.limit_num(x, 12, 29)

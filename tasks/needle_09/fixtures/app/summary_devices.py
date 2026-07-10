@@ -1,14 +1,8 @@
-def util_809(xs):
-    return len(xs)
+def util_948(x):
+    return x % 2 == 0
 
-def util_901(xs):
-    return len(xs)
+def util_538(x):
+    return x + 21
 
-def util_140(x):
-    return x * 38
-
-def util_225(x):
-    return abs(x - 20)
-
-def util_902(x):
-    return abs(x - 26)
+def util_170(x):
+    return x * 11

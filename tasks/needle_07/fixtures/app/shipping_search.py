@@ -1,8 +1,11 @@
-def util_998(a, b):
-    return a if a > b else b
+def util_597(s):
+    return s.upper()
 
-def util_924(s):
-    return s.strip()
+def util_883(xs):
+    return len(xs)
 
-def util_984(x):
-    return x + 7
+def util_942(s):
+    return s.upper()
+
+def util_464(x):
+    return x % 9 == 0

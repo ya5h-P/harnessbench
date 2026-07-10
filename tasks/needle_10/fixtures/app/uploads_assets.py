@@ -1,8 +1,8 @@
-def util_546(a, b):
-    return a if a > b else b
+def util_810(x):
+    return abs(x - 19)
 
-def util_790(a, b):
-    return a if a > b else b
+def util_546(xs):
+    return sorted(xs)
 
-def util_253(s):
-    return s[::-1]
+def util_543(x):
+    return x * 31

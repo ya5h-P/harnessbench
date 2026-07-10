@@ -1,11 +1,14 @@
-def util_731(x):
-    return x + 5
+def util_953(x):
+    return x * 19
 
-def util_534(x):
-    return abs(x - 36)
+def util_487(x):
+    return x * 10
 
-def util_669(s):
-    return s[::-1]
+def util_112(x):
+    return abs(x - 24)
 
-def util_433(x):
-    return abs(x - 16)
+def util_231(x):
+    return x + 30
+
+def util_359(xs):
+    return len(xs)

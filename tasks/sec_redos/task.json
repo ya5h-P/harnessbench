@@ -1,0 +1,12 @@
+{
+  "id": "sec_redos",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_REDOS OK",
+  "capability": "algorithmic-dos-resistance",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "ReDoS catastrophic backtracking; grader gates on a short probe timeout"
+}

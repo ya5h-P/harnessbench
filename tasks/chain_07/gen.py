@@ -6,7 +6,7 @@ records = [{"id": rng.randrange(1, 40), "user": rng.choice(users),
             "amount": round(rng.uniform(1, 200), 2), "ok": rng.random() < 0.7}
            for _ in range(rng.randrange(45, 70))]
 json.dump(records, open(os.path.join(workdir, "data.json"), "w"))
-STEPS = ["dedupe", "keep_ok", "totals", "to_csv"]
+STEPS = ["dedupe", "keep_ok", "totals", "filter_min", "rank"]
 data = list(records)
 if "dedupe" in STEPS:
     seen, out = set(), []
@@ -18,13 +18,18 @@ data = [r for r in data if r.get("ok")]
 t = {}
 for r in data:
     t[r["user"]] = round(t.get(r["user"], 0) + r["amount"], 2)
-json.dump({"required": ["unique.json", "kept.json", "totals.json", "final.csv"], "final": "final.csv", "steps": ["dedupe", "keep_ok", "totals", "to_csv"]}, open(os.path.join(gradedir, "chain_spec.json"), "w"))
-FINAL = "final.csv"
+basis = {u: v for u, v in t.items() if v >= 50} if "filter_min" in STEPS else t
+json.dump({"required": ["unique.json", "kept.json", "totals.json", "filtered.json", "ranking.txt"], "final": "ranking.txt", "steps": ["dedupe", "keep_ok", "totals", "filter_min", "rank"]}, open(os.path.join(gradedir, "chain_spec.json"), "w"))
+FINAL = "ranking.txt"
 if FINAL.endswith(".json"):
-    json.dump(t, open(os.path.join(gradedir, "expected_final.json"), "w"), sort_keys=True)
+    json.dump(basis, open(os.path.join(gradedir, "expected_final.json"), "w"), sort_keys=True)
 elif FINAL == "final.csv":
-    lines = ["user,total"] + ["%s,%.2f" % (u, t[u]) for u in sorted(t)]
+    lines = ["user,total"] + ["%s,%.2f" % (u, basis[u]) for u in sorted(basis)]
     open(os.path.join(gradedir, "expected_final.txt"), "w").write("\n".join(lines) + "\n")
+elif FINAL == "ranking.txt":
+    order = sorted(basis, key=lambda u: (-basis[u], u))
+    open(os.path.join(gradedir, "expected_final.txt"), "w").write(
+        "\n".join("%d. %s %.2f" % (i + 1, u, basis[u]) for i, u in enumerate(order)) + "\n")
 else:
-    top = sorted(t, key=lambda u: (-t[u], u))[0] if t else "-"
-    open(os.path.join(gradedir, "expected_final.txt"), "w").write("users=%d\ntop=%s\n" % (len(t), top))
+    top = sorted(basis, key=lambda u: (-basis[u], u))[0] if basis else "-"
+    open(os.path.join(gradedir, "expected_final.txt"), "w").write("users=%d\ntop=%s\n" % (len(basis), top))

@@ -1,0 +1,6 @@
+logs/app.log has ~80000 lines in the format:
+  <timestamp> <LEVEL> code=<code> id=<id> path=<path> <message>
+(plus '=== RESTART ===' marker lines). It is far too large to read directly — compute the answer with a script or shell tools. Write answer.txt in the project root containing exactly three lines:
+  errors=<total ERROR lines>
+  top_path=<path with the most ERROR lines; ties broken alphabetically>
+  unique_ids=<number of distinct id values among ERROR lines>.

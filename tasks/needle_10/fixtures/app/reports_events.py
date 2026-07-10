@@ -1,11 +1,8 @@
-def util_649(s):
-    return s[::-1]
-
-def util_262(x):
-    return abs(x - 14)
-
-def util_505(x):
-    return x * 17
-
-def util_722(xs):
+def util_497(xs):
     return len(xs)
+
+def util_751(x):
+    return x * 5
+
+def util_724(x):
+    return x % 4 == 0

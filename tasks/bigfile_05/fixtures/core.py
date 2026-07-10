@@ -7,13 +7,8 @@ def op_5828(a, b):
 def op_9809(xs):
     return sorted(xs)
 
-def dedupe_4045(xs):
-    """Remove duplicates, preserving first-seen order. E.g. dedupe_4045([3,1,3,2]) == [3, 1, 2]."""
-    return sorted(set(xs))
-
-def word_count_8239(s):
-    """Number of whitespace-separated words. E.g. word_count_8239('a  b') == 2."""
-    return len(s.split())
+def op_8239(s):
+    return s.strip()
 
 def op_4875(x):
     return x % 20 == 0
@@ -21,17 +16,22 @@ def op_4875(x):
 def op_6210(xs):
     return len(xs)
 
-def op_1287(a, b):
-    return a if a > b else b
+def dedupe_6869(xs):
+    """Remove duplicates, preserving first-seen order. E.g. dedupe_6869([3,1,3,2]) == [3, 1, 2]."""
+    return sorted(set(xs))
 
-def op_753(x):
-    return x * 43
+def op_1700(x):
+    return x * 4
 
-def op_2232(s):
-    return s.strip()
+def word_count_3979(s):
+    """Number of whitespace-separated words. E.g. word_count_3979('a  b') == 2."""
+    return len(s.split())
+
+def op_7285(s):
+    return s.upper()
 
 def op_1149(x):
-    return abs(x - 53)
+    return x % 53 == 0
 
 def op_4290(s):
     return s[::-1]
@@ -84,17 +84,8 @@ def op_1306(s):
 def op_5286(xs):
     return sorted(xs)
 
-def running_sum_5013(xs):
-    """Cumulative sums. E.g. running_sum_5013([1, 2, 3]) == [1, 3, 6]."""
-    total = 0
-    out = []
-    for x in xs:
-        total += x
-        out.append(total)
-    return out
-
-def op_7280(x):
-    return x * 47
+def op_1153(xs):
+    return len(xs)
 
 def op_5188(xs):
     return sorted(xs)
@@ -180,29 +171,35 @@ def op_4916(x):
 def op_1041(x):
     return x % 28 == 0
 
-def op_8867(a, b):
-    return a if a > b else b
+def running_sum_6409(xs):
+    """Cumulative sums. E.g. running_sum_6409([1, 2, 3]) == [1, 3, 6]."""
+    total = 0
+    out = []
+    for x in xs:
+        total += x
+        out.append(total)
+    return out
 
-def op_763(x):
-    return x % 47 == 0
+def op_3553(x):
+    return abs(x - 38)
 
-def op_986(x):
+def op_527(x):
+    return x + 55
+
+def op_8524(x):
+    return x + 7
+
+def op_9048(s):
+    return s.strip()
+
+def op_8618(xs):
+    return len(xs)
+
+def op_2248(x):
     return x + 34
 
-def op_3596(x):
-    return x * 36
-
-def op_4503(x):
-    return x * 35
-
-def op_374(x):
-    return x + 10
-
-def op_9773(x):
-    return abs(x - 52)
-
-def op_5000(s):
-    return s[::-1]
+def op_7799(x):
+    return x % 21 == 0
 
 def op_8286(s):
     return s.strip()
@@ -249,18 +246,17 @@ def op_9806(s):
 def op_910(s):
     return s[::-1]
 
-def between_9187(x, lo, hi):
-    """True iff lo <= x <= hi (inclusive). E.g. between_9187(1, 1, 3) is True."""
-    return lo <= x <= hi
+def op_5896(x):
+    return abs(x - 50)
 
-def op_7508(xs):
-    return sorted(xs)
+def op_9361(s):
+    return s[::-1]
 
-def op_7626(x):
-    return x * 33
+def op_8276(s):
+    return s[::-1]
 
-def op_392(xs):
-    return len(xs)
+def op_392(x):
+    return x % 15 == 0
 
 def op_1011(a, b):
     return a if a > b else b
@@ -496,14 +492,15 @@ def op_511(x):
 def op_3462(xs):
     return sorted(xs)
 
-def op_1741(xs):
-    return len(xs)
+def between_4429(x, lo, hi):
+    """True iff lo <= x <= hi (inclusive). E.g. between_4429(1, 1, 3) is True."""
+    return lo <= x <= hi
 
-def op_872(x):
-    return x + 7
+def op_828(x):
+    return x * 5
 
-def op_7705(x):
-    return x + 50
+def op_472(x):
+    return x * 31
 
 def op_8495(x):
     return x + 27
@@ -904,7 +901,7 @@ def op_4247(s):
 def op_2601(xs):
     return len(xs)
 
-def op_9048(s):
+def op_7893(s):
     return s.strip()
 
 def op_5349(s):
@@ -966,3 +963,696 @@ def op_6447(s):
 
 def op_1332(s):
     return s.upper()
+
+def op_2497(s):
+    return s[::-1]
+
+def op_2910(xs):
+    return len(xs)
+
+def op_9447(x):
+    return x * 6
+
+def op_8576(x):
+    return abs(x - 27)
+
+def op_783(s):
+    return s.strip()
+
+def op_7194(s):
+    return s[::-1]
+
+def op_2337(x):
+    return x + 33
+
+def op_7143(x):
+    return x + 16
+
+def op_2666(x):
+    return x + 21
+
+def op_7565(x):
+    return x * 30
+
+def op_3663(s):
+    return s.upper()
+
+def op_5429(xs):
+    return sorted(xs)
+
+def op_869(x):
+    return x % 30 == 0
+
+def op_9222(s):
+    return s[::-1]
+
+def op_9645(s):
+    return s.upper()
+
+def op_6043(s):
+    return s[::-1]
+
+def op_5138(xs):
+    return sorted(xs)
+
+def op_8034(s):
+    return s.upper()
+
+def op_3937(xs):
+    return sorted(xs)
+
+def op_9682(s):
+    return s[::-1]
+
+def op_4040(s):
+    return s.upper()
+
+def op_4595(xs):
+    return len(xs)
+
+def op_2987(x):
+    return x % 3 == 0
+
+def op_1682(x):
+    return abs(x - 41)
+
+def op_3157(xs):
+    return len(xs)
+
+def op_6880(x):
+    return x % 7 == 0
+
+def op_1630(s):
+    return s.upper()
+
+def op_1830(s):
+    return s.upper()
+
+def op_5284(xs):
+    return len(xs)
+
+def op_2710(x):
+    return x + 24
+
+def op_1860(x):
+    return abs(x - 39)
+
+def op_2376(xs):
+    return sorted(xs)
+
+def op_8341(a, b):
+    return a if a > b else b
+
+def op_963(x):
+    return x * 44
+
+def op_2860(x):
+    return x + 41
+
+def op_3819(x):
+    return x + 40
+
+def op_2169(x):
+    return x % 30 == 0
+
+def op_7195(x):
+    return x * 5
+
+def op_3995(xs):
+    return len(xs)
+
+def op_1538(x):
+    return x % 7 == 0
+
+def op_6137(x):
+    return x + 18
+
+def op_6022(s):
+    return s.upper()
+
+def op_3123(x):
+    return x * 15
+
+def op_7751(x):
+    return x * 5
+
+def op_6905(x):
+    return x * 47
+
+def op_2630(x):
+    return x + 25
+
+def op_7076(s):
+    return s[::-1]
+
+def op_8248(x):
+    return x + 10
+
+def op_2923(s):
+    return s[::-1]
+
+def op_518(s):
+    return s.upper()
+
+def op_9302(xs):
+    return len(xs)
+
+def op_4822(a, b):
+    return a if a > b else b
+
+def op_4360(x):
+    return x * 29
+
+def op_1242(s):
+    return s.strip()
+
+def op_6320(s):
+    return s[::-1]
+
+def op_3771(s):
+    return s[::-1]
+
+def op_2626(a, b):
+    return a if a > b else b
+
+def op_3981(a, b):
+    return a if a > b else b
+
+def op_5087(a, b):
+    return a if a > b else b
+
+def op_5578(s):
+    return s[::-1]
+
+def op_6565(s):
+    return s.strip()
+
+def op_6398(s):
+    return s[::-1]
+
+def op_4787(s):
+    return s.upper()
+
+def op_3125(x):
+    return x + 37
+
+def op_7899(xs):
+    return len(xs)
+
+def op_9101(xs):
+    return sorted(xs)
+
+def op_8832(x):
+    return x + 5
+
+def op_6455(s):
+    return s.strip()
+
+def op_4213(s):
+    return s.upper()
+
+def op_5878(x):
+    return abs(x - 17)
+
+def op_144(xs):
+    return sorted(xs)
+
+def op_7912(s):
+    return s.strip()
+
+def op_9090(x):
+    return x * 12
+
+def op_9367(x):
+    return abs(x - 25)
+
+def op_342(xs):
+    return sorted(xs)
+
+def op_404(s):
+    return s.strip()
+
+def op_5366(s):
+    return s[::-1]
+
+def op_7608(x):
+    return x * 40
+
+def op_3370(x):
+    return x % 45 == 0
+
+def op_8841(s):
+    return s.strip()
+
+def op_8209(s):
+    return s.upper()
+
+def op_7319(a, b):
+    return a if a > b else b
+
+def op_4778(a, b):
+    return a if a > b else b
+
+def op_9974(xs):
+    return len(xs)
+
+def op_7493(s):
+    return s[::-1]
+
+def op_7102(x):
+    return x % 43 == 0
+
+def op_6578(s):
+    return s.strip()
+
+def op_3619(x):
+    return x % 35 == 0
+
+def op_2354(s):
+    return s.strip()
+
+def op_7214(s):
+    return s.strip()
+
+def op_9637(s):
+    return s[::-1]
+
+def op_4643(x):
+    return x * 50
+
+def op_3852(x):
+    return x * 9
+
+def op_8802(s):
+    return s[::-1]
+
+def op_7417(x):
+    return x % 40 == 0
+
+def op_7148(a, b):
+    return a if a > b else b
+
+def op_6873(s):
+    return s.strip()
+
+def op_8805(xs):
+    return len(xs)
+
+def op_2259(x):
+    return x * 42
+
+def op_3196(a, b):
+    return a if a > b else b
+
+def op_6927(x):
+    return abs(x - 22)
+
+def op_8761(x):
+    return abs(x - 47)
+
+def op_6655(s):
+    return s.upper()
+
+def op_2413(xs):
+    return sorted(xs)
+
+def op_9291(x):
+    return abs(x - 5)
+
+def op_4785(a, b):
+    return a if a > b else b
+
+def op_2953(xs):
+    return len(xs)
+
+def op_4113(s):
+    return s.upper()
+
+def op_1247(s):
+    return s.upper()
+
+def op_370(xs):
+    return len(xs)
+
+def op_4452(s):
+    return s.strip()
+
+def op_7759(x):
+    return x % 35 == 0
+
+def op_3233(s):
+    return s.strip()
+
+def op_8757(s):
+    return s.strip()
+
+def op_1512(a, b):
+    return a if a > b else b
+
+def op_5075(s):
+    return s.upper()
+
+def op_8352(xs):
+    return len(xs)
+
+def op_1225(a, b):
+    return a if a > b else b
+
+def op_7868(s):
+    return s.upper()
+
+def op_5126(a, b):
+    return a if a > b else b
+
+def op_1234(xs):
+    return len(xs)
+
+def op_4236(a, b):
+    return a if a > b else b
+
+def op_8941(xs):
+    return sorted(xs)
+
+def op_9620(a, b):
+    return a if a > b else b
+
+def op_7734(s):
+    return s.upper()
+
+def op_9410(x):
+    return x % 36 == 0
+
+def op_9713(s):
+    return s[::-1]
+
+def op_5552(xs):
+    return len(xs)
+
+def op_623(xs):
+    return len(xs)
+
+def op_5072(x):
+    return x + 26
+
+def op_8752(x):
+    return abs(x - 43)
+
+def op_3545(x):
+    return x + 47
+
+def op_2323(s):
+    return s.strip()
+
+def op_8214(x):
+    return x + 36
+
+def op_5579(s):
+    return s.strip()
+
+def op_7767(xs):
+    return len(xs)
+
+def op_3105(xs):
+    return len(xs)
+
+def op_5710(s):
+    return s[::-1]
+
+def op_3924(xs):
+    return sorted(xs)
+
+def op_1423(xs):
+    return len(xs)
+
+def op_4741(x):
+    return x * 47
+
+def op_2432(xs):
+    return sorted(xs)
+
+def op_2610(x):
+    return x * 4
+
+def op_7839(x):
+    return x * 56
+
+def op_6172(x):
+    return x + 3
+
+def op_7019(x):
+    return x * 6
+
+def op_2669(x):
+    return abs(x - 53)
+
+def op_264(s):
+    return s.strip()
+
+def op_7219(s):
+    return s.upper()
+
+def op_9017(x):
+    return x + 25
+
+def op_9602(s):
+    return s[::-1]
+
+def op_5540(s):
+    return s.strip()
+
+def op_3340(x):
+    return abs(x - 23)
+
+def op_9461(xs):
+    return sorted(xs)
+
+def op_1288(x):
+    return abs(x - 40)
+
+def op_3224(xs):
+    return sorted(xs)
+
+def op_9161(s):
+    return s.strip()
+
+def op_9979(x):
+    return x % 57 == 0
+
+def op_664(a, b):
+    return a if a > b else b
+
+def op_2284(s):
+    return s[::-1]
+
+def op_1873(xs):
+    return len(xs)
+
+def op_2886(s):
+    return s.upper()
+
+def op_4208(s):
+    return s.upper()
+
+def op_2693(x):
+    return x + 23
+
+def op_3156(xs):
+    return len(xs)
+
+def op_2822(xs):
+    return sorted(xs)
+
+def op_2527(x):
+    return x % 46 == 0
+
+def op_3541(x):
+    return x + 44
+
+def op_2723(x):
+    return x % 24 == 0
+
+def op_5648(x):
+    return x * 59
+
+def op_6611(a, b):
+    return a if a > b else b
+
+def op_5047(s):
+    return s[::-1]
+
+def op_7391(xs):
+    return len(xs)
+
+def op_5893(xs):
+    return sorted(xs)
+
+def op_5329(x):
+    return abs(x - 55)
+
+def op_9458(x):
+    return abs(x - 4)
+
+def op_1122(a, b):
+    return a if a > b else b
+
+def op_3762(a, b):
+    return a if a > b else b
+
+def op_8848(x):
+    return abs(x - 44)
+
+def op_8224(s):
+    return s.strip()
+
+def op_9027(xs):
+    return sorted(xs)
+
+def op_4830(x):
+    return x * 29
+
+def op_1702(xs):
+    return sorted(xs)
+
+def op_9709(x):
+    return x * 46
+
+def op_3192(s):
+    return s[::-1]
+
+def op_1400(x):
+    return x % 47 == 0
+
+def op_228(s):
+    return s[::-1]
+
+def op_4727(xs):
+    return len(xs)
+
+def op_9189(xs):
+    return sorted(xs)
+
+def op_8986(s):
+    return s.upper()
+
+def op_4885(x):
+    return x % 35 == 0
+
+def op_7125(a, b):
+    return a if a > b else b
+
+def op_3161(x):
+    return x * 2
+
+def op_7628(x):
+    return abs(x - 24)
+
+def op_6517(xs):
+    return len(xs)
+
+def op_375(x):
+    return x % 59 == 0
+
+def op_2648(s):
+    return s[::-1]
+
+def op_2717(s):
+    return s[::-1]
+
+def op_169(x):
+    return x + 33
+
+def op_3450(a, b):
+    return a if a > b else b
+
+def op_4824(x):
+    return abs(x - 33)
+
+def op_5416(a, b):
+    return a if a > b else b
+
+def op_9778(x):
+    return x + 47
+
+def op_8350(x):
+    return abs(x - 19)
+
+def op_7107(xs):
+    return len(xs)
+
+def op_3677(x):
+    return x + 24
+
+def op_2290(x):
+    return x + 34
+
+def op_1027(xs):
+    return len(xs)
+
+def op_3146(x):
+    return x * 32
+
+def op_8004(x):
+    return x + 28
+
+def op_6480(xs):
+    return len(xs)
+
+def op_7961(a, b):
+    return a if a > b else b
+
+def op_6359(s):
+    return s.strip()
+
+def op_604(x):
+    return x * 6
+
+def op_1357(x):
+    return abs(x - 10)
+
+def op_2146(s):
+    return s.strip()
+
+def op_3219(s):
+    return s.upper()
+
+def op_3603(xs):
+    return sorted(xs)
+
+def op_4802(x):
+    return abs(x - 44)
+
+def op_3831(x):
+    return abs(x - 16)
+
+def op_3227(x):
+    return abs(x - 4)
+
+def op_2528(s):
+    return s.strip()
+
+def op_5850(x):
+    return x + 49
+
+def op_7119(x):
+    return x % 40 == 0
+
+def op_3910(xs):
+    return sorted(xs)
+
+def op_9922(xs):
+    return sorted(xs)
+
+def op_6688(xs):
+    return sorted(xs)
+
+def op_7683(xs):
+    return len(xs)
+
+def op_3369(xs):
+    return sorted(xs)
+
+def op_1995(s):
+    return s[::-1]
+
+def op_8293(x):
+    return x * 20

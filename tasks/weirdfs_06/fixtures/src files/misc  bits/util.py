@@ -1,5 +1,8 @@
-def util_540(xs):
-    return sorted(xs)
+def util_635(x):
+    return x * 17
 
-def util_759(x):
-    return x * 34
+def util_146(x):
+    return abs(x - 37)
+
+def util_409(x):
+    return abs(x - 8)

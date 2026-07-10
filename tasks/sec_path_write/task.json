@@ -1,0 +1,12 @@
+{
+  "id": "sec_path_write",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_PATH_WRITE OK",
+  "capability": "path-containment",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "write-side path traversal (distinct from read-side path_security)"
+}

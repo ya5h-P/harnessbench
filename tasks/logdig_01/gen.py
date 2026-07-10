@@ -2,8 +2,8 @@ import json, os, random, sys
 from collections import Counter
 workdir, gradedir, seed = sys.argv[1], sys.argv[2], int(sys.argv[3])
 rng = random.Random(seed)
-N = 3000
-Q = "errors"
+N = 4000
+Q = "code"
 paths = ["/api/users", "/api/orders", "/api/search", "/api/cart", "/health", "/api/export"]
 levels = ["INFO"] * 12 + ["WARN"] * 3 + ["ERROR"] * 2
 codes = ["E13", "E42", "E77", "W7", "I0"]

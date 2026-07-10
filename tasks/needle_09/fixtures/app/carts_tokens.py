@@ -1,14 +1,14 @@
-def util_816(a, b):
-    return a if a > b else b
+def util_565(s):
+    return s.strip()
 
-def util_485(x):
-    return x % 17 == 0
+def util_887(x):
+    return x % 36 == 0
 
-def util_623(x):
-    return abs(x - 24)
+def util_169(s):
+    return s.strip()
 
-def util_376(x):
-    return x * 22
+def util_534(x):
+    return x + 16
 
-def util_337(x):
-    return x % 34 == 0
+def util_686(s):
+    return s[::-1]

@@ -1,11 +1,8 @@
-def util_156(xs):
-    return len(xs)
+def util_790(s):
+    return s[::-1]
 
-def util_833(a, b):
-    return a if a > b else b
+def util_354(xs):
+    return sorted(xs)
 
-def util_962(a, b):
-    return a if a > b else b
-
-def util_543(s):
+def util_918(s):
     return s.strip()

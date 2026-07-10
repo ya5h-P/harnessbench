@@ -1,0 +1,12 @@
+{
+  "id": "sec_deserialize",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_DESERIALIZE OK",
+  "capability": "safe-deserialization",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "pickle RCE -> JSON"
+}

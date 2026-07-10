@@ -1,8 +1,14 @@
-def util_721(x):
-    return x + 35
+def util_548(x):
+    return x + 12
 
-def util_588(a, b):
-    return a if a > b else b
+def util_281(xs):
+    return sorted(xs)
 
-def util_495(x):
-    return abs(x - 19)
+def util_248(s):
+    return s.upper()
+
+def util_743(s):
+    return s.upper()
+
+def util_215(xs):
+    return sorted(xs)

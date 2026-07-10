@@ -1,11 +1,14 @@
-def util_756(xs):
-    return len(xs)
+def util_743(x):
+    return x + 16
 
-def util_843(x):
-    return abs(x - 6)
+def util_820(xs):
+    return sorted(xs)
 
-def util_240(s):
+def util_923(s):
     return s.upper()
 
-def util_700(x):
-    return x * 20
+def util_689(a, b):
+    return a if a > b else b
+
+def util_969(s):
+    return s.upper()

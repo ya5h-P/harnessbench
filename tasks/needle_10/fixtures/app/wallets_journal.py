@@ -1,8 +1,11 @@
-def util_467(s):
-    return s[::-1]
+def util_603(xs):
+    return len(xs)
 
-def util_887(s):
-    return s.upper()
+def util_775(x):
+    return x % 15 == 0
 
-def util_596(s):
-    return s.strip()
+def util_388(x):
+    return x % 9 == 0
+
+def util_790(a, b):
+    return a if a > b else b

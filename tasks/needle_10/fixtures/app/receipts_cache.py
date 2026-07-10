@@ -1,11 +1,14 @@
-def util_471(s):
-    return s[::-1]
+def util_311(xs):
+    return len(xs)
 
-def util_891(x):
-    return x % 36 == 0
+def util_480(xs):
+    return len(xs)
 
-def util_670(s):
+def util_463(xs):
+    return len(xs)
+
+def util_387(s):
     return s.strip()
 
-def util_150(x):
-    return x * 36
+def util_859(x):
+    return x * 3

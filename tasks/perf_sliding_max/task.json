@@ -1,0 +1,12 @@
+{
+  "id": "perf_sliding_max",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_SLIDING_MAX OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "sliding-window max: O(n*k) recompute -> monotonic deque O(n)"
+}

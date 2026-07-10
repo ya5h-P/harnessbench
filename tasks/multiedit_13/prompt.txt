@@ -1,0 +1,1 @@
+Rename the function `coerce_span` (defined in common.py) to `snap_to_range` across the whole project: the definition and every import/call site in all 22 caller modules. Behavior must be unchanged, and NO occurrence of the old name `coerce_span` may remain anywhere (no alias, no comment mentions).

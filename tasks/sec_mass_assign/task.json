@@ -1,0 +1,12 @@
+{
+  "id": "sec_mass_assign",
+  "domain": "security-defensive",
+  "difficulty": 4,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "SEC_MASS_ASSIGN OK",
+  "capability": "authorization",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "mass-assignment / over-posting"
+}

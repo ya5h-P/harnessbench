@@ -1,4 +1,4 @@
 import common
 
 def run(x):
-    return common.restrict_range(x, 9, 26)
+    return common.restrict_range(x, 15, 27)

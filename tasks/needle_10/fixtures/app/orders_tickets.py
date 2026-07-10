@@ -1,8 +1,8 @@
-def util_455(a, b):
-    return a if a > b else b
+def util_467(s):
+    return s[::-1]
 
-def util_534(x):
-    return x + 12
-
-def util_499(s):
+def util_887(s):
     return s.upper()
+
+def util_596(s):
+    return s.strip()

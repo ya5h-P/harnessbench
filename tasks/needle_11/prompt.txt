@@ -1,0 +1,5 @@
+This project has 290 source file(s) under app/. 3 buggy functions are buried somewhere in it:
+- `is_pal_365(s)` should follow its docstring: True iff s is a palindrome ignoring case and non-alphanumerics. E.g. is_pal_365('Aba') is True.  (right now is_pal_365('Aba') != True)
+- `pct_257(part, whole)` should follow its docstring: part as a percentage of whole, rounded to 1 decimal. E.g. pct_257(1, 8) == 12.5.  (right now pct_257(1, 8) != 12.5)
+- `count_vowels_192(s)` should follow its docstring: Number of vowels in s, case-insensitive. E.g. count_vowels_192('AeIx') == 3.  (right now count_vowels_192('AeIx') != 3)
+Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

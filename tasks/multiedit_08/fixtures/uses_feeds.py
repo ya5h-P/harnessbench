@@ -1,4 +1,4 @@
 import common
 
 def run(x):
-    return common.clamp_value(x, 13, 41)
+    return common.clamp_value(x, 16, 22)

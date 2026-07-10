@@ -1,2 +1,2 @@
-core.py in this project is large (450 functions). The function `c2f_5109(c)` should: Celsius to Fahrenheit. E.g. c2f_5109(0) == 32.0; c2f_5109(100) == 212.0.
-Right now c2f_5109(0) returns the wrong value (expected 32.0). Fix `c2f_5109` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (700 functions). The function `c2f_7466(c)` should: Celsius to Fahrenheit. E.g. c2f_7466(0) == 32.0; c2f_7466(100) == 212.0.
+Right now c2f_7466(0) returns the wrong value (expected 32.0). Fix `c2f_7466` only — every other function in core.py must remain exactly as it is.

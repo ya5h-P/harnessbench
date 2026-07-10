@@ -1,3 +1,3 @@
-This project has 20 source file(s) under app/. One buggy function is buried somewhere in it:
-- `dedupe_796(xs)` should follow its docstring: Remove duplicates, preserving first-seen order. E.g. dedupe_796([3,1,3,2]) == [3, 1, 2].  (right now dedupe_796([3, 1, 3, 2]) != [3, 1, 2])
+This project has 40 source file(s) under app/. One buggy function is buried somewhere in it:
+- `pct_858(part, whole)` should follow its docstring: part as a percentage of whole, rounded to 1 decimal. E.g. pct_858(1, 8) == 12.5.  (right now pct_858(1, 8) != 12.5)
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

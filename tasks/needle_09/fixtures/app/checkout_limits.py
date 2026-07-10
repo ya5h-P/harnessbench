@@ -1,14 +1,14 @@
-def util_565(s):
+def util_605(s):
+    return s[::-1]
+
+def util_854(s):
     return s.strip()
 
-def util_887(x):
-    return x % 36 == 0
-
-def util_169(s):
-    return s.strip()
-
-def util_534(x):
-    return x + 16
+def util_573(x):
+    return abs(x - 38)
 
 def util_686(s):
     return s[::-1]
+
+def util_584(x):
+    return x % 30 == 0

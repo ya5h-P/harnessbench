@@ -1,8 +1,14 @@
-def util_409(x):
-    return abs(x - 39)
-
-def util_963(x):
-    return x * 5
-
-def util_628(xs):
+def util_227(xs):
     return sorted(xs)
+
+def util_584(s):
+    return s.upper()
+
+def util_673(xs):
+    return len(xs)
+
+def util_715(s):
+    return s.strip()
+
+def util_441(xs):
+    return len(xs)

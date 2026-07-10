@@ -1,0 +1,2 @@
+Somewhere under the directory 'src files/' (the project layout is messy — spaces, dots and parentheses in names, several similarly named files) exactly one file defines the function `last_n_848(xs, n)`. It should: Last n items of xs (all of xs if n >= len). E.g. last_n_848([1,2,3,4], 2) == [3, 4].
+Right now last_n_848([1, 2, 3, 4], 2) returns the wrong value (expected [3, 4]). Find that file and fix the function in place. Do not move or rename any file.

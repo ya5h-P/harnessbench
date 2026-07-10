@@ -1,8 +1,8 @@
-def util_802(x):
-    return abs(x - 15)
+def util_573(s):
+    return s.strip()
 
-def util_987(x):
-    return abs(x - 7)
+def util_692(x):
+    return abs(x - 11)
 
-def util_886(x):
-    return x + 15
+def util_630(xs):
+    return len(xs)

@@ -1,11 +1,14 @@
-def util_114(x):
-    return abs(x - 36)
+def util_935(x):
+    return x % 38 == 0
 
-def util_133(a, b):
-    return a if a > b else b
+def util_973(x):
+    return x + 22
 
-def util_727(a, b):
-    return a if a > b else b
+def util_340(s):
+    return s.upper()
 
-def util_983(x):
-    return abs(x - 4)
+def util_594(x):
+    return x * 28
+
+def util_307(xs):
+    return sorted(xs)

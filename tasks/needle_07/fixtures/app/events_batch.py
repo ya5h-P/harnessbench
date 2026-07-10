@@ -1,15 +1,15 @@
-def count_vowels_336(s):
-    """Number of vowels in s, case-insensitive. E.g. count_vowels_336('AeIx') == 3."""
-    return sum(1 for ch in s.lower() if ch in "aeiou")
-
-def util_745(s):
-    return s.strip()
-
-def util_536(s):
+def util_172(s):
     return s.upper()
 
-def util_997(xs):
-    return len(xs)
+def word_count_251(s):
+    """Number of whitespace-separated words. E.g. word_count_251('a  b') == 2."""
+    return len(s.split())
 
-def util_592(xs):
-    return len(xs)
+def util_534(s):
+    return s[::-1]
+
+def util_656(x):
+    return abs(x - 25)
+
+def util_199(s):
+    return s.strip()

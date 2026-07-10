@@ -1,0 +1,12 @@
+{
+  "id": "sec_cmd_argv",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_CMD_ARGV OK",
+  "capability": "injection-safety",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "shell command injection -> argv list"
+}

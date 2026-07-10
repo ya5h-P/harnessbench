@@ -1,14 +1,11 @@
-def util_970(x):
-    return abs(x - 26)
-
-def util_173(s):
-    return s.strip()
-
-def util_342(s):
+def util_870(s):
     return s.upper()
 
-def util_900(x):
-    return abs(x - 21)
+def util_821(x):
+    return x + 3
 
-def util_551(x):
-    return x * 31
+def util_256(s):
+    return s.strip()
+
+def util_599(x):
+    return x + 28

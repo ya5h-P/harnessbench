@@ -1,0 +1,12 @@
+{
+  "id": "perf_dup_within_k",
+  "domain": "performance-optimization",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "PERF_DUP_WITHIN_K OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "dup-within-k: O(n*k) window rescan -> sliding set O(n)"
+}

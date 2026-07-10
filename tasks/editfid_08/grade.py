@@ -1,14 +1,17 @@
-import sys, os, json, importlib.util
+import sys, os
+def norm(b): return b.replace(b"\r\n", b"\n").rstrip(b"\n")
 def main():
     w, g = sys.argv[1], sys.argv[2]
-    p = os.path.join(w, "patterns.py")
-    if not os.path.exists(p): print("FAIL: patterns.py missing"); sys.exit(1)
-    spec = importlib.util.spec_from_file_location("pats", p)
-    mod = importlib.util.module_from_spec(spec)
-    try: spec.loader.exec_module(mod)
-    except Exception as e: print("FAIL: import error %r" % e); sys.exit(1)
-    exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
-    if getattr(mod, "PATTERNS", None) != exp:
-        print("FAIL: PATTERNS does not match expected values"); sys.exit(1)
+    p = os.path.join(w, "access.cfg")
+    if not os.path.exists(p): print("FAIL: access.cfg missing"); sys.exit(1)
+    got = norm(open(p, "rb").read())
+    exp = norm(open(os.path.join(g, "expected.bin"), "rb").read())
+    if got != exp:
+        try:
+            got.decode("utf-8")
+            print("FAIL: access.cfg was re-encoded (decodes as UTF-8); it must stay Latin-1"); sys.exit(1)
+        except UnicodeDecodeError:
+            pass
+        print("FAIL: access.cfg bytes differ from expected (only retries should change)"); sys.exit(1)
     print("EDITFID_08 OK")
 main()

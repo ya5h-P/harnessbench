@@ -1,11 +1,8 @@
-def util_740(x):
-    return x + 7
+def util_611(a, b):
+    return a if a > b else b
 
-def util_918(x):
-    return abs(x - 4)
+def util_444(x):
+    return x % 10 == 0
 
-def util_553(s):
+def util_631(s):
     return s.upper()
-
-def util_833(s):
-    return s.strip()

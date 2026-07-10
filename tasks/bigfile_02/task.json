@@ -1,9 +1,12 @@
 {
   "id": "bigfile_02",
   "domain": "large-file-edit",
-  "difficulty": 2,
-  "timeout_s": 480,
+  "difficulty": 3,
+  "timeout_s": 600,
   "reseed": false,
   "grader_token": "BIGFILE_02 OK",
-  "notes": "bigfile family: precise edit in a 90-function file"
+  "capability": "precise-edit-in-large-file",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "bigfile family: precise edit in a 240-function file"
 }

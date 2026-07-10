@@ -1,0 +1,12 @@
+{
+  "id": "perf_median_stream",
+  "domain": "performance-optimization",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "PERF_MEDIAN_STREAM OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "streaming median: O(n^2 log n) resort -> two-heap"
+}

@@ -1,11 +1,11 @@
-def util_113(x):
-    return x % 35 == 0
+def util_454(xs):
+    return sorted(xs)
 
-def util_836(s):
-    return s[::-1]
+def util_729(a, b):
+    return a if a > b else b
 
-def util_635(xs):
-    return len(xs)
+def util_509(s):
+    return s.upper()
 
-def util_493(s):
+def util_485(s):
     return s.upper()

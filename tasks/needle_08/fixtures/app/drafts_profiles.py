@@ -1,14 +1,14 @@
-def util_972(xs):
-    return sorted(xs)
-
-def util_600(xs):
-    return sorted(xs)
-
-def util_789(a, b):
-    return a if a > b else b
-
-def util_300(s):
+def util_692(s):
     return s.strip()
 
-def util_236(x):
-    return x + 10
+def util_395(xs):
+    return sorted(xs)
+
+def util_117(s):
+    return s.upper()
+
+def util_201(a, b):
+    return a if a > b else b
+
+def util_909(s):
+    return s.upper()

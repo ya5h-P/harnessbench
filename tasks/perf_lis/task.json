@@ -1,0 +1,12 @@
+{
+  "id": "perf_lis",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_LIS OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "LIS: O(n^2) DP -> patience/bisect O(n log n)"
+}

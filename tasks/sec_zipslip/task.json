@@ -1,0 +1,12 @@
+{
+  "id": "sec_zipslip",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_ZIPSLIP OK",
+  "capability": "path-containment",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "Zip Slip archive traversal"
+}

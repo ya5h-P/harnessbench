@@ -1,4 +1,4 @@
 import shared
 
 def run(x):
-    return shared.keep_within(x, 6, 22)
+    return shared.narrow_into(x, 16, 39)

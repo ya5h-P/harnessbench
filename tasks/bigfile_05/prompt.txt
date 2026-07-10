@@ -1,2 +1,2 @@
-core.py in this project is large (320 functions). The function `dedupe_4045(xs)` should: Remove duplicates, preserving first-seen order. E.g. dedupe_4045([3,1,3,2]) == [3, 1, 2].
-Right now dedupe_4045([3, 1, 3, 2]) returns the wrong value (expected [3, 1, 2]). Fix `dedupe_4045` only — every other function in core.py must remain exactly as it is.
+core.py in this project is large (550 functions). The function `dedupe_6869(xs)` should: Remove duplicates, preserving first-seen order. E.g. dedupe_6869([3,1,3,2]) == [3, 1, 2].
+Right now dedupe_6869([3, 1, 3, 2]) returns the wrong value (expected [3, 1, 2]). Fix `dedupe_6869` only — every other function in core.py must remain exactly as it is.

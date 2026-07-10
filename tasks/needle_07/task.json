@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": false,
   "grader_token": "NEEDLE_07 OK",
-  "notes": "needle family: locate a described function among 90 files"
+  "capability": "search-navigation",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "needle family: locate a described function among 160 files"
 }

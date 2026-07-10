@@ -1,14 +1,14 @@
-def util_896(s):
+def util_647(s):
     return s[::-1]
 
-def util_618(x):
-    return x * 4
+def util_267(a, b):
+    return a if a > b else b
 
-def util_294(s):
-    return s.strip()
+def util_682(a, b):
+    return a if a > b else b
 
-def util_248(xs):
+def util_447(s):
+    return s[::-1]
+
+def util_777(xs):
     return len(xs)
-
-def util_583(x):
-    return abs(x - 9)

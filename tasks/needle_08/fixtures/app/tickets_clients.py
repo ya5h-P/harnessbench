@@ -1,14 +1,12 @@
-def util_743(x):
-    return x % 23 == 0
+def between_620(x, lo, hi):
+    """True iff lo <= x <= hi (inclusive). E.g. between_620(1, 1, 3) is True."""
+    return lo <= x <= hi
 
-def util_460(s):
-    return s.upper()
+def util_772(x):
+    return x + 12
 
-def util_415(s):
-    return s.strip()
-
-def util_582(s):
-    return s.upper()
-
-def util_563(xs):
+def util_553(xs):
     return len(xs)
+
+def util_468(a, b):
+    return a if a > b else b

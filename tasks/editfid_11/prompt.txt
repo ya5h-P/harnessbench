@@ -1,0 +1,1 @@
+build.cfg mixes fragile conventions: CRLF line endings (required by the deploy tool), TAB-indented recipe lines (required by the build tool), unicode text, and one minified JSON line. Make exactly two changes: (1) version 3.1.4 -> 4.0.0, (2) inside pipeline_json, "max_jobs": 8 -> 24. Everything else — every byte, every tab, every CRLF — must survive.

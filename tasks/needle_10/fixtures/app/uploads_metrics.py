@@ -1,11 +1,8 @@
-def util_307(x):
-    return x + 34
+def util_929(s):
+    return s[::-1]
 
-def util_749(s):
+def util_132(x):
+    return x % 35 == 0
+
+def util_358(s):
     return s.strip()
-
-def util_366(x):
-    return abs(x - 5)
-
-def util_127(x):
-    return x + 2

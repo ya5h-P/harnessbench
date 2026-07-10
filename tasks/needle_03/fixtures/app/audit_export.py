@@ -13,6 +13,6 @@ def util_446(x):
 def util_726(s):
     return s.upper()
 
-def between_731(x, lo, hi):
-    """True iff lo <= x <= hi (inclusive). E.g. between_731(1, 1, 3) is True."""
-    return lo <= x <= hi
+def mean2_731(xs):
+    """Arithmetic mean rounded to 2 decimals. E.g. mean2_731([2, 4]) == 3.0."""
+    return round(sum(xs) / len(xs), 2)

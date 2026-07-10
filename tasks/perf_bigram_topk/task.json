@@ -1,0 +1,12 @@
+{
+  "id": "perf_bigram_topk",
+  "domain": "performance-optimization",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "PERF_BIGRAM_TOPK OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "bigram top: O(n^2) pair rescan -> Counter"
+}

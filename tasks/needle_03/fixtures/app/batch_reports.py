@@ -1,8 +1,8 @@
-def util_845(x):
-    return abs(x - 16)
+def util_303(xs):
+    return sorted(xs)
 
-def util_930(a, b):
-    return a if a > b else b
-
-def util_128(s):
+def util_810(s):
     return s.strip()
+
+def util_108(xs):
+    return len(xs)

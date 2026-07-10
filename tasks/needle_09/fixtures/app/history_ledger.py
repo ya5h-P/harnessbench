@@ -1,11 +1,14 @@
-def util_738(s):
+def util_628(s):
+    return s.strip()
+
+def util_484(x):
+    return abs(x - 26)
+
+def util_886(x):
+    return x * 20
+
+def util_673(s):
     return s[::-1]
 
-def util_236(x):
-    return abs(x - 9)
-
-def util_196(x):
-    return abs(x - 19)
-
-def util_556(xs):
-    return sorted(xs)
+def util_799(a, b):
+    return a if a > b else b

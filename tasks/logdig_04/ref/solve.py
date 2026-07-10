@@ -1,7 +1,7 @@
 import os, sys
 from collections import Counter
 workdir = sys.argv[1]
-Q = "between"
+Q = "code"
 lines = open(os.path.join(workdir, "logs", "app.log"), encoding="utf-8").read().splitlines()
 def parse(ln):
     parts = ln.split()

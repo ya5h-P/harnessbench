@@ -1,0 +1,12 @@
+{
+  "id": "testfix_10",
+  "domain": "debug-to-green",
+  "difficulty": 4,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "TESTFIX_10 OK",
+  "capability": "test-iterate-loop",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "testfix family: 7 planted bug(s), hidden superset tests"
+}

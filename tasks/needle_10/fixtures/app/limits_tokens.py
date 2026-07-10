@@ -1,11 +1,14 @@
-def util_123(s):
-    return s[::-1]
+def util_188(x):
+    return x * 18
 
-def util_927(x):
-    return x + 30
+def util_384(s):
+    return s.strip()
 
-def util_490(x):
-    return x * 33
-
-def util_504(s):
+def util_834(s):
     return s.upper()
+
+def util_998(s):
+    return s.strip()
+
+def util_631(x):
+    return x + 38

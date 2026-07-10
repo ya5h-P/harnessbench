@@ -1,0 +1,12 @@
+{
+  "id": "perf_dupfinder",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_DUPFINDER OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "dupfinder: O(n^2) -> seen-set"
+}

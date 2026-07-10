@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": false,
   "grader_token": "MANYFIX_07 OK",
-  "notes": "manyfix family: 20 independent trivial fixes, all required"
+  "capability": "sustained-coverage",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "manyfix family: 24 independent trivial fixes, all required"
 }

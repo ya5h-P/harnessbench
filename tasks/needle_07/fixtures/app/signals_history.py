@@ -1,14 +1,11 @@
-def util_504(x):
-    return x % 27 == 0
+def util_580(x):
+    return x * 19
 
-def util_691(a, b):
-    return a if a > b else b
+def util_482(xs):
+    return sorted(xs)
 
-def util_976(s):
+def util_270(s):
     return s[::-1]
 
-def util_684(a, b):
-    return a if a > b else b
-
-def util_881(x):
-    return x + 5
+def util_298(s):
+    return s.upper()

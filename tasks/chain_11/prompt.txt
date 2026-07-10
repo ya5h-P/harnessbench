@@ -1,0 +1,10 @@
+data.json holds transaction records. Run this 7-step pipeline from the project root, in order:
+  1) python tools/dedupe.py data.json unique.json
+  2) python tools/keep_ok.py unique.json kept.json
+  3) python tools/totals.py kept.json totals.json
+  4) python tools/filter_min.py totals.json filtered.json
+  5) python tools/to_csv.py filtered.json final.csv
+  6) python tools/rank.py filtered.json ranking.txt
+  7) python tools/summary.py filtered.json summary.txt
+All listed output files must exist afterwards; summary.txt is the final deliverable.
+NOTE: two of the step scripts each have a trivial bug that makes them crash — diagnose and fix them before/while running the pipeline.

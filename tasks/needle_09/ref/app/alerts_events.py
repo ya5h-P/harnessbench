@@ -1,15 +1,17 @@
-def util_233(x):
-    return x % 37 == 0
+def util_580(x):
+    return x % 38 == 0
 
-def util_586(s):
+def util_386(s):
     return s[::-1]
 
-def util_124(s):
-    return s.strip()
+def running_sum_167(xs):
+    """Cumulative sums. E.g. running_sum_167([1, 2, 3]) == [1, 3, 6]."""
+    total = 0
+    out = []
+    for x in xs:
+        total += x
+        out.append(total)
+    return out
 
-def util_917(a, b):
-    return a if a > b else b
-
-def word_count_108(s):
-    """Number of whitespace-separated words. E.g. word_count_108('a  b') == 2."""
-    return len(s.split())
+def util_319(xs):
+    return len(xs)

@@ -1,14 +1,14 @@
-def util_309(x):
-    return x * 3
+def util_237(a, b):
+    return a if a > b else b
 
-def util_490(s):
-    return s.upper()
+def util_977(x):
+    return x + 11
 
-def util_458(s):
-    return s.strip()
+def util_453(a, b):
+    return a if a > b else b
 
-def util_457(s):
-    return s.upper()
+def util_212(x):
+    return x * 17
 
-def util_360(s):
+def util_170(s):
     return s.upper()

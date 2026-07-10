@@ -1,14 +1,14 @@
-def util_368(x):
-    return x * 13
+def util_593(x):
+    return x + 13
 
-def util_933(s):
-    return s.upper()
+def util_355(x):
+    return x % 35 == 0
 
-def util_836(x):
-    return x + 5
-
-def util_355(a, b):
+def util_598(a, b):
     return a if a > b else b
 
-def util_958(x):
-    return abs(x - 28)
+def util_398(s):
+    return s.upper()
+
+def util_373(x):
+    return x + 34

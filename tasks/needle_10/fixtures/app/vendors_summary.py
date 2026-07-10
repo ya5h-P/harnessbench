@@ -1,8 +1,14 @@
-def util_487(x):
-    return x % 18 == 0
+def util_223(x):
+    return x * 38
 
-def util_251(x):
-    return x + 23
+def util_911(xs):
+    return sorted(xs)
 
-def util_747(xs):
+def util_817(xs):
+    return len(xs)
+
+def util_281(x):
+    return abs(x - 13)
+
+def util_916(xs):
     return len(xs)

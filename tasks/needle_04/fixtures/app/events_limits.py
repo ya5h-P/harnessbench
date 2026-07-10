@@ -1,8 +1,8 @@
-def util_632(x):
-    return abs(x - 20)
-
-def util_406(s):
+def util_785(s):
     return s.upper()
 
-def util_247(xs):
-    return len(xs)
+def util_297(a, b):
+    return a if a > b else b
+
+def util_208(x):
+    return abs(x - 8)

@@ -1,8 +1,8 @@
-def util_810(x):
-    return x + 34
+def util_962(x):
+    return x % 15 == 0
 
-def util_374(x):
-    return x * 3
+def util_171(s):
+    return s.upper()
 
-def util_970(s):
-    return s.strip()
+def util_209(xs):
+    return len(xs)

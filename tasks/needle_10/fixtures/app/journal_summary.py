@@ -1,8 +1,11 @@
-def util_117(a, b):
+def util_442(s):
+    return s.strip()
+
+def util_988(xs):
+    return len(xs)
+
+def util_451(a, b):
     return a if a > b else b
 
-def util_623(x):
-    return abs(x - 13)
-
-def util_389(x):
-    return x + 16
+def util_243(s):
+    return s.strip()

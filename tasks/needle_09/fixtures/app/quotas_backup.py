@@ -1,8 +1,11 @@
-def util_367(xs):
-    return len(xs)
+def util_593(x):
+    return x * 22
 
-def util_297(a, b):
+def util_858(a, b):
     return a if a > b else b
 
-def util_816(x):
-    return abs(x - 3)
+def util_613(s):
+    return s[::-1]
+
+def util_807(s):
+    return s[::-1]

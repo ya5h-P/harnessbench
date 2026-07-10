@@ -1,8 +1,8 @@
-def util_836(a, b):
-    return a if a > b else b
+def util_129(x):
+    return x + 27
 
-def util_172(x):
-    return abs(x - 6)
+def util_568(x):
+    return x + 7
 
-def util_244(a, b):
+def util_607(a, b):
     return a if a > b else b

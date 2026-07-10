@@ -1,0 +1,12 @@
+{
+  "id": "perf_anagram",
+  "domain": "performance-optimization",
+  "difficulty": 4,
+  "timeout_s": 540,
+  "reseed": false,
+  "grader_token": "PERF_ANAGRAM OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "anagram grouping: O(n^2) key-list scan -> dict keyed by sorted letters"
+}

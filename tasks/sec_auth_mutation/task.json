@@ -1,0 +1,12 @@
+{
+  "id": "sec_auth_mutation",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_AUTH_MUTATION OK",
+  "capability": "authorization",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "missing auth-before-mutation (IDOR + broken auth)"
+}

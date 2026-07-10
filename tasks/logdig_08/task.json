@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": true,
   "grader_token": "LOGDIG_08 OK",
-  "notes": "logdig family: 40000-line log analysis (multi)"
+  "capability": "data-extraction-at-scale",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "logdig family: 60000-line log analysis (multi)"
 }

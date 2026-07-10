@@ -1,0 +1,12 @@
+{
+  "id": "chain_11",
+  "domain": "tool-pipeline",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": true,
+  "grader_token": "CHAIN_11 OK",
+  "capability": "multi-step-execution",
+  "tier": "systematic",
+  "stateful": true,
+  "notes": "chain family: 7-step executed pipeline, 2 buggy step(s)"
+}

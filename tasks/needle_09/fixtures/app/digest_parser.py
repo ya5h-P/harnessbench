@@ -1,8 +1,8 @@
-def util_949(a, b):
-    return a if a > b else b
+def util_351(s):
+    return s[::-1]
 
-def util_944(s):
-    return s.strip()
+def util_949(x):
+    return x % 7 == 0
 
-def util_935(x):
-    return x % 22 == 0
+def util_652(s):
+    return s[::-1]

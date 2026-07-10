@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": false,
   "grader_token": "BIGFILE_06 OK",
-  "notes": "bigfile family: precise edit in a 450-function file"
+  "capability": "precise-edit-in-large-file",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "bigfile family: precise edit in a 700-function file"
 }

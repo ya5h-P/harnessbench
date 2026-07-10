@@ -1,8 +1,14 @@
-def util_205(x):
-    return x + 18
+def util_749(xs):
+    return sorted(xs)
 
-def util_368(a, b):
+def util_524(x):
+    return x * 28
+
+def util_316(xs):
+    return len(xs)
+
+def util_718(a, b):
     return a if a > b else b
 
-def util_403(xs):
-    return sorted(xs)
+def util_257(xs):
+    return len(xs)

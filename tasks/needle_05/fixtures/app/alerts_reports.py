@@ -1,8 +1,8 @@
-def util_694(x):
-    return abs(x - 21)
+def util_318(x):
+    return abs(x - 20)
 
-def util_344(s):
-    return s.upper()
+def util_112(x):
+    return x * 25
 
-def util_589(x):
-    return x % 28 == 0
+def util_329(s):
+    return s.strip()

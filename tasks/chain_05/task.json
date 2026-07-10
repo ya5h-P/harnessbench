@@ -1,9 +1,12 @@
 {
   "id": "chain_05",
   "domain": "tool-pipeline",
-  "difficulty": 3,
-  "timeout_s": 600,
+  "difficulty": 4,
+  "timeout_s": 900,
   "reseed": true,
   "grader_token": "CHAIN_05 OK",
-  "notes": "chain family: 3-step executed pipeline"
+  "capability": "multi-step-execution",
+  "tier": "variance",
+  "stateful": true,
+  "notes": "chain family: 5-step executed pipeline, 1 buggy step(s)"
 }

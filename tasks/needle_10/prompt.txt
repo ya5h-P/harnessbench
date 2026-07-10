@@ -1,4 +1,5 @@
-This project has 200 source file(s) under app/. 2 buggy functions are buried somewhere in it:
-- `word_count_693(s)` should follow its docstring: Number of whitespace-separated words. E.g. word_count_693('a  b') == 2.  (right now word_count_693('a  b') != 2)
-- `pct_487(part, whole)` should follow its docstring: part as a percentage of whole, rounded to 1 decimal. E.g. pct_487(1, 8) == 12.5.  (right now pct_487(1, 8) != 12.5)
+This project has 260 source file(s) under app/. 3 buggy functions are buried somewhere in it:
+- `count_vowels_693(s)` should follow its docstring: Number of vowels in s, case-insensitive. E.g. count_vowels_693('AeIx') == 3.  (right now count_vowels_693('AeIx') != 3)
+- `word_count_234(s)` should follow its docstring: Number of whitespace-separated words. E.g. word_count_234('a  b') == 2.  (right now word_count_234('a  b') != 2)
+- `safe_get_665(d, key, default)` should follow its docstring: d[key] if present else default; a stored falsy value is returned as-is. E.g. safe_get_665({'a': 0}, 'a', 9) == 0.  (right now safe_get_665({'a': 0}, 'a', 9) != 0)
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

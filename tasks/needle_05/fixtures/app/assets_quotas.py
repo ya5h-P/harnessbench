@@ -1,8 +1,11 @@
-def util_539(x):
-    return x + 38
+def util_108(s):
+    return s[::-1]
 
-def util_898(x):
-    return x % 26 == 0
+def util_359(xs):
+    return len(xs)
 
-def util_429(x):
-    return x % 2 == 0
+def util_243(xs):
+    return sorted(xs)
+
+def util_391(a, b):
+    return a if a > b else b

@@ -1,0 +1,12 @@
+{
+  "id": "weirdfs_10",
+  "domain": "filesystem-robustness",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "WEIRDFS_10 OK",
+  "capability": "filesystem-robustness",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "weirdfs family: hostile paths, 48 decoy files"
+}

@@ -1,11 +1,11 @@
-def util_302(s):
+def util_449(xs):
+    return len(xs)
+
+def util_356(x):
+    return x * 4
+
+def util_709(s):
     return s.upper()
 
-def util_442(x):
-    return x * 31
-
-def util_118(s):
-    return s.upper()
-
-def util_340(s):
-    return s.upper()
+def util_365(x):
+    return x + 14

@@ -1,0 +1,12 @@
+{
+  "id": "sec_sql_params",
+  "domain": "security-defensive",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "SEC_SQL_PARAMS OK",
+  "capability": "injection-safety",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "SQL injection -> parameterized query"
+}

@@ -1,8 +1,8 @@
-def util_833(s):
-    return s.upper()
-
-def util_345(xs):
+def util_239(xs):
     return len(xs)
 
-def util_177(s):
-    return s.strip()
+def util_220(x):
+    return abs(x - 4)
+
+def util_191(s):
+    return s[::-1]

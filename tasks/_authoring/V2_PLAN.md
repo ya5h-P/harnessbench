@@ -1,6 +1,19 @@
 # HarnessBench v2 suite — expansion blueprint
 
-Status: **proposed, awaiting sign-off before task generation.** Target 200 tasks (from 150).
+Status: **EXECUTED.** The suite is now 200 tasks (from 150), all passing preflight. Realized
+difficulty margins: **d1–2 = 20, d3 = 50, d4 = 80, d5 = 50** — matching the targets below exactly.
+Composition: 133 generated (families) + 67 hand-authored (46 v1 kept + 14 perf + 10 security +
+3 refactor − archival). 12 low-value v1 tasks moved to `tasks/_archive/`. Tier split: 142 variance
+/ 58 systematic; 10 stateful. Generators: `generate_families.py` (families), `gen_authored.py`
+(perf), `gen_security.py` (security), `gen_refactor.py` (refactor).
+
+Deviation from the plan: the concurrency tasks proposed under §3b were **not** added as new
+tasks — CPython thread races can't be forced to fail deterministically every run, which a
+benchmark grader requires (buggy must always fail). Concurrency stays covered by the two vetted
+v1 tasks (`counter_concurrency`, `idgen_concurrency`); the freed budget went to deterministic perf
+tasks (relative-speedup gates) instead. Everything else below was implemented as described.
+
+---
 Motivation: the v1 run showed d4 is where harnesses separate, yet v1 is bottom-heavy. This rebalances
 toward the hard band and reorganizes by *harness capability under test* rather than by generator family.
 

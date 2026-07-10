@@ -1,3 +1,3 @@
-This project has 8 source file(s) under app/. One buggy function is buried somewhere in it:
-- `running_sum_485(xs)` should follow its docstring: Cumulative sums. E.g. running_sum_485([1, 2, 3]) == [1, 3, 6].  (right now running_sum_485([1, 2, 3]) != [1, 3, 6])
+This project has 25 source file(s) under app/. One buggy function is buried somewhere in it:
+- `pct_979(part, whole)` should follow its docstring: part as a percentage of whole, rounded to 1 decimal. E.g. pct_979(1, 8) == 12.5.  (right now pct_979(1, 8) != 12.5)
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

@@ -1,8 +1,11 @@
-def util_421(xs):
-    return len(xs)
+def util_419(x):
+    return x + 31
 
-def util_617(xs):
-    return len(xs)
+def util_750(x):
+    return x * 28
 
-def util_431(xs):
-    return sorted(xs)
+def util_432(s):
+    return s[::-1]
+
+def util_152(s):
+    return s.upper()

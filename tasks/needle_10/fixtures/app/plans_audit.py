@@ -1,12 +1,8 @@
-def pct_487(part, whole):
-    """part as a percentage of whole, rounded to 1 decimal. E.g. pct_487(1, 8) == 12.5."""
-    return round(part / whole, 1)
+def util_757(x):
+    return x % 14 == 0
 
-def util_778(s):
+def util_730(s):
     return s.strip()
 
-def util_338(a, b):
-    return a if a > b else b
-
-def util_589(xs):
-    return len(xs)
+def util_322(x):
+    return abs(x - 23)

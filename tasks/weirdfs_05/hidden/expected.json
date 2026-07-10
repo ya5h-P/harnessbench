@@ -1,1 +1,1 @@
-[{"file": ["src files", "alpha-core", "data & docs", "modules v2.1", "misc  bits", "utils.py"], "func": "is_pal_767", "cases": [[["Aba"], true], [["No lemon, no melon"], true], [["abc"], false]]}]
+[{"file": ["src files", "alpha-core", "data & docs", "modules v2.1", "misc  bits", "cafe", "old-stuff", "utils.py"], "func": "is_pal_767", "cases": [[["Aba"], true], [["No lemon, no melon"], true], [["abc"], false]]}]

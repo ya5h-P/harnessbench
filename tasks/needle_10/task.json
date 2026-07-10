@@ -2,8 +2,11 @@
   "id": "needle_10",
   "domain": "code-search-fix",
   "difficulty": 5,
-  "timeout_s": 1500,
+  "timeout_s": 900,
   "reseed": false,
   "grader_token": "NEEDLE_10 OK",
-  "notes": "needle family: locate a described function among 200 files"
+  "capability": "search-navigation",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "needle family: locate a described function among 260 files"
 }

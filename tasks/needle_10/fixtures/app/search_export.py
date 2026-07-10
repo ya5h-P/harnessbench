@@ -1,8 +1,11 @@
-def util_480(s):
-    return s.upper()
+def util_794(x):
+    return abs(x - 34)
 
-def util_770(s):
+def util_171(s):
     return s.strip()
 
-def util_775(xs):
-    return sorted(xs)
+def util_850(x):
+    return abs(x - 20)
+
+def util_631(x):
+    return x * 14

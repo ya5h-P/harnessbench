@@ -1,11 +1,8 @@
-def util_583(xs):
-    return len(xs)
+def util_828(x):
+    return x * 11
 
-def util_540(x):
-    return abs(x - 15)
-
-def util_346(s):
+def util_875(s):
     return s[::-1]
 
-def util_459(x):
-    return x * 4
+def util_901(xs):
+    return len(xs)

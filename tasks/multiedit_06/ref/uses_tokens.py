@@ -1,4 +1,4 @@
 import shared
 
 def run(x):
-    return shared.cap_between(x, 17, 41)
+    return shared.confine_to(x, 2, 13)

@@ -1,0 +1,12 @@
+{
+  "id": "sec_url_allowlist",
+  "domain": "security-defensive",
+  "difficulty": 4,
+  "timeout_s": 480,
+  "reseed": false,
+  "grader_token": "SEC_URL_ALLOWLIST OK",
+  "capability": "input-validation",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "SSRF allowlist bypass via substring host check"
+}

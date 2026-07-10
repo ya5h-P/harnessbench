@@ -1,4 +1,4 @@
-This project has 160 source file(s) under app/. 2 buggy functions are buried somewhere in it:
-- `word_count_108(s)` should follow its docstring: Number of whitespace-separated words. E.g. word_count_108('a  b') == 2.  (right now word_count_108('a  b') != 2)
-- `running_sum_905(xs)` should follow its docstring: Cumulative sums. E.g. running_sum_905([1, 2, 3]) == [1, 3, 6].  (right now running_sum_905([1, 2, 3]) != [1, 3, 6])
+This project has 220 source file(s) under app/. 2 buggy functions are buried somewhere in it:
+- `running_sum_167(xs)` should follow its docstring: Cumulative sums. E.g. running_sum_167([1, 2, 3]) == [1, 3, 6].  (right now running_sum_167([1, 2, 3]) != [1, 3, 6])
+- `clamp_684(x, lo, hi)` should follow its docstring: Clamp x into [lo, hi]. E.g. clamp_684(12, 1, 10) == 10; clamp_684(0, 1, 10) == 1.  (right now clamp_684(5, 1, 10) != 5)
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

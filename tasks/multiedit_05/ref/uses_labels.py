@@ -1,4 +1,4 @@
 import baselib
 
 def run(x):
-    return baselib.bound_to(x, 11, 37)
+    return baselib.snap_to_range(x, 16, 41)

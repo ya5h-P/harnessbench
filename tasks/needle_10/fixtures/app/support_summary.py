@@ -1,14 +1,11 @@
-def util_450(x):
-    return abs(x - 12)
+def util_334(x):
+    return x % 14 == 0
 
-def util_672(x):
-    return x % 4 == 0
+def util_477(s):
+    return s.strip()
 
-def util_651(s):
-    return s[::-1]
+def util_302(s):
+    return s.upper()
 
-def util_563(x):
-    return abs(x - 20)
-
-def util_363(s):
-    return s[::-1]
+def util_381(x):
+    return x + 4

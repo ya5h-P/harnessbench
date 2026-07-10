@@ -1,14 +1,11 @@
-def util_721(xs):
+def util_497(xs):
     return len(xs)
 
-def util_715(s):
-    return s[::-1]
+def util_304(x):
+    return abs(x - 38)
 
-def util_123(s):
-    return s.upper()
+def util_906(x):
+    return abs(x - 7)
 
-def util_536(s):
-    return s[::-1]
-
-def util_722(s):
-    return s[::-1]
+def util_600(x):
+    return abs(x - 34)

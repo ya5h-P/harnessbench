@@ -1,19 +1,14 @@
-import sys, os, json
-
+import sys, os, json, importlib.util
 def main():
-    workdir, gradedir = sys.argv[1], sys.argv[2]
-    target = "cfg.json"
-    p = os.path.join(workdir, *target.split("/"))
-    if not os.path.exists(p):
-        print("FAIL: missing %s" % target); sys.exit(1)
-    try:
-        got = json.load(open(p, encoding="utf-8"))
-    except Exception as e:
-        print("FAIL: %s is not valid JSON: %r" % (target, e)); sys.exit(1)
-    exp = json.load(open(os.path.join(gradedir, "expected.json"), encoding="utf-8"))
-    if got != exp:
-        print("FAIL: %s does not match the expected object" % target); sys.exit(1)
+    w, g = sys.argv[1], sys.argv[2]
+    p = os.path.join(w, "thresholds.py")
+    if not os.path.exists(p): print("FAIL: thresholds.py missing"); sys.exit(1)
+    spec = importlib.util.spec_from_file_location("th", p)
+    mod = importlib.util.module_from_spec(spec)
+    try: spec.loader.exec_module(mod)
+    except Exception as e: print("FAIL: import error %r" % e); sys.exit(1)
+    exp = json.load(open(os.path.join(g, "expected.json"), encoding="utf-8"))
+    if getattr(mod, "THRESHOLDS", None) != exp:
+        print("FAIL: THRESHOLDS does not match expected values"); sys.exit(1)
     print("EDITFID_03 OK")
-
-if __name__ == "__main__":
-    main()
+main()

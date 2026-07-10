@@ -1,8 +1,14 @@
-def util_338(s):
-    return s[::-1]
-
-def util_871(xs):
+def util_343(xs):
     return len(xs)
 
-def util_995(x):
-    return x % 18 == 0
+def util_408(s):
+    return s.upper()
+
+def util_483(a, b):
+    return a if a > b else b
+
+def util_420(x):
+    return x * 24
+
+def util_574(a, b):
+    return a if a > b else b

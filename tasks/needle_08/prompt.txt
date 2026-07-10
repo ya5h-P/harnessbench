@@ -1,3 +1,4 @@
-This project has 120 source file(s) under app/. One buggy function is buried somewhere in it:
-- `between_488(x, lo, hi)` should follow its docstring: True iff lo <= x <= hi (inclusive). E.g. between_488(1, 1, 3) is True.  (right now between_488(1, 1, 3) != True)
+This project has 200 source file(s) under app/. 2 buggy functions are buried somewhere in it:
+- `c2f_388(c)` should follow its docstring: Celsius to Fahrenheit. E.g. c2f_388(0) == 32.0; c2f_388(100) == 212.0.  (right now c2f_388(0) != 32.0)
+- `strip_ext_243(fn)` should follow its docstring: Filename without its LAST extension only. E.g. strip_ext_243('archive.tar.gz') == 'archive.tar'.  (right now strip_ext_243('archive.tar.gz') != 'archive.tar')
 Find the file(s) defining the function(s) above and fix the implementation(s). Do not modify any other function.

@@ -1,0 +1,1 @@
+Rename the function `clamp_value` (defined in baselib.py) to `restrict_range` across the whole project: the definition and every import/call site in all 28 caller modules. Behavior must be unchanged, and NO occurrence of the old name `clamp_value` may remain anywhere (no alias, no comment mentions).

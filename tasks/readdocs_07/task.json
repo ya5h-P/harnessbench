@@ -5,5 +5,8 @@
   "timeout_s": 900,
   "reseed": true,
   "grader_token": "READDOCS_07 OK",
+  "capability": "context-grounding",
+  "tier": "variance",
+  "stateful": false,
   "notes": "readdocs family: 4 constants across 6 docs, with deprecated-value traps"
 }

@@ -1,11 +1,8 @@
-def util_951(xs):
+def util_340(a, b):
+    return a if a > b else b
+
+def util_125(xs):
     return len(xs)
 
-def util_513(a, b):
-    return a if a > b else b
-
-def util_114(s):
-    return s.upper()
-
-def util_685(a, b):
-    return a if a > b else b
+def util_484(x):
+    return x * 13

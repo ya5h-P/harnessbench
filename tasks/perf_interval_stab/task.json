@@ -1,0 +1,12 @@
+{
+  "id": "perf_interval_stab",
+  "domain": "performance-optimization",
+  "difficulty": 5,
+  "timeout_s": 900,
+  "reseed": false,
+  "grader_token": "PERF_INTERVAL_STAB OK",
+  "capability": "algorithmic-efficiency",
+  "tier": "systematic",
+  "stateful": false,
+  "notes": "interval stabbing: O(n^2) point scan -> sweep line"
+}

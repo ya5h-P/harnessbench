@@ -1,14 +1,11 @@
-def util_781(s):
+def util_471(s):
+    return s[::-1]
+
+def util_891(x):
+    return x % 36 == 0
+
+def util_670(s):
     return s.strip()
 
-def util_234(x):
-    return x + 22
-
-def util_494(x):
-    return x + 30
-
-def util_961(x):
-    return x * 30
-
-def util_867(a, b):
-    return a if a > b else b
+def util_150(x):
+    return x * 36

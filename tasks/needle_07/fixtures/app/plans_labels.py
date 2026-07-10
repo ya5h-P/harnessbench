@@ -1,8 +1,14 @@
-def util_293(s):
-    return s[::-1]
+def util_702(x):
+    return x + 24
 
-def util_806(xs):
+def util_860(x):
+    return x % 12 == 0
+
+def util_288(xs):
     return sorted(xs)
 
-def util_903(s):
-    return s.strip()
+def util_558(s):
+    return s.upper()
+
+def util_560(x):
+    return x + 25

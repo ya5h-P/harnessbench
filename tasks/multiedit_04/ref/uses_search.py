@@ -1,4 +1,4 @@
 import baselib
 
 def run(x):
-    return baselib.restrict_range(x, 13, 39)
+    return baselib.hold_between(x, 8, 26)

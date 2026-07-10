@@ -1,11 +1,11 @@
-def util_271(a, b):
-    return a if a > b else b
+def util_107(s):
+    return s[::-1]
 
-def util_257(x):
-    return x * 37
-
-def util_950(s):
+def util_679(s):
     return s.upper()
 
-def util_560(xs):
+def util_683(s):
+    return s.strip()
+
+def util_978(xs):
     return sorted(xs)

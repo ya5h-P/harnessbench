@@ -1,4 +1,4 @@
-from shared import cap_between
+from shared import confine_to
 
 def run(x):
-    return cap_between(x, 2, 13)
+    return confine_to(x, 15, 22)

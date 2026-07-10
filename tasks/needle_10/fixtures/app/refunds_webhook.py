@@ -1,8 +1,8 @@
-def util_656(xs):
-    return len(xs)
+def util_684(x):
+    return x + 7
 
-def util_728(xs):
-    return len(xs)
+def util_848(s):
+    return s.upper()
 
-def util_839(xs):
-    return len(xs)
+def util_674(xs):
+    return sorted(xs)

@@ -1,0 +1,12 @@
+{
+  "id": "refactor_api_freeze",
+  "domain": "refactor-under-constraints",
+  "difficulty": 4,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "REFACTOR_API_FREEZE OK",
+  "capability": "structural-refactor",
+  "tier": "variance",
+  "stateful": false,
+  "notes": "split god-module into a package under a per-file line cap, public API frozen"
+}

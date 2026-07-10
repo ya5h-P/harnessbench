@@ -1,11 +1,11 @@
-def util_794(s):
-    return s.upper()
-
-def util_373(s):
+def util_517(s):
     return s.strip()
 
-def util_342(a, b):
-    return a if a > b else b
+def util_711(xs):
+    return len(xs)
 
-def util_129(s):
-    return s.strip()
+def util_729(x):
+    return x + 2
+
+def util_320(x):
+    return x + 11

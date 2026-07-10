@@ -5,5 +5,8 @@
   "timeout_s": 480,
   "reseed": false,
   "grader_token": "EDITFID_01 OK",
+  "capability": "edit-fidelity",
+  "tier": "variance",
+  "stateful": false,
   "notes": "generated family task (see tasks/_authoring)"
 }

@@ -1,0 +1,12 @@
+{
+  "id": "refactor_nodeps",
+  "domain": "refactor-under-constraints",
+  "difficulty": 5,
+  "timeout_s": 600,
+  "reseed": false,
+  "grader_token": "REFACTOR_NODEPS OK",
+  "capability": "dependency-removal",
+  "tier": "systematic",
+  "stateful": true,
+  "notes": "remove vendored dep -> stdlib; requires a migration_notes.md artifact (stateful)"
+}

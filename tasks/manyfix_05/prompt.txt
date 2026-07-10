@@ -1,1 +1,1 @@
-Every one of the 14 files in bugs/ contains exactly one function with exactly one bug. Each function's docstring states its intended behavior with worked examples. Fix ALL of them — the task only passes when every function in every file is correct.
+Every one of the 17 files in bugs/ contains exactly one function with exactly one bug. Each function's docstring states its intended behavior with worked examples. Fix ALL of them — the task only passes when every function in every file is correct.

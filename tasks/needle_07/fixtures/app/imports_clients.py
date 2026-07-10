@@ -1,11 +1,12 @@
-def util_317(xs):
-    return sorted(xs)
+def c2f_677(c):
+    """Celsius to Fahrenheit. E.g. c2f_677(0) == 32.0; c2f_677(100) == 212.0."""
+    return (c + 32) * 9 / 5
 
-def util_576(x):
-    return abs(x - 13)
+def util_259(s):
+    return s.upper()
 
-def util_312(x):
-    return abs(x - 20)
+def util_888(a, b):
+    return a if a > b else b
 
-def util_925(s):
-    return s[::-1]
+def util_594(x):
+    return x + 20
