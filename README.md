@@ -7,13 +7,13 @@ agent CLI you wrap around it* changes the results just as much — one harness n
 another fumbles, with the exact same weights behind both. HarnessBench measures that difference.
 
 Point two or more coding-agent harnesses (pi, opencode, hermes, aider, your own…) at the **same
-model endpoint**, run the same 150 tasks through each, and get an honest leaderboard:
+model endpoint**, run the same 200 tasks through each, and get an honest leaderboard:
 
 ```
-| # | Harness  | Correct | Reliab | Effic | Capab | OVERALL  | 95% CI | pass@k | pass^k |
-|---|----------|--------:|-------:|------:|------:|---------:|:------:|-------:|-------:|
-| 1 | pi       |      96 |     98 |    96 |    92 | **95.5** | 87–100 |     97 |     97 |
-| 2 | yourtool |       ? |      ? |     ? |     ? |    **?** |    ?   |      ? |      ? |
+| # | Harness  | Correct | Reliab | Effic | Capab | OVERALL  | 95% CI | pass@k | pass^k | τ-out | τ-eff |
+|---|----------|--------:|-------:|------:|------:|---------:|:------:|-------:|-------:|------:|------:|
+| 1 | pi       |      96 |     98 |    96 |    92 | **95.5** | 87–100 |     97 |     97 | +0.81 | +0.74 |
+| 2 | yourtool |       ? |      ? |     ? |     ? |    **?** |    ?   |      ? |      ? |   ?   |   ?   |
 ```
 
 It's designed for exactly the setup most local-LLM tinkerers have: one machine, one
@@ -27,15 +27,21 @@ and walk away.
   against hidden tests. The grade directory is *empty* while the agent works, agent-visible
   tests are a subset of the hidden ones, and the harness log is scanned for any attempt to
   peek. Prose claims count for nothing; only working artifacts pass.
-- **A discrimination guarantee.** `engine/preflight.sh` proves every one of the 150 graders
+- **A discrimination guarantee.** `engine/preflight.sh` proves every one of the 200 graders
   fails the unsolved state and passes a reference solution — before any model is involved.
 - **Honest statistics.** Templated task families are treated as clusters (one skill can't
   dominate the score), the confidence interval is a cluster bootstrap, and harness pairs get a
-  paired permutation test so you know whether a ranking gap is real or noise.
-- **Harness-focused tasks.** 98 of the 150 tasks deliberately keep the *thinking* easy and
-  scale the *orchestration*: find one function among 200 files, edit line 4,000 of a huge file,
-  rename a symbol across 18 call sites, fix 28 trivial bugs without missing one, compute an
-  answer from a 40k-line log. That's the stuff that separates harnesses.
+  paired permutation test so you know whether a ranking gap is real or noise. Run-to-run
+  stability is reported as Kendall τ (τ-out on pass/fail, τ-eff on wall-time) so you can tell a
+  systematic weakness from sampling noise.
+- **Harness-focused tasks.** 133 of the 200 tasks deliberately keep the *thinking* easy and
+  scale the *orchestration*: find one function among 320 files, edit precisely in a
+  2,000-function file, rename a symbol across 28 call sites, fix 40 trivial bugs without missing
+  one, compute an answer from a 150k-line log. That's the stuff that separates harnesses. The
+  suite is deliberately top-heavy (65% at difficulty 4–5, where harnesses actually diverge).
+- **A runaway guard.** Each run is watched live against the server's token counter; if one task
+  spirals past a token cap (`HB_RUNAWAY_TOKENS`, default 8000) the harness is killed and the run
+  is recorded `RUNAWAY` — kept distinct from a genuine wrong answer or a clean timeout.
 
 See [SPEC.md](SPEC.md) for the full methodology, scoring math, and known limitations.
 
@@ -57,11 +63,11 @@ The built-in `mock` harness plays a perfect agent, so you can verify the whole p
 on your machine before spending any GPU time:
 
 ```bash
-# 1. every grader must discriminate: "buggy rc=1, ref rc=0" for all 150 tasks
+# 1. every grader must discriminate: "buggy rc=1, ref rc=0" for all 200 tasks
 bash engine/preflight.sh
 
 # 2. dry-run the pipeline end to end
-bash run_one.sh mock fizzbuzz 1 1001 noprobe
+bash run_one.sh mock greet_format 1 1001 noprobe
 bash run_one.sh mock chain_03 1 1001 noprobe
 
 # 3. score it
@@ -81,6 +87,7 @@ export HB_PYTHON=python3                                        # Linux, if `pyt
 export HB_ENDPOINT=http://localhost:8000/v1/chat/completions    # your server (probe fallback)
 export HB_METRICS_URL=http://localhost:8000/metrics             # llama.cpp /metrics (primary token/tok-s source)
 export HB_MODEL=your-model-name                                 # model id your server expects
+export HB_RUNAWAY_TOKENS=8000                                   # kill+flag a task if it generates > this many tokens
 
 # tell the adapters where the harness CLIs live (examples):
 export PI_NODE=/usr/bin/node PI_CLI=~/node_modules/@earendil-works/pi-coding-agent/dist/cli.js
@@ -105,7 +112,7 @@ bash run_matrix.sh --harness pi,opencode --repeats 1
 bash run_matrix.sh --harness pi,opencode,hermes --repeats 5
 
 # or start with a subset
-bash run_matrix.sh --harness pi --tasks fizzbuzz,needle_03,logdig_01 --repeats 1
+bash run_matrix.sh --harness pi --tasks greet_format,needle_03,logdig_01 --repeats 1
 ```
 
 Good to know:
@@ -121,6 +128,10 @@ Good to know:
   a synthetic tok/s probe fires between runs into `out/tokps.csv` as a fallback (`src=probe`) —
   either way Efficiency is normalized by your server's actual speed, so a faster GPU doesn't make
   a harness look smarter.
+- **Runaway protection.** Alongside each task's wall-clock timeout, `run_one.sh` watches the
+  server's generated-token counter live; a task that spirals past `HB_RUNAWAY_TOKENS` (default
+  8000) is killed and logged `RUNAWAY` (`pass=0`, counted as a non-clean completion). Set it
+  higher for verbose harnesses, or `HB_RUNAWAY_TOKENS=100000` to effectively disable it.
 - Flags: `--repeats N`, `--tasks all|id,..`, `--harness a,b`, `--seed-base S`, `--no-warmup`,
   `--no-probe`.
 - If a timed-out harness leaves a zombie process holding your endpoint (mostly a Windows thing),
@@ -168,11 +179,17 @@ and absolute anchors mean adding your harness never changes anyone else's score.
 ## Add tasks
 
 - **One-off task**: copy any `tasks/<id>/`, follow [tasks/TASK_FORMAT.md](tasks/TASK_FORMAT.md),
-  then run `bash engine/preflight.sh <id>` until it reports `buggy rc=1, ref rc=0`.
-- **The 98 templated tasks** are generated by `tasks/_authoring/generate_families.py`
+  then run `bash engine/preflight.sh <id>` until it reports `buggy rc=1, ref rc=0`. New tasks may
+  set the optional `capability`, `tier` (`variance`|`systematic`), and `stateful` fields — see
+  TASK_FORMAT.md. Preflight rejects a difficulty ≥ 3 task tagged `capability: "floor"`.
+- **The 133 templated tasks** are generated by `tasks/_authoring/generate_families.py`
   (idempotent, self-checking). Extend a family there rather than editing generated dirs.
+- **The hand-authored tail** (performance, security-critical, refactor-under-constraints) is
+  generated by `tasks/_authoring/gen_authored.py`, `gen_security.py`, and `gen_refactor.py`.
 - **Vendor a real repo**: `bash fetch_repos.sh <name> <url> <sha>`, then see
   `tasks/repos/REAL_REPOS.md`.
+- **Retired tasks** live in `tasks/_archive/` — still runnable, but excluded from the matrix and
+  scoring (the runner and preflight only glob the direct children of `tasks/`).
 
 ## Publishing your results
 
@@ -186,13 +203,16 @@ match — a harness ranking measured on one model does not automatically transfe
 
 ```
 SPEC.md              methodology & scoring math
-tasks/               150 task dirs (task.json, prompt.txt, fixtures/, hidden grade.py, ref/)
-tasks/_authoring/    generator for the 98 templated harness-load tasks (11 families)
+tasks/               200 task dirs (task.json, prompt.txt, fixtures/, hidden grade.py, ref/)
+tasks/_authoring/    generators: generate_families.py (133 templated tasks, 11 families),
+                     gen_authored.py (perf), gen_security.py, gen_refactor.py + V2_PLAN.md
+tasks/_archive/      retired tasks, kept runnable but excluded from the matrix & scoring
 tasks/repos/         vendored real-repo snapshots (pinned @SHA) + curation guide
 adapters/            pi.sh, opencode.sh, hermes.sh, mock.sh (+ parsers) — add yours here
 engine/              setup.py (workdir/gradedir builder), preflight.sh (discrimination check),
                      metrics_delta.py (per-run token/tok-s deltas from llama.cpp /metrics)
-run_one.sh           one (harness,task,repeat): setup -> invoke -> grade -> metrics -> csv
+run_one.sh           one (harness,task,repeat): setup -> invoke (timeout + runaway guard) ->
+                     grade -> metrics -> csv
 run_matrix.sh        the full matrix (sequential, resumable, shuffled, warmup)
 probe_tokps.sh       synthetic tok/s probe (fallback when the server has no /metrics)
 score.py             scoring -> out/scores.json + out/LEADERBOARD.md
