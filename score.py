@@ -75,7 +75,7 @@ def load(path):
 def task_aggregate(reps):
     """Aggregate repeats of one (harness,task) -> dict of stats."""
     passes = [r["pass"] for r in reps]
-    clean = [0.0 if r["status"] in ("CRASH", "TIMEOUT", "REFUSED") else 1.0 for r in reps]
+    clean = [0.0 if r["status"] in ("CRASH", "TIMEOUT", "REFUSED", "RUNAWAY") else 1.0 for r in reps]
     sv = [r["self_verify"] for r in reps]
     has_tools = any(r["toolcalls"] > 0 for r in reps)
     walls = [r["wall_s"] for r in reps]

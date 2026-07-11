@@ -37,21 +37,35 @@ if [ "$harness" = "mock" ]; then export HB_TASKDIR="$taskdir"; else unset HB_TAS
 # requests (server must run with --metrics; empty snapshots fall back to the probe below)
 MURL="${HB_METRICS_URL:-http://localhost:8000/metrics}"
 curl -s -m 3 "$MURL" 2>/dev/null | grep '^llamacpp:' > "$rundir/m0.prom" || true
+# baseline generated-token counter for the runaway watchdog. The server is single-slot and runs
+# are sequential, so (current - gen0) is THIS task's generated tokens. If it blows past the
+# runaway cap the harness is killed mid-flight and the run is classified RUNAWAY (not WRONG/CRASH).
+gen0=$(awk '/^llamacpp:tokens_predicted_total/{print int($2)}' "$rundir/m0.prom"); : "${gen0:=0}"
+RUNAWAY_TOKENS="${HB_RUNAWAY_TOKENS:-8000}"
 start=$(date +%s)
-timed_out=0; invoke_rc=0
-if command -v timeout >/dev/null 2>&1; then
-  timeout --kill-after=15 "${timeout_s}s" bash "$adapter" invoke "$work" "$rundir/prompt.txt" "$rundir"
-  invoke_rc=$?
-  [ "$invoke_rc" -eq 124 ] && timed_out=1
-else
-  bash "$adapter" invoke "$work" "$rundir/prompt.txt" "$rundir" &
-  pid=$!; deadline=$(( $(date +%s) + timeout_s ))
-  while kill -0 "$pid" 2>/dev/null; do
-    [ "$(date +%s)" -ge "$deadline" ] && { kill -9 "$pid" 2>/dev/null; timed_out=1; break; }
-    sleep 2
-  done
-  wait "$pid" 2>/dev/null; invoke_rc=$?
-fi
+timed_out=0; invoke_rc=0; runaway=0
+
+# kill an MSYS background process AND its Windows child tree (the harness exe: node/hermes)
+kill_tree(){
+  local p="$1" wp
+  wp=$(cat "/proc/$p/winpid" 2>/dev/null)
+  [ -n "$wp" ] && taskkill //F //T //PID "$wp" >/dev/null 2>&1
+  kill -9 "$p" 2>/dev/null
+}
+
+# single watchdog enforcing BOTH the wall-clock timeout and the token runaway cap
+bash "$adapter" invoke "$work" "$rundir/prompt.txt" "$rundir" &
+pid=$!; deadline=$(( start + timeout_s ))
+while kill -0 "$pid" 2>/dev/null; do
+  now=$(date +%s)
+  if [ "$now" -ge "$deadline" ]; then kill_tree "$pid"; timed_out=1; break; fi
+  gcur=$(curl -s -m 3 "$MURL" 2>/dev/null | awk '/^llamacpp:tokens_predicted_total/{print int($2)}')
+  if [ -n "$gcur" ] && [ "$((gcur - gen0))" -gt "$RUNAWAY_TOKENS" ]; then
+    kill_tree "$pid"; runaway=1; break
+  fi
+  sleep 3
+done
+wait "$pid" 2>/dev/null; invoke_rc=$?
 end=$(date +%s); wall=$((end-start))
 curl -s -m 3 "$MURL" 2>/dev/null | grep '^llamacpp:' > "$rundir/m1.prom" || true
 
@@ -65,7 +79,10 @@ gout=$("$PY" "$taskdir/grade.py" "$work" "$grade" 2>&1); grc=$?
 # 5. classify outcome
 logfile="$rundir/run.json"; [ -f "$logfile" ] || logfile="$rundir/run.log"
 logsize=$(wc -c < "$logfile" 2>/dev/null || echo 0)
-if [ "$grc" -eq 0 ]; then status=PASS; passed=1
+# RUNAWAY takes precedence: if we had to kill the harness for exceeding the token cap, the run is
+# a runaway regardless of what partial output happened to grade as.
+if [ "$runaway" -eq 1 ]; then status=RUNAWAY; passed=0
+elif [ "$grc" -eq 0 ]; then status=PASS; passed=1
 else
   passed=0
   # CRASH is checked before REFUSED: a harness that dies before writing any log is a crash,
