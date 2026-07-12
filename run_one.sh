@@ -69,8 +69,25 @@ while kill -0 "$pid" 2>/dev/null; do
   now=$(date +%s)
   if [ "$now" -ge "$deadline" ]; then kill_tree "$pid"; timed_out=1; break; fi
   # live check: in-flight request's own decode count (catches a single runaway completion
-  # immediately, without waiting for the request to finish)
-  ndec=$(curl -s -m 3 "$SURL" 2>/dev/null | grep -oE '"n_decoded":[0-9]+' | tail -1 | cut -d: -f2)
+  # immediately, without waiting for the request to finish). /slots keeps the LAST completed
+  # request's n_decoded even when idle, so this must gate on is_processing=true — otherwise a
+  # fresh task reads the previous task's stale count and kills itself instantly.
+  ndec=$(curl -s -m 3 "$SURL" 2>/dev/null | "$PY" -c '
+import json,sys
+try:
+    slots = json.load(sys.stdin)
+    vals = []
+    for s in slots:
+        if not s.get("is_processing"):
+            continue
+        nt = s.get("next_token") or {}
+        if isinstance(nt, list):
+            nt = nt[0] if nt else {}
+        vals.append(nt.get("n_decoded", 0))
+    print(max(vals) if vals else "")
+except Exception:
+    print("")
+' 2>/dev/null)
   if [ -n "$ndec" ] && [ "$ndec" -gt "$RUNAWAY_TOKENS" ]; then
     kill_tree "$pid"; runaway=1; break
   fi
