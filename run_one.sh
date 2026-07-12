@@ -38,9 +38,18 @@ if [ "$harness" = "mock" ]; then export HB_TASKDIR="$taskdir"; else unset HB_TAS
 MURL="${HB_METRICS_URL:-http://localhost:8000/metrics}"
 curl -s -m 3 "$MURL" 2>/dev/null | grep '^llamacpp:' > "$rundir/m0.prom" || true
 # baseline generated-token counter for the runaway watchdog. The server is single-slot and runs
-# are sequential, so (current - gen0) is THIS task's generated tokens. If it blows past the
-# runaway cap the harness is killed mid-flight and the run is classified RUNAWAY (not WRONG/CRASH).
+# are sequential, so (current - gen0) is THIS task's generated tokens across all its turns. If it
+# blows past the runaway cap the harness is killed mid-flight and the run is classified RUNAWAY.
 gen0=$(awk '/^llamacpp:tokens_predicted_total/{print int($2)}' "$rundir/m0.prom"); : "${gen0:=0}"
+# /metrics' tokens_predicted_total only updates once a request completes, so a single pathological
+# completion (a repetition loop generating tens of thousands of tokens in one turn) is invisible to
+# the gen0/gcur delta below until it's already over — confirmed live via llama-server's own
+# print_timing console log showing n_decoded climbing past 30k while /metrics stayed flat. /slots
+# (enabled: endpoint_slots=true) exposes each in-flight request's live decode count instead, so it's
+# checked first; the cumulative /metrics delta stays as a second check (catches many-small-turns-
+# add-up-to-a-runaway, which a single request's n_decoded can't see) and as a fallback for servers
+# without --slots.
+SURL="${HB_SLOTS_URL:-${MURL%/metrics}/slots}"
 RUNAWAY_TOKENS="${HB_RUNAWAY_TOKENS:-8000}"
 start=$(date +%s)
 timed_out=0; invoke_rc=0; runaway=0
@@ -59,6 +68,14 @@ pid=$!; deadline=$(( start + timeout_s ))
 while kill -0 "$pid" 2>/dev/null; do
   now=$(date +%s)
   if [ "$now" -ge "$deadline" ]; then kill_tree "$pid"; timed_out=1; break; fi
+  # live check: in-flight request's own decode count (catches a single runaway completion
+  # immediately, without waiting for the request to finish)
+  ndec=$(curl -s -m 3 "$SURL" 2>/dev/null | grep -oE '"n_decoded":[0-9]+' | tail -1 | cut -d: -f2)
+  if [ -n "$ndec" ] && [ "$ndec" -gt "$RUNAWAY_TOKENS" ]; then
+    kill_tree "$pid"; runaway=1; break
+  fi
+  # cumulative check: total tokens generated so far this task across all turns (fallback source
+  # if /slots is unavailable)
   gcur=$(curl -s -m 3 "$MURL" 2>/dev/null | awk '/^llamacpp:tokens_predicted_total/{print int($2)}')
   if [ -n "$gcur" ] && [ "$((gcur - gen0))" -gt "$RUNAWAY_TOKENS" ]; then
     kill_tree "$pid"; runaway=1; break
