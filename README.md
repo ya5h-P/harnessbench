@@ -95,9 +95,14 @@ export OPENCODE_EXE=~/.local/bin/opencode  OPENCODE_MODEL=llama.cpp/your-model-n
 export HERMES_EXE=~/.local/bin/hermes
 ```
 
-**Windows:** run everything from **Git Bash**, and use `/c/Users/you/...`-style paths in the
-variables above. One hard-won tip is already baked in: opencode is launched as the exe directly,
-because its PowerShell wrapper hangs at init on Windows.
+**Windows:** run everything from **Git Bash / MSYS** (`uname` shows `MINGW64`), and use
+`/c/Users/you/...`-style paths in the variables above. **Not WSL** — launching `bash` from a
+PowerShell/CMD prompt resolves to `C:\Windows\system32\bash.exe` (WSL), where `python` isn't on
+PATH (you'll get `python: command not found`) and the `/c/...` paths and `taskkill` calls the
+adapters use don't apply. If you must invoke from PowerShell, call Git's bash explicitly, e.g.
+`& "$env:LOCALAPPDATA\Programs\Git\bin\bash.exe" run_matrix.sh ...`. One hard-won tip is already
+baked in: opencode is launched as the exe directly, because its PowerShell wrapper hangs at init
+on Windows.
 
 **Linux/macOS:** everything is plain bash + coreutils; just set `HB_PYTHON=python3` if your
 distro doesn't ship a `python` alias.
@@ -113,6 +118,9 @@ bash run_matrix.sh --harness pi,opencode,hermes --repeats 5
 
 # or start with a subset
 bash run_matrix.sh --harness pi --tasks greet_format,needle_03,logdig_01 --repeats 1
+
+# start clean: wipe the checkpoint + per-run outputs (asks for a typed "yes", then exits)
+bash run_matrix.sh --reset
 ```
 
 Good to know:
@@ -132,8 +140,15 @@ Good to know:
   server's generated-token counter live; a task that spirals past `HB_RUNAWAY_TOKENS` (default
   8000) is killed and logged `RUNAWAY` (`pass=0`, counted as a non-clean completion). Set it
   higher for verbose harnesses, or `HB_RUNAWAY_TOKENS=100000` to effectively disable it.
+- **Starting over.** `--reset` wipes the checkpoint and per-run outputs (`out/results.csv`,
+  `out/server_usage.csv`, `out/flags.csv`, and everything under `runs/`) so the next run is fresh.
+  It asks for a typed `yes` first, then exits without running — it never assumes a harness/task set
+  you didn't ask for, so kick off the run yourself afterward. Your analysis artifacts
+  (`scores.json`, `LEADERBOARD.md`, `*.log`, plots) are left untouched. If it reports
+  `reset INCOMPLETE`, a stray harness process is still holding a `runs/` dir open — see the last
+  bullet.
 - Flags: `--repeats N`, `--tasks all|id,..`, `--harness a,b`, `--seed-base S`, `--no-warmup`,
-  `--no-probe`.
+  `--no-probe`, `--reset`.
 - If a timed-out harness leaves a zombie process holding your endpoint (mostly a Windows thing),
   kill the stray `node`/`opencode`/`hermes` process and re-run — it resumes.
 
